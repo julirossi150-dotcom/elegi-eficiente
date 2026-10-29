@@ -8,10 +8,11 @@ on:
   schedule:
     - cron: '0 9 * * *'
   workflow_dispatch:
+  # Incluye los pushes de datos desde la PC (scripts/actualizar-desde-pc.ps1). Los commits de datos que hace
+  # este mismo workflow no lo vuelven a disparar: GitHub no lanza workflows desde pushes con GITHUB_TOKEN.
   push:
     branches: [main]
     paths-ignore:
-      - 'public/data/**'
       - '**.md'
 
 permissions:

@@ -43,6 +43,14 @@ Herramientas de diagnóstico: `npx tsx pipeline/run.ts --offline` (reusa lo baja
 
 El sitio es 100 % estático: también funciona en Cloudflare Pages o Netlify publicando la carpeta `out/`.
 
+### Actualización desde una PC
+
+Frávega bloquea a los servidores de GitHub (HTTP 403), así que la corrida diaria de GitHub no la trae. Para cubrirla,
+`scripts/actualizar-desde-pc.ps1` corre el pipeline desde una conexión hogareña, valida y sube los datos; el push dispara la
+publicación. Una tarea programada de Windows ("Elegi Eficiente - actualizar datos") lo corre todos los días a las 08:00
+(o apenas se prende la PC si estaba apagada). Si la PC no corre, GitHub conserva las ofertas de Frávega 3 días.
+El registro queda en `pipeline/.cache/actualizar-desde-pc.log`. Para probar sin subir: agregar `-SinSubir`.
+
 ## Límites conocidos
 
 - Solo ~5–10 % de las publicaciones informan kWh; con datos de fabricante sube algo, y el resto se estima por clase (error medio contra datos reales: heladeras ±13 %, lavarropas ±22 %).
