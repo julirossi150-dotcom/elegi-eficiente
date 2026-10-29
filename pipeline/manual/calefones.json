@@ -1,0 +1,50 @@
+[
+  {
+    "brand": "Señorial",
+    "eans": ["7796825009009", "7796825008996"],
+    "match": "evolution max",
+    "specs": { "hasPilot": false, "flowLMin": 14, "gasPowerKcalH": 19000 },
+    "label": { "cls": null },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/06/Ficha-Evolution-Max.pdf",
+    "note": "Ficha Señorial: encendido automático (sin piloto). El \"Tipo B\" que muestran algunas tiendas como clase es el tipo de tiraje, no la eficiencia."
+  },
+  {
+    "brand": "Escorial",
+    "models": ["CE-14L*", "CE14L*"],
+    "match": "escorial.*\\b14 ?(l|lts|litros)\\b",
+    "specs": { "hasPilot": false, "flowLMin": 14, "efficiencyPct": 81, "gasPowerKcalH": 20000 },
+    "label": { "cls": "A" },
+    "source": "https://escorial.com.ar/img/products/manuals/manual-escorial-calefon-ce-14l-4220.pdf",
+    "note": "Manual Escorial CE-14L: 23,3 kW de consumo y 18,8 kW útiles con gas natural (81 %); sin llama piloto, clase A"
+  },
+  {
+    "brand": "Escorial",
+    "models": ["CE-15L*", "CE15L*"],
+    "specs": { "hasPilot": false, "flowLMin": 15 },
+    "source": "https://escorial.com.ar/producto/186-nuevo-calefon-ce-15l-smart-tiro-forzado",
+    "note": "Ficha de escorial.com.ar: sin llama piloto"
+  },
+  {
+    "brand": "Volcan",
+    "models": ["315BFV*", "315BRV*", "315KRV*", "315PRV*", "315IRV*", "315DRV*", "313BFV*", "313BRV*"],
+    "specs": { "hasPilot": true },
+    "label": { "cls": "D" },
+    "source": "https://volcan.com.ar/shop/calefones/315bfv/",
+    "note": "Ficha de volcan.com.ar: encendido piezoeléctrico (con piloto), clase D con gas natural (C con GLP)"
+  },
+  {
+    "brand": "Volcan",
+    "models": ["315KAV*"],
+    "specs": { "hasPilot": false },
+    "label": { "cls": "A" },
+    "source": "https://volcan.com.ar/shop/calefones/315kav/",
+    "note": "Ficha de volcan.com.ar: encendido automático sin piloto, clase A"
+  },
+  {
+    "brand": "Longvie",
+    "match": "pilotless",
+    "specs": { "hasPilot": false },
+    "source": "https://longvie.com/calefones/calefones-tiro-natural/tiro-natural-gas-natural/",
+    "note": "Línea Pilotless de Longvie: sin llama piloto"
+  }
+]

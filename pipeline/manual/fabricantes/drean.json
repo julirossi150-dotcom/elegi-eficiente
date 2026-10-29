@@ -1,0 +1,831 @@
+[
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "DSP480LKRSS0*"
+  ],
+  "specs": {
+   "kwhPerYear": 410,
+   "totalVolumeL": 456,
+   "freezerVolumeL": 177
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/DSP480LKRSS0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "DSP610IORSS0*"
+  ],
+  "specs": {
+   "kwhPerYear": 382,
+   "totalVolumeL": 553,
+   "freezerVolumeL": 170
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/DSP610IORSS0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "FHDR143CB*"
+  ],
+  "specs": {
+   "kwhPerYear": 193,
+   "totalVolumeL": 143,
+   "freezerVolumeL": 143
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/FHDR143CB",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK135AB00*",
+   "HPK135AM00*",
+   "HME350BL*",
+   "HME350ML*"
+  ],
+  "specs": {
+   "kwhPerYear": 310,
+   "totalVolumeL": 264,
+   "freezerVolumeL": 68
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR280F50B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "MABE",
+  "models": [
+   "HPK135AB00*",
+   "HPK135AM00*",
+   "HME350BL*",
+   "HME350ML*"
+  ],
+  "specs": {
+   "kwhPerYear": 310,
+   "totalVolumeL": 264,
+   "freezerVolumeL": 68
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR280F50B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK135MA00B01*"
+  ],
+  "specs": {
+   "kwhPerYear": 310,
+   "totalVolumeL": 264,
+   "freezerVolumeL": 68
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR280F50B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "HDR280F00B*",
+   "HDR280F30PB*",
+   "HDR280F50B*",
+   "HDR280F50PB*"
+  ],
+  "specs": {
+   "kwhPerYear": 310,
+   "totalVolumeL": 264,
+   "freezerVolumeL": 68
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR280F50B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Top House",
+  "models": [
+   "HTH135M00B01*"
+  ],
+  "specs": {
+   "kwhPerYear": 310,
+   "totalVolumeL": 264,
+   "freezerVolumeL": 68
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR280F50B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK136AN00*",
+   "HPK136AS00*",
+   "HPK136MA00S01*",
+   "HPK136MA00N01*"
+  ],
+  "specs": {
+   "kwhPerYear": 291,
+   "totalVolumeL": 302,
+   "freezerVolumeL": 105
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR320F50E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "MABE",
+  "models": [
+   "HME314SL*",
+   "ME314NE*"
+  ],
+  "specs": {
+   "kwhPerYear": 291,
+   "totalVolumeL": 302,
+   "freezerVolumeL": 105
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR320F50E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "HDR320F00S*",
+   "HDR320F00N*",
+   "HDR320F50S*",
+   "HDR320F50N*",
+   "HDR320F50NE*",
+   "HDR320F50E*"
+  ],
+  "specs": {
+   "kwhPerYear": 291,
+   "totalVolumeL": 302,
+   "freezerVolumeL": 105
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR320F50E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK141MB00*",
+   "HPK141MS00*",
+   "HPK141MA00B01*"
+  ],
+  "specs": {
+   "kwhPerYear": 356,
+   "totalVolumeL": 359,
+   "freezerVolumeL": 91
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR370F50B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "HDR370F00B*",
+   "HDR370F00S*",
+   "HDR370F00N*",
+   "HDR370F50B*"
+  ],
+  "specs": {
+   "kwhPerYear": 356,
+   "totalVolumeL": 359,
+   "freezerVolumeL": 91
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR370F50B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK141MS10*",
+   "HPK141MA11S01*"
+  ],
+  "specs": {
+   "kwhPerYear": 359,
+   "totalVolumeL": 355,
+   "freezerVolumeL": 91
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR370F61E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "HDR370F11S*",
+   "HDR370F61S*",
+   "HDR370F61E*"
+  ],
+  "specs": {
+   "kwhPerYear": 359,
+   "totalVolumeL": 355,
+   "freezerVolumeL": 91
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR370F61E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK151MB00*",
+   "HPK151MS00*"
+  ],
+  "specs": {
+   "kwhPerYear": 335,
+   "totalVolumeL": 395,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F30B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "MABE",
+  "models": [
+   "HPK151MB00*",
+   "HPK151MS00*"
+  ],
+  "specs": {
+   "kwhPerYear": 335,
+   "totalVolumeL": 395,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F30B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK151MA00B01*"
+  ],
+  "specs": {
+   "kwhPerYear": 335,
+   "totalVolumeL": 395,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F30B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "HDR400F00B*",
+   "HDR400F00S*",
+   "HDR400F00N*",
+   "HDR400F30S*",
+   "HDR400F30B*",
+   "HDR400F30N*",
+   "HDR400F30E*"
+  ],
+  "specs": {
+   "kwhPerYear": 335,
+   "totalVolumeL": 395,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F30B",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK151MB00*",
+   "HPK151MS00*"
+  ],
+  "specs": {
+   "kwhPerYear": 335,
+   "totalVolumeL": 395,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F30E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "MABE",
+  "models": [
+   "HPK151MB00*",
+   "HPK151MS00*"
+  ],
+  "specs": {
+   "kwhPerYear": 335,
+   "totalVolumeL": 395,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F30E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK151MA00B01*"
+  ],
+  "specs": {
+   "kwhPerYear": 335,
+   "totalVolumeL": 395,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F30E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "HDR400F00B*",
+   "HDR400F00S*",
+   "HDR400F00N*",
+   "HDR400F30S*",
+   "HDR400F30B*",
+   "HDR400F30N*",
+   "HDR400F30E*"
+  ],
+  "specs": {
+   "kwhPerYear": 335,
+   "totalVolumeL": 395,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F30E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK151MS11*",
+   "HPK151MA11S01*",
+   "HPK151MN11*",
+   "HPK151MA11N01*"
+  ],
+  "specs": {
+   "kwhPerYear": 334,
+   "totalVolumeL": 392,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F41E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "HDR400F11N*",
+   "HDR400F11S*",
+   "HDR400F41N*",
+   "HDR400F41S*",
+   "HDR400F41E*"
+  ],
+  "specs": {
+   "kwhPerYear": 334,
+   "totalVolumeL": 392,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F41E",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Patrick",
+  "models": [
+   "HPK151MS11*",
+   "HPK151MA11S01*",
+   "HPK151MN11*",
+   "HPK151MA11N01*"
+  ],
+  "specs": {
+   "kwhPerYear": 334,
+   "totalVolumeL": 392,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F41N",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "HDR400F11N*",
+   "HDR400F11S*",
+   "HDR400F41N*",
+   "HDR400F41S*",
+   "HDR400F41E*"
+  ],
+  "specs": {
+   "kwhPerYear": 334,
+   "totalVolumeL": 392,
+   "freezerVolumeL": 125
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/HDR400F41N",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LCFDR0610LB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.3,
+   "waterLPerCycle": 52,
+   "capacityKg": 6
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LCFDR0610LB0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LCFDR0814SB*",
+   "LCFDR0814SG*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.28,
+   "waterLPerCycle": 60,
+   "capacityKg": 8
+  },
+  "label": {
+   "cls": "A",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LCFDR0814SB0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LCFDR0814SB*",
+   "LCFDR0814SG*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.28,
+   "waterLPerCycle": 60,
+   "capacityKg": 8
+  },
+  "label": {
+   "cls": "A",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LCFDR0814SG0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LCFDR1012SB*",
+   "LCFDR1012TG*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.35,
+   "waterLPerCycle": 70,
+   "capacityKg": 10.5
+  },
+  "label": {
+   "cls": "A",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LCFDR1012SB0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LCFDR1012SB*",
+   "LCFDR1012TG*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.35,
+   "waterLPerCycle": 70,
+   "capacityKg": 10.5
+  },
+  "label": {
+   "cls": "A",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LCFDR1012TG0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LFDR0914ISB0*",
+   "LFDR0914ISG0*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.39,
+   "waterLPerCycle": 66,
+   "capacityKg": 9
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LFDR0914ISG0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LFDR1114ISG0*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.44,
+   "waterLPerCycle": 78,
+   "capacityKg": 11.5
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LFDR1114ISG0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LPDR0865ILG*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.44,
+   "waterLPerCycle": 200,
+   "capacityKg": 8
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LPDR0865ILG",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "LPDR1165LG*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.45,
+   "waterLPerCycle": 200,
+   "capacityKg": 11
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LPDR1165LG",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Drean",
+  "models": [
+   "CONCEPTNEOFUZZY658B*",
+   "CONCEPTNEOFUZZY658G*",
+   "CONCEPTNEOFUZZY658N*",
+   "CONCEPTNEOFUZZY658P*",
+   "CONCEPTNEOFUZZY658Q*",
+   "CONCEPTNEOFUZZY658R*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.45,
+   "waterLPerCycle": 115,
+   "capacityKg": 6.5
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/LSDR0680TB0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "RMF04LGAS0*",
+   "RDF04LGAS0*"
+  ],
+  "specs": {
+   "kwhPerYear": 142,
+   "totalVolumeL": 96,
+   "freezerVolumeL": 12
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/RDF04LGAS0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "RZD215PVARO0*",
+   "RZD215PVARB0*",
+   "RZD215PVARX0*"
+  ],
+  "specs": {
+   "kwhPerYear": 165,
+   "totalVolumeL": 207,
+   "freezerVolumeL": 45
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/RZD215PVARX0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Drean",
+  "models": [
+   "RZN320PCARX0*"
+  ],
+  "specs": {
+   "kwhPerYear": 270,
+   "totalVolumeL": 317,
+   "freezerVolumeL": 77
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://drean.com.ar/es_AR/p/RZN320PCARX0",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ }
+]

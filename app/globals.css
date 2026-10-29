@@ -1,0 +1,107 @@
+@import 'tailwindcss';
+
+/* Paleta inspirada en la referencia: cielo celeste en el hero, verde petróleo profundo
+   en las secciones, títulos amarillo pálido y acentos ámbar. */
+@theme {
+  --font-sans: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
+
+  --color-sky-deep: #1d8fd8;
+  --color-sky: #3aa9ec;
+  --color-sky-light: #7fd0f6;
+  --color-navy: #1f4a8a;
+  --color-navy-dark: #173a6e;
+
+  --color-ink: #0a2627;
+  --color-ink-2: #0f3133;
+  --color-ink-3: #143b3d;
+  --color-ink-4: #1b4a4c;
+  --color-line: #24585a;
+
+  --color-leaf: #1f6b57;
+  --color-leaf-2: #2a8a6e;
+  --color-mint: #7fd6b4;
+
+  --color-sun: #f2e18d;
+  --color-amber: #f6c343;
+  --color-mustard: #c8b443;
+  --color-coral: #f08a6c;
+
+  --color-text: #e8f1ef;
+  --color-muted: #a3bdb9;
+  --color-faint: #6f8f8b;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Manchas orgánicas de fondo como en la referencia */
+.blob-bg {
+  position: relative;
+  isolation: isolate;
+}
+.blob-bg::before,
+.blob-bg::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  border-radius: 46% 54% 60% 40% / 52% 44% 56% 48%;
+  background: var(--color-ink-2);
+}
+.blob-bg::before {
+  width: min(720px, 90vw);
+  height: 520px;
+  left: -8%;
+  top: 2%;
+}
+.blob-bg::after {
+  width: 420px;
+  height: 420px;
+  right: -10%;
+  top: 30%;
+  border-radius: 50%;
+  background: var(--color-ink-3);
+  opacity: 0.6;
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-sun);
+}
+
+/* Inputs de rango con el color de la marca */
+input[type='range'] {
+  accent-color: var(--color-amber);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .turbine-blades {
+    transform-box: view-box;
+    animation: spin 9s linear infinite;
+  }
+  .turbine-blades.slow {
+    animation-duration: 13s;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

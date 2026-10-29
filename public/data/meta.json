@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-29T06:23:09.854Z",
+  "categories": [
+    {
+      "id": "heladeras",
+      "count": 686,
+      "withConsumption": 395,
+      "withPrice": 686
+    },
+    {
+      "id": "aires",
+      "count": 377,
+      "withConsumption": 183,
+      "withPrice": 377
+    },
+    {
+      "id": "lavarropas",
+      "count": 323,
+      "withConsumption": 208,
+      "withPrice": 323
+    },
+    {
+      "id": "calefones",
+      "count": 49,
+      "withConsumption": 49,
+      "withPrice": 49
+    },
+    {
+      "id": "termotanques",
+      "count": 337,
+      "withConsumption": 337,
+      "withPrice": 337
+    }
+  ],
+  "stores": [
+    {
+      "id": "fravega",
+      "name": "Frávega",
+      "url": "https://www.fravega.com",
+      "ok": true,
+      "products": 2348
+    },
+    {
+      "id": "cetrogar",
+      "name": "Cetrogar",
+      "url": "https://www.cetrogar.com.ar",
+      "ok": true,
+      "products": 449
+    },
+    {
+      "id": "oncity",
+      "name": "OnCity",
+      "url": "https://www.oncity.com",
+      "ok": true,
+      "products": 762
+    },
+    {
+      "id": "naldo",
+      "name": "Naldo",
+      "url": "https://www.naldo.com.ar",
+      "ok": true,
+      "products": 234
+    },
+    {
+      "id": "carrefour",
+      "name": "Carrefour",
+      "url": "https://www.carrefour.com.ar",
+      "ok": true,
+      "products": 1034
+    },
+    {
+      "id": "jumbo",
+      "name": "Jumbo",
+      "url": "https://www.jumbo.com.ar",
+      "ok": true,
+      "products": 936
+    },
+    {
+      "id": "easy",
+      "name": "Easy",
+      "url": "https://www.easy.com.ar",
+      "ok": true,
+      "products": 118
+    },
+    {
+      "id": "whirlpool",
+      "name": "Whirlpool (oficial)",
+      "url": "https://www.whirlpool.com.ar",
+      "ok": true,
+      "products": 37
+    },
+    {
+      "id": "electrolux",
+      "name": "Electrolux (oficial)",
+      "url": "https://www.tienda.electrolux.com.ar",
+      "ok": true,
+      "products": 21
+    },
+    {
+      "id": "bgh",
+      "name": "BGH (oficial)",
+      "url": "https://www.bgh.com.ar",
+      "ok": true,
+      "products": 38
+    }
+  ]
+}

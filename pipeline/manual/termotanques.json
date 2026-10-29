@@ -1,0 +1,205 @@
+[
+  {
+    "brand": "Longvie",
+    "models": ["T3110F"],
+    "specs": { "storageL": 110, "gasPowerKcalH": 8200, "labelM3Year": 714, "hasPilot": true },
+    "label": { "cls": "B" },
+    "source": "https://longvie-gestion.appsinnovategroup.com/api/uploads/7494468/T3110F.pdf",
+    "note": "Etiqueta ENARGAS NAG-314 publicada por Longvie"
+  },
+  {
+    "brand": "Longvie",
+    "models": ["T3075PF", "T3075CF"],
+    "specs": { "storageL": 75, "gasPowerKcalH": 6400, "recoveryLH": 246, "labelM3Year": 770, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://longvie-gestion.appsinnovategroup.com/api/uploads/7494468/T3075PF.pdf",
+    "note": "Etiqueta ENARGAS NAG-314 y ficha de longvie.com"
+  },
+  {
+    "brand": "Longvie",
+    "models": ["T3050PF", "T3050CF"],
+    "specs": { "storageL": 50, "gasPowerKcalH": 3800, "labelM3Year": 737, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://longvie-gestion.appsinnovategroup.com/api/uploads/7494468/T3050PF.pdf",
+    "note": "Etiqueta ENARGAS NAG-314 publicada por Longvie"
+  },
+  {
+    "brand": "Longvie",
+    "models": ["T3150F"],
+    "specs": { "storageL": 150, "gasPowerKcalH": 8200, "labelM3Year": 784, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://longvie-gestion.appsinnovategroup.com/api/uploads/7494468/T3150F.pdf",
+    "note": "Etiqueta ENARGAS NAG-314 publicada por Longvie"
+  },
+  {
+    "brand": "Longvie",
+    "models": ["T4110*"],
+    "specs": { "storageL": 110, "gasPowerKcalH": 8200, "labelM3Year": 677 },
+    "label": { "cls": "A" },
+    "source": "https://longvie-gestion.appsinnovategroup.com/api/uploads/7494468/T4110.pdf",
+    "note": "Etiqueta ENARGAS NAG-314 publicada por Longvie"
+  },
+  {
+    "brand": "Longvie",
+    "models": ["T4050C*"],
+    "specs": { "storageL": 50, "gasPowerKcalH": 3800, "labelM3Year": 677 },
+    "label": { "cls": "A" },
+    "source": "https://longvie-gestion.appsinnovategroup.com/api/uploads/7494468/T4050C.pdf",
+    "note": "Etiqueta ENARGAS NAG-314 publicada por Longvie"
+  },
+  {
+    "brand": "Longvie",
+    "models": ["TP860AR*"],
+    "specs": { "storageL": 56, "gasPowerKcalH": 20500, "recoveryLH": 740 },
+    "source": "https://longvie.com/productos/termotanque-longvie-potenciado-dual-56-litros-tp860arn/",
+    "note": "Ficha de longvie.com"
+  },
+
+  {
+    "brand": "Señorial",
+    "eans": ["7796825000570", "7796825000730"],
+    "models": ["TSZ-30", "TSZP1-30", "TSZP-30", "TTSLF-30"],
+    "specs": { "storageL": 29, "gasPowerKcalH": 4800, "recoveryLH": 176, "labelM3Year": 708, "hasPilot": true },
+    "label": { "cls": "B" },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/01/FICHAS_TECNICAS_LINEA_ZAFIRO_GAS.pdf",
+    "note": "Ficha técnica Señorial (líneas Zafiro y Family): consumo medio en condiciones normalizadas"
+  },
+  {
+    "brand": "Señorial",
+    "eans": ["7796825000587", "7796825000747"],
+    "models": ["TSZ-50", "TSZP-50", "TSZP1-50", "TTSLF-50"],
+    "specs": { "storageL": 50, "gasPowerKcalH": 5150, "recoveryLH": 194, "labelM3Year": 728, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/01/FICHAS_TECNICAS_LINEA_ZAFIRO_GAS.pdf",
+    "note": "Ficha técnica Señorial (líneas Zafiro y Family): consumo medio en condiciones normalizadas"
+  },
+  {
+    "brand": "Señorial",
+    "eans": ["7796825000679"],
+    "models": ["TSZ-85", "TSZP1-85", "TTS-85", "TTSLF-85"],
+    "specs": { "storageL": 83, "gasPowerKcalH": 4800, "recoveryLH": 181, "labelM3Year": 799, "hasPilot": true },
+    "label": { "cls": "D" },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/01/FICHAS_TECNICAS_LINEA_ZAFIRO_GAS.pdf",
+    "note": "Ficha técnica Señorial (líneas Zafiro y Family): consumo medio en condiciones normalizadas"
+  },
+  {
+    "brand": "Señorial",
+    "eans": ["7796825000686", "7796825000761"],
+    "models": ["TSZP1-120", "TSZP-120", "TTSLF-120"],
+    "specs": { "storageL": 118, "gasPowerKcalH": 4800, "recoveryLH": 172, "labelM3Year": 800, "hasPilot": true },
+    "label": { "cls": "D" },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/01/FICHAS_TECNICAS_LINEA_ZAFIRO_GAS.pdf",
+    "note": "Ficha técnica Señorial (líneas Zafiro y Family): consumo medio en condiciones normalizadas"
+  },
+  {
+    "brand": "Señorial",
+    "eans": ["7796825000693"],
+    "models": ["TSZP-160", "TSZ-160"],
+    "match": "\\b160 ?(l|lts|litros)\\b.*tsz|tsz.*\\b160\\b",
+    "specs": { "storageL": 160, "gasPowerKcalH": 5400, "labelM3Year": 728.3, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/01/FICHAS_TECNICAS_LINEA_ZAFIRO_GAS.pdf",
+    "note": "Ficha técnica Señorial (línea Zafiro). La recuperación publicada (305 L/h) no es compatible con la potencia y no se usa."
+  },
+  {
+    "brand": "Señorial",
+    "eans": ["7796825008286"],
+    "models": ["TSBG-50", "TSGB-50"],
+    "specs": { "storageL": 50, "gasPowerKcalH": 3800, "recoveryLH": 148, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/01/FICHAS_TECNICAS_LINEA_BLACK_GAS.pdf",
+    "note": "Ficha técnica Señorial línea Black"
+  },
+  {
+    "brand": "Señorial",
+    "eans": ["7796825008293"],
+    "models": ["TSBG-75", "TSGB-75"],
+    "specs": { "storageL": 75, "gasPowerKcalH": 6400, "recoveryLH": 232, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/01/FICHAS_TECNICAS_LINEA_BLACK_GAS.pdf",
+    "note": "Ficha técnica Señorial línea Black"
+  },
+  {
+    "brand": "Señorial",
+    "eans": ["7796825008309"],
+    "models": ["TSBG-110", "TSGB-110"],
+    "specs": { "storageL": 110, "gasPowerKcalH": 8200, "recoveryLH": 328, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://senorial.com.ar/wp-content/uploads/2025/01/FICHAS_TECNICAS_LINEA_BLACK_GAS.pdf",
+    "note": "Ficha técnica Señorial línea Black"
+  },
+
+  {
+    "brand": "Escorial",
+    "match": "geiser.*\\b120(?!\\d)|\\b120(?!\\d).*geiser",
+    "specs": { "storageL": 120, "gasPowerKcalH": 4500, "recoveryLH": 162, "hasPilot": true },
+    "label": { "cls": "B" },
+    "source": "https://escorial.com.ar/download/BrochureEscorial.pdf",
+    "note": "Folleto Escorial (termos Geiser): clase, potencia y recuperación con gas natural"
+  },
+  {
+    "brand": "Escorial",
+    "match": "geiser.*\\b80(?!\\d)|\\b80(?!\\d).*geiser",
+    "specs": { "storageL": 80, "gasPowerKcalH": 4500, "recoveryLH": 163, "hasPilot": true },
+    "label": { "cls": "B" },
+    "source": "https://escorial.com.ar/download/BrochureEscorial.pdf",
+    "note": "Folleto Escorial (termos Geiser): clase, potencia y recuperación con gas natural"
+  },
+  {
+    "brand": "Escorial",
+    "match": "^(?!.*(geiser|electric)).*\\b(43|45) ?(l|lts|litros)\\b",
+    "specs": { "storageL": 45, "gasPowerKcalH": 3500, "recoveryLH": 128, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://escorial.com.ar/download/BrochureEscorial.pdf",
+    "note": "Folleto Escorial: clase, potencia y recuperación con gas natural"
+  },
+  {
+    "brand": "Escorial",
+    "match": "^(?!.*(geiser|electric)).*\\b80 ?(l|lts|litros)\\b",
+    "specs": { "storageL": 80, "gasPowerKcalH": 5100, "recoveryLH": 180, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://escorial.com.ar/download/BrochureEscorial.pdf",
+    "note": "Folleto Escorial: clase, potencia y recuperación con gas natural"
+  },
+  {
+    "brand": "Escorial",
+    "match": "^(?!.*(geiser|electric)).*\\b120 ?(l|lts|litros)\\b",
+    "specs": { "storageL": 120, "gasPowerKcalH": 5100, "recoveryLH": 180, "hasPilot": true },
+    "label": { "cls": "C" },
+    "source": "https://escorial.com.ar/download/BrochureEscorial.pdf",
+    "note": "Folleto Escorial: clase, potencia y recuperación con gas natural"
+  },
+
+  {
+    "brand": "Volcan",
+    "models": ["0080GV*"],
+    "specs": { "storageL": 80, "gasPowerKcalH": 3500, "hasPilot": true },
+    "label": { "cls": "B" },
+    "source": "https://volcan.com.ar/shop/termotanques/0080gv/",
+    "note": "Ficha de volcan.com.ar: clase B con gas natural (A con GLP)"
+  },
+  {
+    "brand": "Volcan",
+    "models": ["0050GV*"],
+    "specs": { "storageL": 50, "gasPowerKcalH": 3000, "hasPilot": true },
+    "label": { "cls": "B" },
+    "source": "https://volcan.com.ar/shop/termotanques/0050gv/",
+    "note": "Ficha de volcan.com.ar"
+  },
+  {
+    "brand": "Volcan",
+    "models": ["0080IV*"],
+    "specs": { "storageL": 80, "hasPilot": true },
+    "label": { "cls": "D" },
+    "source": "https://volcan.com.ar/shop/termotanques/0080iv/",
+    "note": "Ficha de volcan.com.ar"
+  },
+  {
+    "brand": "Volcan",
+    "models": ["0050IV*"],
+    "specs": { "storageL": 50, "hasPilot": true },
+    "label": { "cls": "E" },
+    "source": "https://volcan.com.ar/shop/termotanques/0050iv/",
+    "note": "Ficha de volcan.com.ar"
+  }
+]
