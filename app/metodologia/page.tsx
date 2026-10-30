@@ -76,6 +76,20 @@ export default function MetodologiaPage() {
           </Section>
         ))}
 
+        <Section id="calefaccion" title="Aire, gas o eléctrica">
+          <p>
+            En <Link href="/calefaccion/" className="text-mint hover:underline">¿Con qué calefacciono?</Link> usamos el mismo calor para todas las
+            tecnologías: el que necesita tu ambiente durante los días y horas que cargaste. A los aires les calculamos solo el modo calor, con su COP;
+            a los calefactores y estufas, como en su comparador.
+          </p>
+          <p>
+            De cada tecnología tomamos los equipos con la potencia adecuada para tu ambiente y mostramos el de menor costo total (precio + energía en
+            el horizonte) y el más barato de comprar. El gasto de energía por año es la mediana de la tecnología: depende del ambiente y del
+            rendimiento, no del tamaño del equipo. No contamos la instalación (un aire o un tiro balanceado la necesitan) ni que el aire también
+            enfría en verano.
+          </p>
+        </Section>
+
         <Section id="supuestos" title="Valores de referencia">
           <div className="overflow-x-auto rounded-2xl bg-ink-2">
             <table className="tabular w-full min-w-[520px] text-sm">

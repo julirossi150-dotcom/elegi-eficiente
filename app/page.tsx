@@ -112,6 +112,23 @@ export default async function Home() {
                 </li>
               ))}
             </ul>
+            <Link
+              href="/calefaccion/"
+              className="focus-ring group mt-4 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-line/70 p-6 hover:border-sun"
+            >
+              <span className="flex items-center gap-4">
+                <span className="grid size-12 shrink-0 place-items-center rounded-full bg-ink text-amber">
+                  <Icon name="flame" size={24} />
+                </span>
+                <span>
+                  <span className="block font-semibold text-white">¿Con qué calefacciono?</span>
+                  <span className="mt-1 block text-sm text-white/70">Aire frío/calor, gas o eléctrica: cuánto cuesta calefaccionar tu ambiente con cada uno.</span>
+                </span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-sm text-white/90 group-hover:text-sun">
+                Comparar <Icon name="arrow-right" size={16} />
+              </span>
+            </Link>
           </div>
         </section>
 

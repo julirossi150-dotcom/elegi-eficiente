@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/Icon';
-import { acCapacityRange, acRequiredFrigorias, computeRow, heaterCapacityRange, heatRequiredKcalH, DEFAULT_SCENARIO, DEFAULT_TARIFFS, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
+import { acCapacityRange, acRequiredFrigorias, computeRow, gasCompatible, heaterCapacityRange, heatRequiredKcalH, DEFAULT_SCENARIO, DEFAULT_TARIFFS, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
 import { formatARS, formatDate } from '@/lib/format';
 import { withBase } from '@/lib/site';
 import { CAPACITY_UNIT, capacityOf, subtypeOf } from '@/lib/specs';
@@ -24,11 +24,6 @@ const DEFAULT_CAPACITY: Record<CategoryId, [string, string]> = {
   calefactores: ['', ''],
 };
 const PAGE = 30;
-
-function gasCompatible(p: Product, kind: Tariffs['gasKind']) {
-  if (p.energy === 'electricidad' || p.energy === 'multigas') return true;
-  return kind === 'natural' ? p.energy === 'gas_natural' : p.energy === 'gas_envasado';
-}
 
 export default function Comparator({ category }: { category: CategoryId }) {
   const [data, setData] = useState<CategoryFile | null>(null);

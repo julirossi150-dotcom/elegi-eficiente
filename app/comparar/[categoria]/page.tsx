@@ -51,6 +51,11 @@ export default async function CompararPage({ params }: Props) {
         <header className="mt-8 mb-8 max-w-3xl">
           <h1 className="text-3xl font-bold text-sun sm:text-4xl">{c.name}</h1>
           <p className="mt-3 leading-relaxed text-muted">{c.blurb}</p>
+          {(c.id === 'aires' || c.id === 'calefactores') && (
+            <Link href="/calefaccion/" className="focus-ring mt-4 inline-flex items-center gap-1.5 rounded text-sm text-mint hover:underline">
+              ¿Aire, gas o eléctrica? Compará cuánto cuesta calefaccionar con cada uno <Icon name="arrow-right" size={14} />
+            </Link>
+          )}
         </header>
         <Comparator category={c.id as CategoryId} />
       </main>

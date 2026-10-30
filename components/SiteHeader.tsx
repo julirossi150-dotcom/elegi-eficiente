@@ -3,6 +3,7 @@ import { SITE } from '@/lib/site';
 
 const NAV = [
   { href: '/comparar/heladeras/', label: 'Comparar' },
+  { href: '/calefaccion/', label: 'Calefacción' },
   { href: '/#como-funciona', label: 'Cómo funciona' },
   { href: '/metodologia/', label: 'Metodología' },
   { href: '/datos/', label: 'Datos abiertos' },

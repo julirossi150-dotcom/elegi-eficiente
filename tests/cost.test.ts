@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { acCapacityRange, acRequiredFrigorias, computeRow, cumulativeEnergy, heaterCapacityRange, heatRequiredKcalH, DEFAULT_USAGE, hotWaterDemandKcalYear, paybackYears, type Tariffs } from '../lib/cost';
+import { acCapacityRange, acRequiredFrigorias, compareHeating, computeRow, cumulativeEnergy, heaterCapacityRange, heatRequiredKcalH, DEFAULT_USAGE, hotWaterDemandKcalYear, paybackYears, type Tariffs } from '../lib/cost';
 import type { Product } from '../lib/types';
 
 const T: Tariffs = { electricityPerKwh: 100, gasNaturalPerM3: 500, glpPerKg: 1000, gasKind: 'natural' };
@@ -119,5 +119,34 @@ describe('estufas y calefactores', () => {
   it('sin salida: todo el calor queda adentro', () => {
     const p = product({ category: 'calefactores', energy: 'gas_natural', specs: { roomHeaterType: 'sin_salida', gasPowerKcalH: 3000, hasPilot: false } });
     expect(computeRow(p, U, T, S).estimate!.m3Year).toBeCloseTo(HEAT / 9300, 5);
+  });
+});
+
+describe('calefacción: aire, gas o eléctrica', () => {
+  const U = { ...DEFAULT_USAGE, acAreaM2: 20, acCeilingM: 2.6, acHighLoad: false, heatingDaysYear: 150, heatingHoursDay: 6 };
+  const aire = product({ id: 'a', category: 'aires', priceMin: 900_000, specs: { heatPump: true, coolingCapacityW: 3500, eer: 3.2, cop: 3.4 } });
+  const soloFrio = product({ id: 'f', category: 'aires', priceMin: 500_000, specs: { heatPump: false, coolingCapacityW: 3500, eer: 3.2 } });
+  const tb = product({ id: 't', category: 'calefactores', energy: 'gas_natural', priceMin: 400_000, specs: { roomHeaterType: 'tiro_balanceado', gasPowerKcalH: 3000, hasPilot: false, efficiencyPct: 70 } });
+  const chica = product({ id: 'e', category: 'calefactores', priceMin: 50_000, specs: { roomHeaterType: 'caloventor', powerW: 2000 } });
+  const options = compareHeating([aire, soloFrio, tb, chica], U, T, S);
+  const by = (id: string) => options.find((o) => o.tech.id === id)!;
+
+  it('el aire se calcula solo en calor, con el mismo calor que la estufa', () => {
+    // mismo calor: 2.600 kcal/h ≈ 3.024 W × 900 h × 60 % ÷ COP 3,4
+    const kwh = (2600 * 1.163 * 900 * 0.6) / 3.4 / 1000;
+    expect(by('aire').annualEnergyCost).toBeCloseTo(kwh * T.electricityPerKwh, 0);
+    expect(by('aire').count).toBe(1); // el solo frío no cuenta
+  });
+  it('la eléctrica que queda chica no se elige, pero su gasto típico se muestra', () => {
+    expect(by('electrica').best).toBeNull();
+    expect(by('electrica').annualEnergyCost).toBeCloseTo(((2600 * 900 * 0.6) / 860) * T.electricityPerKwh, 0);
+  });
+  it('ordena por costo total; las tecnologías sin equipos van al final', () => {
+    expect(options.at(-1)!.best).toBeNull();
+    const tcos = options.filter((o) => o.best).map((o) => o.best!.tco!);
+    expect(tcos).toEqual([...tcos].sort((a, b) => a - b));
+  });
+  it('con garrafa no aparecen los calefactores de gas natural', () => {
+    expect(compareHeating([tb], U, { ...T, gasKind: 'envasado' }, S).find((o) => o.tech.id === 'tiro_balanceado')!.count).toBe(0);
   });
 });
