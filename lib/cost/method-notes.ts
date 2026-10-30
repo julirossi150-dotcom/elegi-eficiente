@@ -22,6 +22,11 @@ export const METHOD_NOTES: Record<CategoryId, string[]> = {
     'Si tiene piloto le sumamos su consumo de todo el año: típicamente ~0,5 m³ por día, que puede ser casi la mitad del gasto. La clase de ENARGAS (NAG-313) mide la eficiencia global de un día tipo incluyendo el piloto; con ella separamos el consumo del piloto del de calentar.',
     'Piloto, rendimiento y clase los tomamos de las fichas y manuales de los fabricantes cuando están (Escorial, Señorial, Volcán, Longvie). Ojo: algunas tiendas muestran como "clase B" el "Tipo B" de tiraje, que no es una clase de eficiencia.',
   ],
+  calefactores: [
+    'Calor que necesita tu ambiente: superficie × altura × 50 kcal/h por m³ (regla práctica), con 20 % más si es un ambiente frío. Calor por año = esa potencia × días × horas × 60 % de carga media. Mostramos los equipos de 90 % a 160 % de la potencia necesaria.',
+    'Las estufas eléctricas (caloventor, convector, cuarzo, halógena, panel, radiador) convierten el 100 % de la electricidad en calor: para el mismo calor gastan lo mismo, y entre ellas solo cambia el precio y cómo distribuyen el calor. Las diferencias grandes están entre tecnologías: un aire frío/calor da 3 a 4 veces más calor por kWh y el gas suele ser más barato por caloría.',
+    'Los calefactores de tiro balanceado toman y largan el aire afuera: son los únicos aptos para dormitorios, y pierden parte del calor por el tiro (si no informan su rendimiento suponemos 70 %). Las estufas sin salida al exterior dejan todo el calor adentro pero también los gases de combustión: necesitan ventilación permanente. Si tienen piloto, le sumamos ~0,3 m³/día durante la temporada (valor típico aproximado).',
+  ],
   termotanques: [
     'Igual que el calefón para calentar el agua, más el consumo de mantenimiento: lo que gasta para mantener el tanque caliente aunque no se use (NAG-314). Con la clase y la capacidad lo estimamos con el método de la norma; sin clase usamos el valor típico medido (~0,65 m³/día).',
     'Cuando el fabricante publica la etiqueta (Longvie, Señorial), usamos su "consumo medio en condiciones normalizadas" (m³/año): el rendimiento sale de la recuperación ÷ la potencia del quemador, y el mantenimiento es lo que falta para llegar al consumo de la etiqueta. Así, con el uso de la etiqueta (400 L/día de 17 a 42 °C) el cálculo da exactamente ese consumo.',

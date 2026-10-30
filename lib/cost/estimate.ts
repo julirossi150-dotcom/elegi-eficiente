@@ -27,6 +27,26 @@ export function acCapacityRange(u: Usage): [number, number] {
   return [Math.floor((need * lo) / 50) * 50, Math.ceil((need * hi) / 50) * 50];
 }
 
+/** kcal/h que necesita el ambiente para calefaccionarlo. */
+export function heatRequiredKcalH(u: Usage): number {
+  const f = u.acAreaM2 * u.acCeilingM * ASSUMPTIONS.heatKcalPerM3 * (u.acHighLoad ? ASSUMPTIONS.acHighLoadFactor : 1);
+  return Math.round(f / 50) * 50;
+}
+
+/** Rango de potencia (kcal/h) adecuado para una estufa en ese ambiente. */
+export function heaterCapacityRange(u: Usage): [number, number] {
+  const need = heatRequiredKcalH(u);
+  const [lo, hi] = ASSUMPTIONS.heaterSizeTolerance;
+  return [Math.floor((need * lo) / 100) * 100, Math.ceil((need * hi) / 100) * 100];
+}
+
+/** Calor que entrega una estufa (kcal/h): la potencia a gas tal como se vende, o los watts eléctricos × 0,86. */
+export function heaterKcalH(p: Product): number | undefined {
+  if (p.specs.gasPowerKcalH) return p.specs.gasPowerKcalH;
+  if (p.specs.powerW) return Math.round(p.specs.powerW / (PHYSICS.kwhPerKcal.value * 1000));
+  return undefined;
+}
+
 function empty(basis: EnergyEstimate['basis'], steps: string[]): EnergyEstimate {
   return { kwhYear: 0, m3Year: 0, kgGlpYear: 0, waterLYear: 0, basis, steps };
 }
@@ -94,6 +114,52 @@ export function estimateEnergy(p: Product, u: Usage, gasKind: Tariffs['gasKind']
         kwhYear: kwh,
         waterLYear: water,
       };
+    }
+
+    case 'calefactores': {
+      // Igual que en aires: la energía la define el ambiente; el equipo define cuánto de su gas o su luz se vuelve calor.
+      const need = heatRequiredKcalH(u);
+      const hours = u.heatingDaysYear * u.heatingHoursDay;
+      const lf = ASSUMPTIONS.acLoadFactor;
+      const heat = need * hours * lf;
+      const steps = [
+        `Tu ambiente: ${fmt(u.acAreaM2)} m² × ${fmt(u.acCeilingM, 1)} m × ${ASSUMPTIONS.heatKcalPerM3} kcal/h por m³${u.acHighLoad ? ` × ${fmt(ASSUMPTIONS.acHighLoadFactor, 1)}` : ''} = ${fmt(need)} kcal/h.`,
+        `Calor por año: ${fmt(need)} kcal/h × ${fmt(hours)} h (${u.heatingDaysYear} días × ${u.heatingHoursDay} h) × ${fmt(lf * 100)}% de carga media = ${fmt(heat / 1000)} mil kcal.`,
+      ];
+      const cap = heaterKcalH(p);
+      if (cap && cap < need * ASSUMPTIONS.heaterSizeTolerance[0]) {
+        steps.push(`Ojo: con ${fmt(cap)} kcal/h este equipo queda chico para tu ambiente.`);
+      }
+      if (p.energy === 'electricidad') {
+        const kwh = heat * PHYSICS.kwhPerKcal.value;
+        steps.push(`Eléctrica: toda la electricidad se vuelve calor (100 %), así que todas las estufas eléctricas gastan lo mismo para el mismo calor: ${fmt(kwh)} kWh/año.`);
+        return { ...empty('etiqueta', steps), kwhYear: kwh };
+      }
+      let basis: EnergyEstimate['basis'] = 'etiqueta';
+      const vented = s.roomHeaterType === 'tiro_balanceado';
+      const effPct = s.efficiencyPct;
+      const eff = effPct ? effPct / 100 : vented ? ASSUMPTIONS.balancedFlueEfficiencyFallback : 1;
+      if (vented && (!effPct || isEstimated(p, 'efficiencyPct'))) basis = 'estimado';
+      const pc = gasKind === 'envasado' ? PHYSICS.glpKcalPerKg.value : PHYSICS.gasNaturalKcalPerM3.value;
+      const unit = gasKind === 'envasado' ? 'kg' : 'm³';
+      const heatUnits = heat / (eff * pc);
+      steps.push(
+        vented
+          ? `Tiro balanceado: ÷ rendimiento ${fmt(eff * 100)}%${effPct ? '' : ' (supuesto)'} (el resto sale por el tiro) = ${fmt(heatUnits)} ${unit}/año.`
+          : `Sin salida al exterior: todo el calor queda en el ambiente = ${fmt(heatUnits)} ${unit}/año. Necesita ventilación permanente: no es apta para dormitorios ni baños.`,
+      );
+      let idle = 0;
+      if (s.hasPilot !== false) {
+        const m3Day = s.pilotM3PerDay ?? ASSUMPTIONS.heaterPilotM3PerDay;
+        if (s.hasPilot === undefined || s.pilotM3PerDay === undefined) basis = 'estimado';
+        const perDay = gasKind === 'envasado' ? (m3Day * PHYSICS.gasNaturalKcalPerM3.value) / PHYSICS.glpKcalPerKg.value : m3Day;
+        idle = perDay * u.heatingDaysYear;
+        steps.push(`Piloto encendido toda la temporada${s.hasPilot === undefined ? ' (supuesto)' : ''}: ${fmt(perDay, 2)} ${unit}/día × ${u.heatingDaysYear} días = ${fmt(idle)} ${unit}/año.`);
+      } else {
+        steps.push('Sin piloto: no consume gas cuando está apagado.');
+      }
+      const total = heatUnits + idle;
+      return { ...empty(basis, steps), m3Year: gasKind === 'natural' ? total : 0, kgGlpYear: gasKind === 'envasado' ? total : 0 };
     }
 
     case 'calefones':

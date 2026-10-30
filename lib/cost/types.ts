@@ -28,6 +28,9 @@ export interface Usage {
   acCeilingM: number;
   /** Mucho sol, último piso o poco aislamiento: más carga térmica */
   acHighLoad: boolean;
+  /** Estufas y calefactores: días por año y horas por día con la calefacción prendida */
+  heatingDaysYear: number;
+  heatingHoursDay: number;
   /** Lavarropas: lavados por semana */
   washCyclesPerWeek: number;
   /** Agua caliente: litros por persona por día (a ~40 °C de uso) y temperaturas */

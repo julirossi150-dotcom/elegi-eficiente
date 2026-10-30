@@ -265,6 +265,68 @@ function aguaCaliente(r: SpecReader, category: 'calefones' | 'termotanques'): { 
   return { specs: s, energy, guessed };
 }
 
+/** Estufas y calefactores: tipo, energía, potencia (kcal/h a gas, W eléctrica), encendido y rendimiento. */
+function calefactor(r: SpecReader): { specs: Specs; energy: EnergySource; guessed: boolean } {
+  const s: Specs = {};
+  const typeText = normalizeText(`${r.get(/tipo de (producto|gas|energia|estufa|calefactor)|fuente de energia|tiro/) ?? ''} ${r.name}`);
+  const t = ` ${typeText} `;
+  if (/tiro balanceado|\btb ?u?\b|balanceado/.test(t)) s.roomHeaterType = 'tiro_balanceado';
+  else if (/catalitic/.test(t)) s.roomHeaterType = 'catalitica';
+  else if (/caloventor|termoventilador/.test(t)) s.roomHeaterType = 'caloventor';
+  else if (/cuarzo/.test(t)) s.roomHeaterType = 'cuarzo';
+  else if (/halogen/.test(t)) s.roomHeaterType = 'halogena';
+  else if (/radiador|oleo|aceite/.test(t)) s.roomHeaterType = 'radiador';
+  else if (/panel|mica|vitroconvector|placa/.test(t)) s.roomHeaterType = 'panel';
+  else if (/convector|conveccion/.test(t)) s.roomHeaterType = 'convector';
+  else if (/infrarroj|garrafer|pantalla|radiante/.test(t)) s.roomHeaterType = 'infrarroja';
+  else if (/sin salida|tiro natural|\bsss?\b/.test(t)) s.roomHeaterType = 'sin_salida';
+
+  const gasTypes = ['tiro_balanceado', 'catalitica', 'infrarroja', 'sin_salida'];
+  const elecTypes = ['caloventor', 'cuarzo', 'halogena', 'radiador', 'panel', 'convector'];
+  const gasWord = /\bgas\b|garraf|envasado|gas natural|multigas|\bglp\b|tiro|balanceado|kcal/.test(t);
+  const elecWord = /(?<!piezo)electric|\d\s*w(atts?)?\b/.test(t);
+  let energy: EnergySource = 'electricidad';
+  let guessed = false;
+  if (s.roomHeaterType && gasTypes.includes(s.roomHeaterType)) energy = gasKindFrom(typeText) ?? (s.roomHeaterType === 'infrarroja' && /garraf/.test(t) ? 'gas_envasado' : 'gas_natural');
+  else if (s.roomHeaterType && elecTypes.includes(s.roomHeaterType)) energy = 'electricidad';
+  else if (gasWord && !elecWord) energy = gasKindFrom(typeText) ?? 'gas_natural';
+  if (energy !== 'electricidad' && !gasKindFrom(typeText)) guessed = true;
+  // infrarrojas eléctricas existen: si dice watts y no gas, es eléctrica
+  if (s.roomHeaterType === 'infrarroja' && elecWord && !gasWord) energy = 'electricidad';
+  if (s.roomHeaterType === 'convector' && gasWord && !elecWord) energy = gasKindFrom(typeText) ?? 'gas_natural';
+  // la potencia en kcal sin watts en el nombre es de un artefacto a gas (las eléctricas se venden por watts)
+  if (energy === 'electricidad' && /\d\s*k ?\/? ?cal/.test(r.name) && !/\d\s*w(atts?)?\b/.test(r.name) && !elecTypes.includes(s.roomHeaterType ?? '')) {
+    energy = gasKindFrom(typeText) ?? 'gas_natural';
+    guessed = !gasKindFrom(typeText);
+  }
+  // sin indicios claros de electricidad, que decida otra tienda con más datos
+  if (energy === 'electricidad' && !elecWord && !elecTypes.includes(s.roomHeaterType ?? '')) guessed = true;
+  if (!s.roomHeaterType) s.roomHeaterType = energy === 'electricidad' ? 'otro' : 'sin_salida';
+
+  const specText = normalizeText([r.get(/calorias|kcal|capacidad calorifica|potencia|capacidad de calefaccion|consumo de energia/) ?? '', r.name].join(' '));
+  if (energy === 'electricidad') {
+    const w =
+      valueWithUnit('potencia', r.get(/potencia maxima|capacidad de calefaccion|^potencia/) ?? '', /w\b|watts?/) ??
+      numberWithUnit(specText, /w\b|watts?/);
+    const kw = numberWithUnit(specText, /kw\b/);
+    const watts = w ?? (kw ? kw * 1000 : undefined);
+    if (watts && watts >= 300 && watts <= 5000) s.powerW = watts;
+  } else {
+    const kcal =
+      numberWithUnit(normalizeText(r.get(/calorias$|capacidad calorifica|^potencia/) ?? ''), /kcal|k ?cal/) ??
+      num(r.get(/capacidad calorifica/), 1000, 15000) ??
+      numberWithUnit(specText, /kcal|k ?cal|cal\b/);
+    if (kcal && kcal >= 1000 && kcal <= 15000) s.gasPowerKcalH = kcal;
+    const enc = normalizeText(`${r.get(/encendido/) ?? ''} ${r.name}`);
+    if (/sin piloto|electronico|automatico/.test(enc) && !/piezo|manual/.test(enc)) s.hasPilot = false;
+    else if (/piezo|manual|piloto/.test(enc)) s.hasPilot = true;
+    const rend = r.get(/rendimiento/);
+    const pct = rend ? inRange(toNumber(rend), 40, 110) : undefined;
+    if (pct) s.efficiencyPct = pct;
+  }
+  return { specs: s, energy, guessed };
+}
+
 // ---------- entrada ----------
 
 export function toListing(p: VtexProduct, store: string, category: CategoryId, checkedAt: string): Listing | null {
@@ -300,6 +362,13 @@ export function toListing(p: VtexProduct, store: string, category: CategoryId, c
       energy = res.energy;
       energyGuessed = res.guessed;
       if (category === 'calefones' && energy === 'electricidad') return null;
+      break;
+    }
+    case 'calefactores': {
+      const res = calefactor(r);
+      specs = res.specs;
+      energy = res.energy;
+      energyGuessed = res.guessed;
       break;
     }
   }

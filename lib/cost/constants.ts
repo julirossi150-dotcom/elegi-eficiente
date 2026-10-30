@@ -51,6 +51,8 @@ export const DEFAULT_USAGE: Usage = {
   acAreaM2: 20,
   acCeilingM: 2.6,
   acHighLoad: false,
+  heatingDaysYear: 150,
+  heatingHoursDay: 6,
   washCyclesPerWeek: 4,
   hotWaterLPerPersonDay: 50,
   coldWaterTempC: 17,
@@ -64,6 +66,7 @@ export const LIFESPAN_YEARS: Record<CategoryId, number> = {
   lavarropas: 12,
   calefones: 12,
   termotanques: 10,
+  calefactores: 15,
 };
 
 /** Supuestos por categoría usados en el cálculo (se muestran en metodología) */
@@ -85,6 +88,14 @@ export const ASSUMPTIONS = {
   acHighLoadFactor: 1.2,
   /** Rango de capacidad que se considera adecuado, como fracción de la recomendada */
   acSizeTolerance: [0.95, 1.5] as const,
+  /** Calefacción: kcal/h por m³ de ambiente (misma regla práctica que el aire) */
+  heatKcalPerM3: 50,
+  /** Rango de potencia adecuado para estufas (los escalones de potencia son más gruesos que en aires) */
+  heaterSizeTolerance: [0.9, 1.6] as const,
+  /** Rendimiento supuesto de un calefactor de tiro balanceado si no lo informa */
+  balancedFlueEfficiencyFallback: 0.7,
+  /** Piloto de un calefactor a gas: consumo típico aproximado mientras está encendido (m³/día) */
+  heaterPilotM3PerDay: 0.3,
   /** COP típico de un termotanque bomba de calor si no lo informa */
   heatPumpWaterCopFallback: 3,
 };

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/Icon';
-import { acCapacityRange, acRequiredFrigorias, computeRow, DEFAULT_SCENARIO, DEFAULT_TARIFFS, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
+import { acCapacityRange, acRequiredFrigorias, computeRow, heaterCapacityRange, heatRequiredKcalH, DEFAULT_SCENARIO, DEFAULT_TARIFFS, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
 import { formatARS, formatDate } from '@/lib/format';
 import { withBase } from '@/lib/site';
 import { CAPACITY_UNIT, capacityOf, subtypeOf } from '@/lib/specs';
@@ -21,6 +21,7 @@ const DEFAULT_CAPACITY: Record<CategoryId, [string, string]> = {
   lavarropas: ['6', '9'],
   calefones: ['', ''],
   termotanques: ['50', '120'],
+  calefactores: ['', ''],
 };
 const PAGE = 30;
 
@@ -54,10 +55,10 @@ export default function Comparator({ category }: { category: CategoryId }) {
     setTariffsState(loadPref('tariffs', DEFAULT_TARIFFS));
     setScenarioState(loadPref(`scenario:${category}`, { ...DEFAULT_SCENARIO, years: LIFESPAN_YEARS[category] }));
   }, [category]);
-  // En aires el rango de frigorías sale del ambiente; se recalcula cuando cambian sus datos
+  // En aires y estufas el rango de potencia sale del ambiente; se recalcula cuando cambian sus datos
   useEffect(() => {
-    if (category !== 'aires') return;
-    const [lo, hi] = acCapacityRange(usage);
+    if (category !== 'aires' && category !== 'calefactores') return;
+    const [lo, hi] = category === 'aires' ? acCapacityRange(usage) : heaterCapacityRange(usage);
     setCapMin(String(lo));
     setCapMax(String(hi));
   }, [category, usage.acAreaM2, usage.acCeilingM, usage.acHighLoad]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -234,6 +235,11 @@ export default function Comparator({ category }: { category: CategoryId }) {
                 {category === 'aires' && (
                   <p className="mt-0.5 text-xs text-faint">
                     Para tu ambiente: ~{acRequiredFrigorias(usage).toLocaleString('es-AR')} frigorías
+                  </p>
+                )}
+                {category === 'calefactores' && (
+                  <p className="mt-0.5 text-xs text-faint">
+                    Para tu ambiente: ~{heatRequiredKcalH(usage).toLocaleString('es-AR')} kcal/h (eléctricas: 1.000 W ≈ 860 kcal/h)
                   </p>
                 )}
                 <div className="mt-1 flex items-center gap-2">

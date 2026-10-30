@@ -52,6 +52,11 @@ export const CATEGORY_RULES: Record<CategoryId, { node: RegExp; excludeNode?: Re
     node: /termotanque/,
     excludePath: /solar|instalacion|servicio|accesorio|repuesto|no usar|no se usa/,
   },
+  calefactores: {
+    node: /calefacci|calefactor|estufa|caloventor|convector|paneles de mica|^radiadores$/,
+    excludeNode: /lena|exterior|accesorio|salamandra|ecologic|calefon|termotanque|caldera|climatizacion inteligente/,
+    excludePath: /instalacion|servicio|accesorio|repuesto|no usar|no se usa|jardin|pileta|autoparte|compra internacional|outlet|days|lena/,
+  },
 };
 
 /** Filtro por nombre de producto: debe coincidir `include` y no coincidir `exclude`. */
@@ -76,5 +81,10 @@ export const PRODUCT_RULES: Record<CategoryId, { include: RegExp; exclude: RegEx
   termotanques: {
     include: /termotanque/,
     exclude: /solar|kit|valvula|repuesto|accesorio|flexible|conector|soporte|anodo|resistencia para|termostato|instalacion/,
+  },
+  calefactores: {
+    include: /calefactor|estufa|caloventor|convector|panel|radiador|tiro balanceado|calefaccion|infrarroj|catalitic|cuarzo|halogen/,
+    exclude:
+      /lena|pellet|salamandra|exterior|patio|parrilla|kit|repuesto|accesorio|conector|flexible|termocupla|valvula|regulador|soporte|ventilador|aire acondicionado|split|bolsa|manta|almohad|cobertor|toallero|bioetanol|chimenea|diesel|kerosen|parafina|industrial|canon|calefon|termotanque|pileta|auto|cama|pies|zapat/,
   },
 };

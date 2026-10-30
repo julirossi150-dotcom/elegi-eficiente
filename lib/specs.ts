@@ -9,6 +9,21 @@ export const CAPACITY_UNIT: Record<CategoryId, { label: string; unit: string }> 
   lavarropas: { label: 'Carga', unit: 'kg' },
   calefones: { label: 'Caudal', unit: 'L/min' },
   termotanques: { label: 'Capacidad', unit: 'L' },
+  calefactores: { label: 'Potencia', unit: 'kcal/h' },
+};
+
+export const ROOM_HEATER_TYPE: Record<NonNullable<Product['specs']['roomHeaterType']>, string> = {
+  tiro_balanceado: 'Tiro balanceado',
+  sin_salida: 'Sin salida al exterior',
+  infrarroja: 'Infrarroja / garrafera',
+  catalitica: 'Catalítica',
+  caloventor: 'Caloventor',
+  convector: 'Convector',
+  cuarzo: 'Cuarzo',
+  halogena: 'Halógena',
+  panel: 'Panel',
+  radiador: 'Radiador',
+  otro: 'Otra eléctrica',
 };
 
 export function frigoriasOf(p: Product): number | undefined {
@@ -32,6 +47,8 @@ export function capacityOf(p: Product): number | undefined {
       return s.flowLMin;
     case 'termotanques':
       return s.storageL;
+    case 'calefactores':
+      return s.gasPowerKcalH ?? (s.powerW ? Math.round(s.powerW * 0.86) : undefined);
   }
 }
 
@@ -83,6 +100,13 @@ export function specChips(p: Product): string[] {
       chips.push(ENERGY_LABEL[p.energy]);
       if (s.heaterType === 'bomba_de_calor') chips.push('Bomba de calor');
       break;
+    case 'calefactores':
+      if (s.gasPowerKcalH) chips.push(`${n0(s.gasPowerKcalH)} kcal/h`);
+      else if (s.powerW) chips.push(`${n0(s.powerW)} W`);
+      if (s.roomHeaterType) chips.push(ROOM_HEATER_TYPE[s.roomHeaterType]);
+      chips.push(ENERGY_LABEL[p.energy]);
+      if (p.energy !== 'electricidad' && s.hasPilot !== undefined) chips.push(s.hasPilot ? 'Con piloto' : 'Sin piloto');
+      break;
   }
   return chips;
 }
@@ -100,6 +124,8 @@ export function subtypeOf(p: Product): string | undefined {
     case 'calefones':
     case 'termotanques':
       return ENERGY_LABEL[p.energy];
+    case 'calefactores':
+      return s.roomHeaterType ? ROOM_HEATER_TYPE[s.roomHeaterType] : undefined;
   }
 }
 
@@ -134,6 +160,12 @@ export function specRows(p: Product): [string, string][] {
       rows.push(['Rendimiento', s.efficiencyPct ? `${n0(s.efficiencyPct)} %` : undefined]);
       rows.push(['Piloto', s.hasPilot === undefined ? undefined : s.hasPilot ? 'Sí' : 'No']);
       rows.push(['Consumo de mantenimiento', s.maintenanceM3PerDay !== undefined ? `${n1(s.maintenanceM3PerDay)} m³/día` : s.standbyKwhPer24h ? `${n1(s.standbyKwhPer24h)} kWh/día` : undefined]);
+      break;
+    case 'calefactores':
+      rows.push(['Tipo', s.roomHeaterType ? ROOM_HEATER_TYPE[s.roomHeaterType] : undefined]);
+      rows.push(['Potencia', s.gasPowerKcalH ? `${n0(s.gasPowerKcalH)} kcal/h` : kw(s.powerW)]);
+      rows.push(['Rendimiento', s.efficiencyPct ? `${n0(s.efficiencyPct)} %` : undefined]);
+      rows.push(['Piloto', p.energy === 'electricidad' || s.hasPilot === undefined ? undefined : s.hasPilot ? 'Sí' : 'No']);
       break;
   }
   return rows.filter((r): r is [string, string] => Boolean(r[1]));

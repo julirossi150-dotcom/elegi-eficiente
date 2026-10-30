@@ -50,6 +50,12 @@ const PATHS: Record<IconName, React.ReactNode> = {
       <path d="M9 21.5h6M12 8v6M10 12l2 2 2-2" />
     </>
   ),
+  calefactores: (
+    <>
+      <rect x="3.5" y="6" width="17" height="12" rx="2" />
+      <path d="M7 9.5v5M10.5 9.5v5M14 9.5v5M17 9.5v5M6 18v2.5M18 18v2.5" />
+    </>
+  ),
   bolt: <path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8z" />,
   flame: <path d="M12 2.5c3.5 4 6 7 6 11a6 6 0 0 1-12 0c0-2.5 1.2-4.5 3-6 .3 2 1.2 3 2.5 3.5C11 8 11.2 5 12 2.5z" />,
   leaf: (

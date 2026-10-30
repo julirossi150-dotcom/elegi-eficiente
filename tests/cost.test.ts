@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { acCapacityRange, acRequiredFrigorias, computeRow, cumulativeEnergy, DEFAULT_USAGE, hotWaterDemandKcalYear, paybackYears, type Tariffs } from '../lib/cost';
+import { acCapacityRange, acRequiredFrigorias, computeRow, cumulativeEnergy, heaterCapacityRange, heatRequiredKcalH, DEFAULT_USAGE, hotWaterDemandKcalYear, paybackYears, type Tariffs } from '../lib/cost';
 import type { Product } from '../lib/types';
 
 const T: Tariffs = { electricityPerKwh: 100, gasNaturalPerM3: 500, glpPerKg: 1000, gasKind: 'natural' };
@@ -93,5 +93,31 @@ describe('escenario', () => {
     // ahorro 250 kWh × $100 = $25.000/año; diferencia $100.000 → 4 años
     expect(paybackYears(barato, eficiente, S)).toBeCloseTo(4, 6);
     expect(paybackYears(eficiente, barato, S)).toBe(0);
+  });
+});
+
+describe('estufas y calefactores', () => {
+  // 20 m² × 2,6 m × 50 = 2.600 kcal/h; 150 días × 6 h × 60 % → 1.404.000 kcal/año
+  const U = { ...DEFAULT_USAGE, acAreaM2: 20, acCeilingM: 2.6, acHighLoad: false, heatingDaysYear: 150, heatingHoursDay: 6 };
+  const HEAT = 2600 * 900 * 0.6;
+  it('potencia necesaria y rango adecuado', () => {
+    expect(heatRequiredKcalH(U)).toBe(2600);
+    expect(heaterCapacityRange(U)).toEqual([2300, 4200]);
+  });
+  it('todas las eléctricas gastan lo mismo para el mismo calor', () => {
+    const a = computeRow(product({ category: 'calefactores', specs: { roomHeaterType: 'caloventor', powerW: 2000 } }), U, T, S);
+    const b = computeRow(product({ category: 'calefactores', specs: { roomHeaterType: 'radiador', powerW: 2500 } }), U, T, S);
+    expect(a.estimate!.kwhYear).toBeCloseTo(HEAT / 860, 5);
+    expect(b.estimate!.kwhYear).toBeCloseTo(a.estimate!.kwhYear, 5);
+  });
+  it('tiro balanceado: rendimiento supuesto y piloto en la temporada', () => {
+    const p = product({ category: 'calefactores', energy: 'gas_natural', specs: { roomHeaterType: 'tiro_balanceado', gasPowerKcalH: 3000, hasPilot: true } });
+    const r = computeRow(p, U, T, S);
+    expect(r.estimate!.m3Year).toBeCloseTo(HEAT / (0.7 * 9300) + 0.3 * 150, 5);
+    expect(r.estimate!.basis).toBe('estimado');
+  });
+  it('sin salida: todo el calor queda adentro', () => {
+    const p = product({ category: 'calefactores', energy: 'gas_natural', specs: { roomHeaterType: 'sin_salida', gasPowerKcalH: 3000, hasPilot: false } });
+    expect(computeRow(p, U, T, S).estimate!.m3Year).toBeCloseTo(HEAT / 9300, 5);
   });
 });

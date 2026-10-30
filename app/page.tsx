@@ -41,7 +41,7 @@ export default async function Home() {
             El aparato que menos te cuesta, hoy y en diez años
           </h1>
           <p className="mt-6 max-w-md text-base leading-relaxed text-white/90 sm:text-lg">
-            Compará heladeras, aires, lavarropas, calefones y termotanques por su precio y por lo que consumen de luz y gas en tu casa.
+            Compará heladeras, aires, lavarropas, calefones, termotanques y estufas por su precio y por lo que consumen de luz y gas en tu casa.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link

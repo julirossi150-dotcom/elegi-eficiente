@@ -1,7 +1,7 @@
 // Contrato de datos compartido entre el pipeline (pipeline/) y la web (app/).
 // Los archivos generados viven en public/data/ y son el "JSON público descargable".
 
-export const CATEGORY_IDS = ['heladeras', 'aires', 'lavarropas', 'calefones', 'termotanques'] as const;
+export const CATEGORY_IDS = ['heladeras', 'aires', 'lavarropas', 'calefones', 'termotanques', 'calefactores'] as const;
 export type CategoryId = (typeof CATEGORY_IDS)[number];
 
 export type EnergySource = 'electricidad' | 'gas_natural' | 'gas_envasado' | 'multigas';
@@ -85,6 +85,9 @@ export interface Specs {
   recoveryLH?: number;
   /** "Consumo medio en condiciones normalizadas" de la etiqueta ENARGAS (m³/año de gas natural) */
   labelM3Year?: number;
+
+  // Calefactores y estufas (la potencia a gas va en gasPowerKcalH, la eléctrica en powerW)
+  roomHeaterType?: 'tiro_balanceado' | 'sin_salida' | 'infrarroja' | 'catalitica' | 'caloventor' | 'convector' | 'cuarzo' | 'halogena' | 'panel' | 'radiador' | 'otro';
 }
 export type SpecKey = keyof Specs;
 

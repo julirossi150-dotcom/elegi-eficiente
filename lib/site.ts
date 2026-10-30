@@ -4,7 +4,7 @@ export const SITE = {
   name: 'Elegí Eficiente',
   tagline: 'Compará electrodomésticos por lo que te cuestan hoy y durante toda su vida útil.',
   description:
-    'Comparador gratuito de heladeras, aires acondicionados, lavarropas, calefones y termotanques con etiqueta de eficiencia energética en Argentina. Precio de compra + consumo de luz y gas.',
+    'Comparador gratuito de heladeras, aires acondicionados, lavarropas, calefones, termotanques y estufas con etiqueta de eficiencia energética en Argentina. Precio de compra + consumo de luz y gas.',
   repoUrl: process.env.NEXT_PUBLIC_REPO_URL || '',
 };
 
@@ -57,6 +57,13 @@ export const CATEGORIES: CategoryInfo[] = [
     name: 'Termotanques',
     singular: 'termotanque',
     blurb: 'A gas o eléctricos: mantener el agua caliente tiene un costo diario que la etiqueta informa.',
+    energyHint: 'Gas o electricidad',
+  },
+  {
+    id: 'calefactores',
+    name: 'Estufas y calefactores',
+    singular: 'estufa',
+    blurb: 'Tiro balanceado, sin salida o eléctricas: calculamos el gasto para calefaccionar tu ambiente.',
     energyHint: 'Gas o electricidad',
   },
 ];
