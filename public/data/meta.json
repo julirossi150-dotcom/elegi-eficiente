@@ -1,36 +1,36 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-29T23:16:18.416Z",
+  "generatedAt": "2026-10-30T09:45:33.597Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 675,
-      "withConsumption": 394,
-      "withPrice": 675
+      "count": 699,
+      "withConsumption": 404,
+      "withPrice": 699
     },
     {
       "id": "aires",
-      "count": 365,
-      "withConsumption": 180,
-      "withPrice": 365
+      "count": 380,
+      "withConsumption": 189,
+      "withPrice": 380
     },
     {
       "id": "lavarropas",
-      "count": 328,
-      "withConsumption": 206,
-      "withPrice": 328
+      "count": 341,
+      "withConsumption": 209,
+      "withPrice": 341
     },
     {
       "id": "calefones",
-      "count": 49,
-      "withConsumption": 49,
-      "withPrice": 49
+      "count": 50,
+      "withConsumption": 50,
+      "withPrice": 50
     },
     {
       "id": "termotanques",
-      "count": 334,
-      "withConsumption": 334,
-      "withPrice": 334
+      "count": 345,
+      "withConsumption": 345,
+      "withPrice": 345
     }
   ],
   "stores": [
@@ -38,8 +38,9 @@
       "id": "fravega",
       "name": "Frávega",
       "url": "https://www.fravega.com",
-      "ok": true,
-      "products": 2259
+      "ok": false,
+      "products": 0,
+      "error": "HTTP 403: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<HTML><HEAD><META"
     },
     {
       "id": "cetrogar",
@@ -67,7 +68,7 @@
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1039
+      "products": 991
     },
     {
       "id": "jumbo",
@@ -102,7 +103,7 @@
       "name": "BGH (oficial)",
       "url": "https://www.bgh.com.ar",
       "ok": true,
-      "products": 43
+      "products": 44
     }
   ]
 }
