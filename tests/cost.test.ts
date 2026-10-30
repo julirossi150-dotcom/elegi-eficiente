@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { computeRow, cumulativeEnergy, DEFAULT_USAGE, hotWaterDemandKcalYear, paybackYears, type Tariffs } from '../lib/cost';
+import { acCapacityRange, acRequiredFrigorias, computeRow, cumulativeEnergy, DEFAULT_USAGE, hotWaterDemandKcalYear, paybackYears, type Tariffs } from '../lib/cost';
 import type { Product } from '../lib/types';
 
 const T: Tariffs = { electricityPerKwh: 100, gasNaturalPerM3: 500, glpPerKg: 1000, gasKind: 'natural' };
@@ -43,11 +43,26 @@ describe('heladeras', () => {
 });
 
 describe('aires', () => {
-  it('capacidad × horas × carga ÷ EER', () => {
+  const U = { ...DEFAULT_USAGE, acAreaM2: 20, acCeilingM: 2.6, acHighLoad: false, acCoolingHoursYear: 1000, acUseHeating: false };
+  it('frigorías del ambiente: m² × altura × 50, con recargo por sol', () => {
+    expect(acRequiredFrigorias(U)).toBe(2600);
+    expect(acRequiredFrigorias({ ...U, acHighLoad: true })).toBe(3100);
+    expect(acCapacityRange(U)).toEqual([2450, 3900]);
+  });
+  it('carga del ambiente × horas × carga media ÷ EER', () => {
     const p = product({ category: 'aires', specs: { coolingCapacityW: 3500, eer: 3.5 } });
-    const r = computeRow(p, { ...DEFAULT_USAGE, acCoolingHoursYear: 1000, acUseHeating: false }, T, S);
-    // 3500 W × 1000 h × 0,6 ÷ 3,5 = 600 kWh
-    expect(r.estimate?.kwhYear).toBeCloseTo(600, 5);
+    const r = computeRow(p, U, T, S);
+    // 2600 frigorías × 1,163 W × 1000 h × 0,6 ÷ 3,5
+    expect(r.estimate?.kwhYear).toBeCloseTo((2600 * 1.163 * 1000 * 0.6) / 3.5 / 1000, 5);
+  });
+  it('con la misma eficiencia, un equipo más grande no gasta más', () => {
+    const chico = computeRow(product({ category: 'aires', specs: { coolingCapacityW: 3000, eer: 3.5 } }), U, T, S);
+    const grande = computeRow(product({ category: 'aires', specs: { coolingCapacityW: 5000, eer: 3.5 } }), U, T, S);
+    expect(grande.estimate!.kwhYear).toBeCloseTo(chico.estimate!.kwhYear, 5);
+  });
+  it('avisa si el equipo queda chico', () => {
+    const r = computeRow(product({ category: 'aires', specs: { coolingCapacityW: 2600, eer: 3.5 } }), U, T, S);
+    expect(r.estimate!.steps.some((x) => x.includes('queda chico'))).toBe(true);
   });
 });
 

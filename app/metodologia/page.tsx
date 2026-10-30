@@ -110,10 +110,17 @@ export default function MetodologiaPage() {
                   <td className="text-faint">Supuesto del modelo, igual para todos los equipos</td>
                 </tr>
                 <tr>
+                  <td className="text-white">Frigorías que necesita un ambiente</td>
+                  <td>
+                    {ASSUMPTIONS.acFrigoriasPerM3} por m³ (+{Math.round((ASSUMPTIONS.acHighLoadFactor - 1) * 100)}% con mucho sol o último piso)
+                  </td>
+                  <td className="text-faint">Regla práctica habitual de dimensionamiento; es aproximada</td>
+                </tr>
+                <tr>
                   <td className="text-white">Uso por defecto</td>
                   <td colSpan={2}>
                     {DEFAULT_USAGE.people} personas · {DEFAULT_USAGE.hotWaterLPerPersonDay} L de agua caliente por persona y día ·{' '}
-                    {DEFAULT_USAGE.washCyclesPerWeek} lavados por semana · {DEFAULT_USAGE.acCoolingHoursYear} h/año de aire en frío
+                    {DEFAULT_USAGE.washCyclesPerWeek} lavados por semana · {DEFAULT_USAGE.acCoolingHoursYear} h/año de aire en frío en un ambiente de {DEFAULT_USAGE.acAreaM2} m²
                   </td>
                 </tr>
               </tbody>

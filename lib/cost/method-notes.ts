@@ -9,7 +9,8 @@ export const METHOD_NOTES: Record<CategoryId, string[]> = {
     'Si nadie informa los kWh, los estimamos con el IEE medio de la clase y el consumo estándar según volumen, freezer y No Frost (error medio ±13 % contra 75 modelos con dato real). Cuando la letra es ambigua (A o B pueden ser de cualquiera de las dos escalas) usamos la escala más frecuente entre los productos de la misma clase que sí informan consumo.',
   ],
   aires: [
-    'Energía anual = capacidad de frío (W) × horas de uso × 60 % de carga media ÷ índice de eficiencia. Usamos el índice estacional (IEEE) cuando se conoce, si no el EER. Para calefaccionar, capacidad de calor ÷ COP.',
+    'Primero calculamos lo que necesita tu ambiente: superficie × altura × 50 frigorías por m³ (regla práctica habitual), con un 20 % más si tiene mucho sol, es último piso o está poco aislado. Con eso mostramos los equipos de 95 % a 150 % de esas frigorías: uno más chico no llega a la temperatura en los días exigentes.',
+    'Energía anual = carga del ambiente (W) × horas de uso × 60 % de carga media ÷ índice de eficiencia. Usamos el índice estacional (IEEE) cuando se conoce, si no el EER; para calefaccionar, el COP. La energía la define el ambiente, no el tamaño del equipo: entre dos equipos adecuados, gasta menos el más eficiente, no el más chico.',
     'La etiqueta informa el consumo para 500 horas a plena carga. Con la clase sola estimamos el IEEE con el punto medio de su rango (Res. 438/2024: A > 8,5; B 5,6–8,5; C 3,6–5,6; D 3,39–3,6…). La escala IRAM 62406:2019 usa los mismos cortes con letras A+++…D.',
   ],
   lavarropas: [

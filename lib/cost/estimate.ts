@@ -14,6 +14,19 @@ export function hotWaterDemandKcalYear(u: Usage): number {
   return u.people * u.hotWaterLPerPersonDay * dT * PHYSICS.waterKcalPerLC.value * 365;
 }
 
+/** Frigorías que necesita el ambiente: volumen × frigorías por m³, con recargo si tiene mucho sol o es último piso. */
+export function acRequiredFrigorias(u: Usage): number {
+  const f = u.acAreaM2 * u.acCeilingM * ASSUMPTIONS.acFrigoriasPerM3 * (u.acHighLoad ? ASSUMPTIONS.acHighLoadFactor : 1);
+  return Math.round(f / 50) * 50;
+}
+
+/** Rango de frigorías adecuado para el ambiente [mínimo, máximo], redondeado a 50. */
+export function acCapacityRange(u: Usage): [number, number] {
+  const need = acRequiredFrigorias(u);
+  const [lo, hi] = ASSUMPTIONS.acSizeTolerance;
+  return [Math.floor((need * lo) / 50) * 50, Math.ceil((need * hi) / 50) * 50];
+}
+
 function empty(basis: EnergyEstimate['basis'], steps: string[]): EnergyEstimate {
   return { kwhYear: 0, m3Year: 0, kgGlpYear: 0, waterLYear: 0, basis, steps };
 }
@@ -35,6 +48,8 @@ export function estimateEnergy(p: Product, u: Usage, gasKind: Tariffs['gasKind']
     }
 
     case 'aires': {
+      // La energía depende del ambiente (su carga térmica), no del tamaño del equipo: el equipo solo define con qué
+      // eficiencia la entrega. Así dos equipos adecuados se comparan por su índice y no "gasta más" el más grande.
       const lf = ASSUMPTIONS.acLoadFactor;
       const steps: string[] = [];
       let kwh = 0;
@@ -42,18 +57,26 @@ export function estimateEnergy(p: Product, u: Usage, gasKind: Tariffs['gasKind']
       const coolEff = s.seer ?? s.eer ?? (s.coolingCapacityW && s.coolingPowerW ? s.coolingCapacityW / s.coolingPowerW : undefined);
       if (!s.coolingCapacityW || !coolEff) return null;
       if (isEstimated(p, s.seer ? 'seer' : 'eer') || isEstimated(p, 'coolingCapacityW')) basis = 'estimado';
-      const coolKwh = (s.coolingCapacityW * u.acCoolingHoursYear * lf) / coolEff / 1000;
+      const needFrig = acRequiredFrigorias(u);
+      const needW = needFrig * PHYSICS.wattsPerFrigoria.value;
+      steps.push(
+        `Tu ambiente: ${fmt(u.acAreaM2)} m² × ${fmt(u.acCeilingM, 1)} m × ${ASSUMPTIONS.acFrigoriasPerM3} frigorías/m³${u.acHighLoad ? ` × ${fmt(ASSUMPTIONS.acHighLoadFactor, 1)} (sol o último piso)` : ''} = ${fmt(needFrig)} frigorías (${fmt(needW)} W).`,
+      );
+      const capFrig = s.coolingCapacityW / PHYSICS.wattsPerFrigoria.value;
+      if (capFrig < needFrig * ASSUMPTIONS.acSizeTolerance[0]) {
+        steps.push(`Ojo: con ${fmt(capFrig)} frigorías este equipo queda chico para tu ambiente y no llegaría a la temperatura en los días más exigentes.`);
+      }
+      const coolKwh = (needW * u.acCoolingHoursYear * lf) / coolEff / 1000;
       kwh += coolKwh;
       steps.push(
-        `Frío: ${fmt(s.coolingCapacityW)} W de capacidad × ${fmt(u.acCoolingHoursYear)} h/año × ${fmt(lf * 100)}% de carga media ÷ ${s.seer ? 'SEER' : 'EER'} ${fmt(coolEff, 2)} = ${fmt(coolKwh)} kWh/año.`,
+        `Frío: ${fmt(needW)} W × ${fmt(u.acCoolingHoursYear)} h/año × ${fmt(lf * 100)}% de carga media ÷ ${s.seer ? 'SEER' : 'EER'} ${fmt(coolEff, 2)} = ${fmt(coolKwh)} kWh/año.`,
       );
-      if (u.acUseHeating && s.heatPump !== false && (s.heatingCapacityW || s.coolingCapacityW)) {
-        const cap = s.heatingCapacityW ?? s.coolingCapacityW;
+      if (u.acUseHeating && s.heatPump !== false) {
         const heatEff = s.scop ?? s.cop ?? coolEff;
         if ((!s.cop && !s.scop) || isEstimated(p, 'cop')) basis = 'estimado';
-        const heatKwh = (cap * u.acHeatingHoursYear * lf) / heatEff / 1000;
+        const heatKwh = (needW * u.acHeatingHoursYear * lf) / heatEff / 1000;
         kwh += heatKwh;
-        steps.push(`Calor: ${fmt(cap)} W × ${fmt(u.acHeatingHoursYear)} h/año × ${fmt(lf * 100)}% ÷ ${s.scop ? 'SCOP' : 'COP'} ${fmt(heatEff, 2)} = ${fmt(heatKwh)} kWh/año.`);
+        steps.push(`Calor: ${fmt(needW)} W × ${fmt(u.acHeatingHoursYear)} h/año × ${fmt(lf * 100)}% ÷ ${s.scop ? 'SCOP' : 'COP'} ${fmt(heatEff, 2)} = ${fmt(heatKwh)} kWh/año.`);
       }
       return { ...empty(basis, steps), kwhYear: kwh };
     }

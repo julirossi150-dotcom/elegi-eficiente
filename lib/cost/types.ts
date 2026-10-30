@@ -23,6 +23,11 @@ export interface Usage {
   acCoolingHoursYear: number;
   acHeatingHoursYear: number;
   acUseHeating: boolean;
+  /** Aires: ambiente a climatizar, para dimensionar el equipo y su carga térmica */
+  acAreaM2: number;
+  acCeilingM: number;
+  /** Mucho sol, último piso o poco aislamiento: más carga térmica */
+  acHighLoad: boolean;
   /** Lavarropas: lavados por semana */
   washCyclesPerWeek: number;
   /** Agua caliente: litros por persona por día (a ~40 °C de uso) y temperaturas */

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/Icon';
-import { computeRow, DEFAULT_SCENARIO, DEFAULT_TARIFFS, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
+import { acCapacityRange, acRequiredFrigorias, computeRow, DEFAULT_SCENARIO, DEFAULT_TARIFFS, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
 import { formatARS, formatDate } from '@/lib/format';
 import { withBase } from '@/lib/site';
 import { CAPACITY_UNIT, capacityOf, subtypeOf } from '@/lib/specs';
@@ -54,6 +54,13 @@ export default function Comparator({ category }: { category: CategoryId }) {
     setTariffsState(loadPref('tariffs', DEFAULT_TARIFFS));
     setScenarioState(loadPref(`scenario:${category}`, { ...DEFAULT_SCENARIO, years: LIFESPAN_YEARS[category] }));
   }, [category]);
+  // En aires el rango de frigorías sale del ambiente; se recalcula cuando cambian sus datos
+  useEffect(() => {
+    if (category !== 'aires') return;
+    const [lo, hi] = acCapacityRange(usage);
+    setCapMin(String(lo));
+    setCapMax(String(hi));
+  }, [category, usage.acAreaM2, usage.acCeilingM, usage.acHighLoad]); // eslint-disable-line react-hooks/exhaustive-deps
   const setUsage = (u: Usage) => (setUsageState(u), savePref('usage', u));
   const setTariffs = (t: Tariffs) => (setTariffsState(t), savePref('tariffs', t));
   const setScenario = (s: Scenario) => (setScenarioState(s), savePref(`scenario:${category}`, s));
@@ -224,6 +231,11 @@ export default function Comparator({ category }: { category: CategoryId }) {
                 <legend>
                   {unit.label} que necesitás ({unit.unit})
                 </legend>
+                {category === 'aires' && (
+                  <p className="mt-0.5 text-xs text-faint">
+                    Para tu ambiente: ~{acRequiredFrigorias(usage).toLocaleString('es-AR')} frigorías
+                  </p>
+                )}
                 <div className="mt-1 flex items-center gap-2">
                   <input
                     type="number"

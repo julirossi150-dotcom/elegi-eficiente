@@ -48,6 +48,9 @@ export const DEFAULT_USAGE: Usage = {
   acCoolingHoursYear: 600,
   acHeatingHoursYear: 300,
   acUseHeating: false,
+  acAreaM2: 20,
+  acCeilingM: 2.6,
+  acHighLoad: false,
   washCyclesPerWeek: 4,
   hotWaterLPerPersonDay: 50,
   coldWaterTempC: 17,
@@ -76,6 +79,12 @@ export const ASSUMPTIONS = {
    * Es la misma para todos los equipos: la ventaja del inverter aparece por su índice estacional (SEER/SCOP).
    */
   acLoadFactor: 0.6,
+  /** Dimensionamiento del aire: frigorías por m³ de ambiente (regla práctica habitual en Argentina) */
+  acFrigoriasPerM3: 50,
+  /** Recargo de carga térmica con mucho sol, último piso o poco aislamiento */
+  acHighLoadFactor: 1.2,
+  /** Rango de capacidad que se considera adecuado, como fracción de la recomendada */
+  acSizeTolerance: [0.95, 1.5] as const,
   /** COP típico de un termotanque bomba de calor si no lo informa */
   heatPumpWaterCopFallback: 3,
 };

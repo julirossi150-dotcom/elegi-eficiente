@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { computeRow, type Tariffs, type Usage } from '../lib/cost';
+import { computeRow, DEFAULT_USAGE, type Tariffs, type Usage } from '../lib/cost';
 import type { Product } from '../lib/types';
 import { applyEstimates } from '../pipeline/estimate';
 import { parseDjc } from '../pipeline/harvest/djc';
@@ -56,7 +56,7 @@ describe('DJC (Res. 438/2024)', () => {
 
 describe('consumo de etiqueta ENARGAS', () => {
   // condiciones normalizadas de la etiqueta: 400 L/día de 17 a 42 °C
-  const LABEL_USAGE: Usage = { people: 8, hotWaterLPerPersonDay: 50, coldWaterTempC: 17, hotWaterTempC: 42, acCoolingHoursYear: 0, acHeatingHoursYear: 0, acUseHeating: false, washCyclesPerWeek: 0 };
+  const LABEL_USAGE: Usage = { ...DEFAULT_USAGE, people: 8, hotWaterLPerPersonDay: 50, coldWaterTempC: 17, hotWaterTempC: 42, acCoolingHoursYear: 0, acHeatingHoursYear: 0, acUseHeating: false, washCyclesPerWeek: 0 };
   const T: Tariffs = { electricityPerKwh: 100, gasNaturalPerM3: 1, glpPerKg: 1, gasKind: 'natural' };
 
   it('un termotanque con etiqueta reproduce su consumo en condiciones normalizadas', () => {

@@ -19,6 +19,9 @@ const hotWater = [
 export const USAGE_FIELDS: CategoryUsageFields = {
   heladeras: [],
   aires: [
+    { key: 'acAreaM2', label: 'Superficie del ambiente', help: 'Con esto calculamos las frigorías que necesitás.', type: 'number', min: 4, max: 200, step: 1, unit: 'm²' },
+    { key: 'acCeilingM', label: 'Altura del techo', type: 'number', min: 2, max: 6, step: 0.1, unit: 'm' },
+    { key: 'acHighLoad', label: 'Mucho sol, último piso o poco aislamiento', type: 'toggle' },
     {
       key: 'acCoolingHoursYear',
       label: 'Horas de frío por año',
