@@ -29,8 +29,14 @@ function Run($exe, [string[]]$params) {
 
 try {
   Log '--- inicio'
-  # traer lo que haya commiteado la corrida de GitHub, para no pisarla
-  Run git @('pull', '--ff-only', '--quiet', 'origin', 'main') | Out-Null
+  # traer lo que haya commiteado la corrida de GitHub, para no pisarla. Con rebase, porque puede haber
+  # commits de código locales todavía sin subir; si choca, se deja el repo como estaba.
+  try {
+    Run git @('pull', '--rebase', '--autostash', '--quiet', 'origin', 'main') | Out-Null
+  } catch {
+    git rebase --abort 2>$null
+    throw
+  }
   Run npm.cmd @('run', 'data:update') | Out-Null
   Run npm.cmd @('run', 'data:validate') | Out-Null
 
