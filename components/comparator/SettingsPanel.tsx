@@ -2,8 +2,65 @@
 
 import { useState } from 'react';
 import Icon from '@/components/Icon';
-import { DEFAULT_TARIFFS, TARIFF_SOURCES, USAGE_FIELDS, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
+import { USAGE_FIELDS, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
+import type { TariffDefaults } from '@/lib/tariffs';
 import type { CategoryId } from '@/lib/types';
+import { ZONES } from '@/lib/zones';
+import type { ZoneState } from '@/components/useZone';
+
+const LOCATE_MSG: Record<ZoneState['status'], string | null> = {
+  idle: null,
+  locating: 'Buscando tu ubicación…',
+  denied: 'No diste permiso para usar tu ubicación: elegí tu zona en la lista.',
+  error: 'No pudimos obtener tu ubicación: elegí tu zona en la lista.',
+  outside: 'Tu ubicación parece estar fuera de Argentina: elegí tu zona en la lista.',
+};
+
+function LocationSection({ zone }: { zone: ZoneState }) {
+  const msg = LOCATE_MSG[zone.status];
+  return (
+    <section className="rounded-3xl bg-ink-2 p-5" aria-labelledby="zona-t">
+      <h2 id="zona-t" className="flex items-center gap-2 font-semibold text-sun">
+        <Icon name="pin" size={18} /> Dónde estás
+      </h2>
+      <label htmlFor="zona" className="mt-4 block text-sm text-white">
+        Tu zona
+      </label>
+      <select
+        id="zona"
+        value={zone.zoneId ?? ''}
+        onChange={(e) => zone.setZone(e.target.value || null)}
+        className="focus-ring mt-1.5 w-full rounded-xl border border-line bg-ink px-3 py-2 text-white"
+      >
+        <option value="">Todo el país</option>
+        {ZONES.map((z) => (
+          <option key={z.id} value={z.id}>
+            {z.name}
+          </option>
+        ))}
+      </select>
+      <button
+        type="button"
+        onClick={zone.detect}
+        disabled={zone.status === 'locating'}
+        className="focus-ring mt-3 inline-flex items-center gap-1.5 rounded text-sm text-mint hover:underline disabled:opacity-60"
+      >
+        <Icon name="pin" size={14} /> Usar mi ubicación
+      </button>
+      {msg && (
+        <p role="status" className="mt-2 text-xs leading-snug text-muted">
+          {msg}
+        </p>
+      )}
+      <p className="mt-2 text-xs leading-snug text-faint">
+        {zone.zoneId
+          ? 'Mostramos solo las tiendas que hoy entregan o tienen retiro en tu zona.'
+          : 'Elegí tu zona para ver solo las tiendas que te llegan.'}{' '}
+        Tu ubicación se traduce a provincia con la API Georef del Estado y no se guarda fuera de tu navegador.
+      </p>
+    </section>
+  );
+}
 
 function NumberField({
   id,
@@ -66,7 +123,12 @@ export default function SettingsPanel({
   setScenario,
   usesGas,
   usesElectricity,
+  zone,
+  tariffDefaults,
 }: {
+  zone?: ZoneState;
+  /** valores oficiales por defecto y de dónde salen */
+  tariffDefaults: TariffDefaults;
   category: CategoryId;
   usage: Usage;
   setUsage: (u: Usage) => void;
@@ -82,6 +144,7 @@ export default function SettingsPanel({
 
   return (
     <div className="space-y-5">
+      {zone && <LocationSection zone={zone} />}
       {fields.length > 0 && (
         <section className="rounded-3xl bg-ink-2 p-5" aria-labelledby="uso-t">
           <h2 id="uso-t" className="flex items-center gap-2 font-semibold text-sun">
@@ -125,7 +188,7 @@ export default function SettingsPanel({
           </h2>
           <button
             type="button"
-            onClick={() => setTariffs({ ...DEFAULT_TARIFFS, gasKind: tariffs.gasKind })}
+            onClick={() => setTariffs({ ...tariffDefaults.values, gasKind: tariffs.gasKind })}
             className="focus-ring rounded text-xs text-muted underline-offset-2 hover:text-white hover:underline"
           >
             Restablecer
@@ -142,7 +205,7 @@ export default function SettingsPanel({
               onChange={(v) => setTariffs({ ...tariffs, electricityPerKwh: v })}
               min={0}
               step={1}
-              help={tariffs.electricityPerKwh === DEFAULT_TARIFFS.electricityPerKwh ? `Valor de referencia: ${TARIFF_SOURCES.electricityPerKwh}.` : undefined}
+              help={tariffs.electricityPerKwh === tariffDefaults.values.electricityPerKwh ? `Valor de referencia: ${tariffDefaults.notes.electricityPerKwh}` : undefined}
             />
           )}
           {usesGas && (
@@ -170,7 +233,7 @@ export default function SettingsPanel({
                   value={tariffs.gasNaturalPerM3}
                   onChange={(v) => setTariffs({ ...tariffs, gasNaturalPerM3: v })}
                   min={0}
-                  help={tariffs.gasNaturalPerM3 === DEFAULT_TARIFFS.gasNaturalPerM3 ? `Valor de referencia: ${TARIFF_SOURCES.gasNaturalPerM3}.` : undefined}
+                  help={tariffs.gasNaturalPerM3 === tariffDefaults.values.gasNaturalPerM3 ? `Valor de referencia: ${tariffDefaults.notes.gasNaturalPerM3}` : undefined}
                 />
               ) : (
                 <NumberField
@@ -181,7 +244,7 @@ export default function SettingsPanel({
                   value={tariffs.glpPerKg}
                   onChange={(v) => setTariffs({ ...tariffs, glpPerKg: v })}
                   min={0}
-                  help="Precio de la garrafa dividido sus kilos (p. ej. garrafa de 10 kg)."
+                  help={`Precio de la garrafa dividido sus kilos (p. ej. garrafa de 10 kg).${tariffs.glpPerKg === tariffDefaults.values.glpPerKg ? ` Valor de referencia: ${tariffDefaults.notes.glpPerKg}.` : ''}`}
                 />
               )}
             </>

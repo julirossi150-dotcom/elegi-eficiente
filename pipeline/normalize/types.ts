@@ -14,6 +14,8 @@ export interface Listing {
   price: number;
   listPrice?: number;
   available: boolean;
+  /** zonas donde el carrito deja comprarlo (lib/zones); sin dato si el carrito no respondió */
+  zones?: number;
   checkedAt: string;
   energy: EnergySource;
   /** energía deducida (no explícita): se pisa con la de otra tienda si la hay */

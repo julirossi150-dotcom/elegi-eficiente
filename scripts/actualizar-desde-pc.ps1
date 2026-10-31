@@ -1,5 +1,5 @@
-# Actualiza los datos desde esta PC y los sube a GitHub. Existe porque algunas tiendas (Frávega)
-# bloquean a los servidores de GitHub Actions: desde una conexión hogareña responden bien.
+# Actualiza los datos desde esta PC y los sube a GitHub. Sirve si alguna tienda bloquea a los servidores de
+# GitHub Actions: desde una conexión hogareña suelen responder bien.
 # GitHub conserva 3 días las ofertas de una tienda que falla allá, así que alcanza con correrlo
 # la mayoría de los días. El push dispara la compilación y publicación del sitio.
 #

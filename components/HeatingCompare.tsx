@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/Icon';
 import SettingsPanel from '@/components/comparator/SettingsPanel';
-import { compareHeating, DEFAULT_SCENARIO, DEFAULT_TARIFFS, DEFAULT_USAGE, heatRequiredKcalH, type CostRow, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
+import { compareHeating, DEFAULT_SCENARIO, DEFAULT_USAGE, heatRequiredKcalH, type CostRow, type Scenario, type Usage } from '@/lib/cost';
 import { formatARS, formatDate } from '@/lib/format';
 import { withBase } from '@/lib/site';
 import { loadPref, savePref } from '@/lib/storage';
+import { forZone, zoneName } from '@/lib/zones';
+import { useTariffs } from '@/components/useTariffs';
+import { useZone } from '@/components/useZone';
 import type { CategoryFile, Meta } from '@/lib/types';
 
 const SCENARIO_KEY = 'scenario:calefaccion';
@@ -41,17 +44,17 @@ export default function HeatingCompare() {
   const [error, setError] = useState<string | null>(null);
 
   const [usage, setUsageState] = useState<Usage>(DEFAULT_USAGE);
-  const [tariffs, setTariffsState] = useState<Tariffs>(DEFAULT_TARIFFS);
   const [scenario, setScenarioState] = useState<Scenario>(DEFAULT_SCENARIO);
+  const zone = useZone();
+  // tarifa oficial de la zona por defecto, con los cambios del visitante encima
+  const { tariffs, setTariffs, defaults: tariffDefaults } = useTariffs(zone.zoneId);
 
   // Mismas preferencias que el comparador: el ambiente y la tarifa que cargaste allá valen acá
   useEffect(() => {
     setUsageState(loadPref('usage', DEFAULT_USAGE));
-    setTariffsState(loadPref('tariffs', DEFAULT_TARIFFS));
     setScenarioState(loadPref(SCENARIO_KEY, DEFAULT_SCENARIO));
   }, []);
   const setUsage = (u: Usage) => (setUsageState(u), savePref('usage', u));
-  const setTariffs = (t: Tariffs) => (setTariffsState(t), savePref('tariffs', t));
   const setScenario = (s: Scenario) => (setScenarioState(s), savePref(SCENARIO_KEY, s));
 
   useEffect(() => {
@@ -76,7 +79,10 @@ export default function HeatingCompare() {
   }, []);
 
   const storeNames = useMemo(() => Object.fromEntries((meta?.stores ?? []).map((s) => [s.id, s.name])), [meta]);
-  const options = useMemo(() => (products ? compareHeating(products, usage, tariffs, scenario) : []), [products, usage, tariffs, scenario]);
+  const options = useMemo(
+    () => (products ? compareHeating(forZone(products, zone.zoneId), usage, tariffs, scenario) : []),
+    [products, zone.zoneId, usage, tariffs, scenario],
+  );
   const maxAnnual = Math.max(1, ...options.map((o) => o.annualEnergyCost ?? 0));
   const need = heatRequiredKcalH(usage);
 
@@ -93,6 +99,8 @@ export default function HeatingCompare() {
           setScenario={setScenario}
           usesGas
           usesElectricity
+          zone={zone}
+          tariffDefaults={tariffDefaults}
         />
       </aside>
 
@@ -113,7 +121,8 @@ export default function HeatingCompare() {
               </h2>
               <p className="mt-1 text-sm text-muted">
                 Para dar ~{need.toLocaleString('es-AR')} kcal/h en tu ambiente, {usage.heatingDaysYear} días × {usage.heatingHoursDay} h, con{' '}
-                {tariffs.gasKind === 'natural' ? 'gas de red' : 'garrafa'}.{' '}
+                {tariffs.gasKind === 'natural' ? 'gas de red' : 'garrafa'}
+                {zone.zoneId && `, con tiendas que llegan a ${zoneName(zone.zoneId)}`}.{' '}
                 <a href="#ajustes" className="focus-ring rounded text-mint hover:underline lg:hidden">
                   Cambiar mis datos
                 </a>

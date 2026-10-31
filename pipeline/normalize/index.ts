@@ -387,6 +387,7 @@ export function toListing(p: VtexProduct, store: string, category: CategoryId, c
     price: Math.round(offer.price),
     listPrice: offer.listPrice ? Math.round(offer.listPrice) : undefined,
     available: offer.available,
+    zones: offer.zones,
     checkedAt,
     energy,
     energyGuessed,

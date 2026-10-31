@@ -6,17 +6,18 @@ export interface StoreConfig {
   name: string;
   host: string;
   url: string;
+  /** canal de venta para el simulador de carrito (casi todas usan el 1) */
+  salesChannel?: string;
   /** tienda oficial de fabricante: para estas marcas sus fichas valen como dato de fabricante y pisan a las demás tiendas */
   manufacturerOf?: string[];
 }
 
 export const STORES: StoreConfig[] = [
-  { id: 'fravega', name: 'Frávega', host: 'www.fravega.com', url: 'https://www.fravega.com' },
   { id: 'cetrogar', name: 'Cetrogar', host: 'www.cetrogar.com.ar', url: 'https://www.cetrogar.com.ar' },
   { id: 'oncity', name: 'OnCity', host: 'www.oncity.com', url: 'https://www.oncity.com' },
   { id: 'naldo', name: 'Naldo', host: 'www.naldo.com.ar', url: 'https://www.naldo.com.ar' },
   { id: 'carrefour', name: 'Carrefour', host: 'www.carrefour.com.ar', url: 'https://www.carrefour.com.ar' },
-  { id: 'jumbo', name: 'Jumbo', host: 'www.jumbo.com.ar', url: 'https://www.jumbo.com.ar' },
+  { id: 'jumbo', name: 'Jumbo', host: 'www.jumbo.com.ar', url: 'https://www.jumbo.com.ar', salesChannel: '32' },
   { id: 'easy', name: 'Easy', host: 'www.easy.com.ar', url: 'https://www.easy.com.ar' },
   // tiendas oficiales de fabricantes (también venden, así que suman ofertas)
   { id: 'whirlpool', name: 'Whirlpool (oficial)', host: 'www.whirlpool.com.ar', url: 'https://www.whirlpool.com.ar', manufacturerOf: ['Whirlpool'] },

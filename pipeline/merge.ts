@@ -107,7 +107,7 @@ export function mergeListings(listings: Listing[], previous: Map<string, Product
     // una oferta por tienda: la más barata disponible
     const offersByStore = new Map<string, Offer>();
     for (const l of group) {
-      const o: Offer = { store: l.store, price: l.price, listPrice: l.listPrice && l.listPrice > l.price ? l.listPrice : undefined, url: l.url, available: l.available, checkedAt: l.checkedAt };
+      const o: Offer = { store: l.store, price: l.price, listPrice: l.listPrice && l.listPrice > l.price ? l.listPrice : undefined, url: l.url, available: l.available, ...(l.zones !== undefined ? { zones: l.zones } : {}), checkedAt: l.checkedAt };
       const cur = offersByStore.get(l.store);
       if (!cur || (o.available && !cur.available) || (o.available === cur.available && o.price < cur.price)) offersByStore.set(l.store, o);
     }

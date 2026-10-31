@@ -100,7 +100,10 @@ export async function build(report: FetchReport[] | null, log: (m: string) => vo
   const today = now.toISOString().slice(0, 10);
   await mkdir(OUT_DIR, { recursive: true });
   const failed = new Set((report ?? []).filter((r) => !r.ok).map((r) => r.store));
-  const storeDirs = existsSync(RAW_DIR) ? (await readdir(RAW_DIR, { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name) : [];
+  // solo tiendas configuradas: una tienda que se saca (p. ej. Frávega) deja de publicarse aunque quede en el caché
+  const storeDirs = existsSync(RAW_DIR)
+    ? (await readdir(RAW_DIR, { withFileTypes: true })).filter((d) => d.isDirectory() && STORES.some((s) => s.id === d.name)).map((d) => d.name)
+    : [];
 
   const metaCats: Meta['categories'] = [];
   const listingsPerStore = new Map<string, number>();

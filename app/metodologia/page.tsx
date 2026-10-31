@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import SiteFooter from '@/components/SiteFooter';
 import SiteHeader from '@/components/SiteHeader';
-import { ASSUMPTIONS, DEFAULT_TARIFFS, DEFAULT_USAGE, EMISSIONS, LIFESPAN_YEARS, PHYSICS, TARIFF_SOURCES } from '@/lib/cost';
+import { ASSUMPTIONS, DEFAULT_USAGE, EMISSIONS, LIFESPAN_YEARS, PHYSICS } from '@/lib/cost';
+import { readTariffs } from '@/lib/data-server';
+import { tariffDefaults } from '@/lib/tariffs';
 import { formatARS } from '@/lib/format';
 import { CATEGORIES } from '@/lib/site';
 import { METHOD_NOTES, METHOD_SOURCES } from '@/lib/cost/method-notes';
@@ -23,7 +25,9 @@ function Section({ id, title, children }: { id: string; title: string; children:
   );
 }
 
-export default function MetodologiaPage() {
+export default async function MetodologiaPage() {
+  const official = await readTariffs();
+  const { values: tariff, notes: tariffNotes } = tariffDefaults(official, 'caba');
   return (
     <>
       <SiteHeader />
@@ -96,18 +100,18 @@ export default function MetodologiaPage() {
               <tbody className="[&_td]:p-3 [&_tr]:border-t [&_tr]:border-line/50 [&_tr:first-child]:border-t-0">
                 <tr>
                   <td className="text-white">Luz (por defecto)</td>
-                  <td>{formatARS(DEFAULT_TARIFFS.electricityPerKwh)}/kWh</td>
-                  <td className="text-faint">{TARIFF_SOURCES.electricityPerKwh}</td>
+                  <td>{formatARS(tariff.electricityPerKwh)}/kWh</td>
+                  <td className="text-faint">{tariffNotes.electricityPerKwh}</td>
                 </tr>
                 <tr>
                   <td className="text-white">Gas natural (por defecto)</td>
-                  <td>{formatARS(DEFAULT_TARIFFS.gasNaturalPerM3)}/m³</td>
-                  <td className="text-faint">{TARIFF_SOURCES.gasNaturalPerM3}</td>
+                  <td>{formatARS(tariff.gasNaturalPerM3)}/m³</td>
+                  <td className="text-faint">{tariffNotes.gasNaturalPerM3} Cada zona usa la tarifa de su distribuidora.</td>
                 </tr>
                 <tr>
                   <td className="text-white">Gas envasado (por defecto)</td>
-                  <td>{formatARS(DEFAULT_TARIFFS.glpPerKg)}/kg</td>
-                  <td className="text-faint">{TARIFF_SOURCES.glpPerKg}</td>
+                  <td>{formatARS(tariff.glpPerKg)}/kg</td>
+                  <td className="text-faint">{tariffNotes.glpPerKg}</td>
                 </tr>
                 {[...Object.values(PHYSICS), ...Object.values(EMISSIONS)].map((k) => (
                   <tr key={k.label}>

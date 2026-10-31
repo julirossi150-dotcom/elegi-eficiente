@@ -92,12 +92,14 @@ export interface Specs {
 export type SpecKey = keyof Specs;
 
 export interface Offer {
-  /** id de tienda, p. ej. "fravega" */
+  /** id de tienda, p. ej. "carrefour" */
   store: string;
   price: number;
   listPrice?: number;
   url: string;
   available: boolean;
+  /** Zonas (lib/zones) donde se puede comprar con entrega o retiro: bit i = ZONES[i]. Sin dato = no se sabe. */
+  zones?: number;
   /** ISO 8601 */
   checkedAt: string;
 }

@@ -11,7 +11,12 @@ Tiendas (catálogos VTEX públicos) ──► pipeline/ (todos los días) ──
 ```
 
 - **No existe una base pública oficial** de etiquetas: la Res. 438/2024 prevé una, pero no está publicada. Por eso armamos la nuestra.
-- `pipeline/fetch.ts` baja Frávega, Cetrogar, OnCity, Naldo, Carrefour, Jumbo y Easy (1 request/seg por tienda, user-agent identificado).
+- `pipeline/fetch.ts` baja Cetrogar, OnCity, Naldo, Carrefour, Jumbo, Easy y las tiendas oficiales (1 request/seg por tienda, user-agent identificado).
+- **Stock y zonas confirmados con el carrito:** el catálogo de una tienda puede listar productos que ya no vende. Cada oferta se
+  consulta en el simulador de carrito de la tienda con el código postal de cada zona (`lib/zones.ts`: una por provincia, con el
+  Gran Buenos Aires aparte). Lo que no se puede comprar en ninguna zona no se publica, y cada oferta guarda en qué zonas se
+  puede comprar (entrega o retiro). El sitio usa la ubicación del visitante (o la zona que elija) para mostrar solo esas ofertas.
+- Frávega no se usa: su catálogo VTEX lista productos que su sitio ya no vende y sus links llevan a páginas inexistentes.
 - `pipeline/normalize/` interpreta las fichas de cada tienda (los nombres de campos varían).
 - `pipeline/merge.ts` une el mismo producto entre tiendas (por EAN o marca + modelo).
 - `pipeline/estimate.ts` completa el consumo que las tiendas no publican, a partir de la clase y la capacidad, con las fórmulas de cada norma. Todo valor estimado queda marcado.
@@ -20,18 +25,22 @@ Tiendas (catálogos VTEX públicos) ──► pipeline/ (todos los días) ──
   - `pipeline/manual/<categoria>.json`: cargas a mano desde etiquetas, fichas y manuales, con su fuente. Coinciden por EAN, por código de modelo (con `*` como comodín) o por una regex sobre el nombre.
   - `pipeline/manual/fabricantes/*.json`: los genera `npx tsx pipeline/harvest/run.ts`, que baja las Declaraciones Juradas de Conformidad (Res. 438/2024) de los sitios de fabricantes (hoy Drean, que incluye Patrick, Mabe y Top House) y las lee con `pdftotext`. No corre a diario: conviene repetirlo cada uno o dos meses.
 - `lib/cost/` es el modelo de costos, compartido entre el pipeline y la web.
+- `pipeline/tariffs.ts` baja las tarifas de referencia oficiales (`public/data/tarifas.json`): luz del cuadro tarifario mensual de
+  Edenor y Edesur (ente regulador nacional) y gas natural de la planilla de tarifas vigentes de ENARGAS, por distribuidora y zona.
+  Son el cargo variable residencial más IVA (lo que cuesta cada kWh o m³ de más). La garrafa no tiene precio oficial mensual: se usa
+  un valor de referencia fijo. El visitante puede reemplazar cualquier valor por el de su factura.
 
 ## Comandos
 
 ```bash
 npm install
-npm run data:update          # baja catálogos y regenera public/data (≈2 min)
+npm run data:update          # baja catálogos, consulta el carrito por zona y regenera public/data (≈30 min)
 npm run dev                  # http://localhost:3000
 npm test                     # pruebas del modelo de costos y del parseo
 npm run build                # sitio estático en out/
 ```
 
-Herramientas de diagnóstico: `npx tsx pipeline/run.ts --offline` (reusa lo bajado), `npx tsx pipeline/discover.ts heladeras fravega`
+Herramientas de diagnóstico: `npx tsx pipeline/run.ts --offline` (reusa lo bajado), `npx tsx pipeline/discover.ts heladeras carrefour`
 (qué categorías y campos trae una tienda) y `npx tsx pipeline/check-estimates.ts` (error de las estimaciones contra datos reales).
 
 ## Publicar gratis (GitHub Pages)
@@ -45,10 +54,10 @@ El sitio es 100 % estático: también funciona en Cloudflare Pages o Netlify pub
 
 ### Actualización desde una PC
 
-Frávega bloquea a los servidores de GitHub (HTTP 403), así que la corrida diaria de GitHub no la trae. Para cubrirla,
-`scripts/actualizar-desde-pc.ps1` corre el pipeline desde una conexión hogareña, valida y sube los datos; el push dispara la
-publicación. Una tarea programada de Windows ("Elegi Eficiente - actualizar datos") lo corre todos los días a las 08:00
-(o apenas se prende la PC si estaba apagada). Si la PC no corre, GitHub conserva las ofertas de Frávega 3 días.
+Opcional: hoy todas las tiendas responden a GitHub, así que la corrida diaria alcanza. Si alguna tienda empezara a bloquear
+a los servidores de GitHub, `scripts/actualizar-desde-pc.ps1` corre el pipeline desde una conexión hogareña, valida y sube
+los datos; el push dispara la publicación. Se puede programar con una tarea de Windows. Si una tienda falla, se conservan
+sus ofertas de los últimos 3 días.
 El registro queda en `pipeline/.cache/actualizar-desde-pc.log`. Para probar sin subir: agregar `-SinSubir`.
 
 ## Límites conocidos

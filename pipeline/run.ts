@@ -1,6 +1,7 @@
-// Pipeline diario: npm run data:update  (opciones: --offline para reusar el caché crudo, --stores=fravega,naldo)
+// Pipeline diario: npm run data:update  (opciones: --offline para reusar el caché crudo, --stores=carrefour,naldo)
 import { build } from './build';
 import { fetchAll } from './fetch';
+import { updateTariffs } from './tariffs';
 
 const args = process.argv.slice(2);
 const offline = args.includes('--offline');
@@ -17,4 +18,5 @@ if (report) {
   }
 }
 const meta = await build(report);
+if (!offline) await updateTariffs();
 console.log(`Listo en ${Math.round((Date.now() - t0) / 1000)} s — ${meta.categories.reduce((s, c) => s + c.count, 0)} productos.`);

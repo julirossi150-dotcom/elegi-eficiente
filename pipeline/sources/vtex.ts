@@ -1,4 +1,5 @@
 // Lectura del catálogo público de tiendas VTEX (/api/catalog_system/pub/...).
+import { ZONES } from '../../lib/zones';
 import { politeFetchJson, politePostJson } from '../lib/http';
 
 export interface VtexOffer {
@@ -6,6 +7,8 @@ export interface VtexOffer {
   ListPrice: number;
   AvailableQuantity: number;
   IsAvailable?: boolean;
+  /** Agregado por verifyAvailability: zonas donde el carrito deja comprarlo (bit i = ZONES[i]) */
+  zones?: number;
 }
 
 export interface VtexItem {
@@ -75,77 +78,105 @@ export async function fetchCategoryProducts(host: string, path: CategoryPath, lo
   return all;
 }
 
-/** Respuesta del simulador de carrito: se usa para confirmar que el producto se puede comprar hoy. */
+/** Respuesta del simulador de carrito: se usa para confirmar que el producto se puede comprar hoy y dónde. */
 interface SimulationResponse {
   items?: { id: string; seller: string; availability?: string }[];
 }
 
-/** Disponibilidades del simulador que significan "está a la venta" (cannotBeDelivered: existe y tiene stock, pero no llega al código postal de prueba). */
-const ON_SALE = new Set(['available', 'cannotBeDelivered']);
-const SIM_BATCH = 50;
-const SIM_POSTAL_CODE = '1414';
+// lotes chicos: con muchos artículos pesados juntos el carrito no encuentra envío para el pedido
+const SIM_BATCH = 5;
+
+export interface VerifyResult {
+  /** ofertas con respuesta del carrito en al menos una zona */
+  checked: number;
+  /** ofertas que el carrito no deja comprar en ninguna zona */
+  rejected: number;
+  failed: boolean;
+}
 
 /**
- * El catálogo de algunas tiendas informa stock de productos que ya no venden (Frávega mantiene el catálogo VTEX
- * pero su sitio dice "La página no existe"). El simulador de carrito sí refleja lo que se puede comprar:
- * las ofertas que el simulador rechaza se marcan como no disponibles. Si el simulador no responde por un ítem
- * (algunas tiendas no lo devuelven), se deja lo que dice el catálogo.
+ * Confirma cada oferta con el simulador de carrito de la tienda, en el código postal de cada zona (lib/zones).
+ * El catálogo informa stock de productos que ya no se venden; el carrito, no. Por cada oferta se guarda en
+ * `zones` (bit i = ZONES[i]) dónde se puede comprar con entrega o retiro. Si no se puede comprar en ninguna zona,
+ * la oferta queda no disponible. Si el carrito no responde por una oferta en alguna zona, no se toca lo que dice el catálogo.
  */
-export async function verifyAvailability(host: string, products: VtexProduct[]): Promise<{ checked: number; rejected: number; failed: boolean }> {
-  const offers: { item: VtexItem; seller: string; o: VtexOffer }[] = [];
+export async function verifyAvailability(host: string, products: VtexProduct[], salesChannel = '1', minIntervalMs = 500): Promise<VerifyResult> {
+  const offers: { item: VtexItem; seller: string; o: VtexOffer; yes: number; no: number; unknown: number }[] = [];
   for (const p of products)
     for (const item of p.items ?? [])
       for (const s of item.sellers ?? []) {
         const o = s.commertialOffer;
-        if (o && o.Price > 0 && (o.AvailableQuantity ?? 0) > 0 && o.IsAvailable !== false && s.sellerId) offers.push({ item, seller: s.sellerId, o });
+        if (o && o.Price > 0 && (o.AvailableQuantity ?? 0) > 0 && o.IsAvailable !== false && s.sellerId) offers.push({ item, seller: s.sellerId, o, yes: 0, no: 0, unknown: 0 });
       }
-  let checked = 0;
-  let rejected = 0;
-  let failedBatches = 0;
   // Un lote por vendedor: si el sistema de un vendedor del marketplace falla, el carrito rechaza el lote entero
   const bySeller = new Map<string, typeof offers>();
   for (const x of offers) bySeller.set(x.seller, [...(bySeller.get(x.seller) ?? []), x]);
   const batches: (typeof offers)[] = [];
   for (const list of bySeller.values()) for (let i = 0; i < list.length; i += SIM_BATCH) batches.push(list.slice(i, i + SIM_BATCH));
-  for (const batch of batches) {
+
+  let calls = 0;
+  let failedCalls = 0;
+  // nodeliver: existe y tiene stock, pero el carrito no encuentra entrega ni retiro para ese código postal
+  type Answer = 'yes' | 'no' | 'nodeliver' | 'unknown';
+  /** Disponibilidad de cada oferta del lote en un código postal. */
+  const simulate = async (batch: typeof offers, postalCode: string): Promise<Answer[]> => {
+    calls++;
     let res: SimulationResponse;
     try {
-      ({ data: res } = await politePostJson<SimulationResponse>(`https://${host}/api/checkout/pub/orderForms/simulation?sc=1`, {
-        items: batch.map((b) => ({ id: b.item.itemId, quantity: 1, seller: b.seller })),
-        country: 'ARG',
-        postalCode: SIM_POSTAL_CODE,
-      }));
+      ({ data: res } = await politePostJson<SimulationResponse>(
+        `https://${host}/api/checkout/pub/orderForms/simulation?sc=${salesChannel}`,
+        { items: batch.map((b) => ({ id: b.item.itemId, quantity: 1, seller: b.seller })), country: 'ARG', postalCode },
+        { minIntervalMs },
+      ));
     } catch (err) {
-      // El vendedor no responde al carrito: hoy no se le puede comprar
-      if (/Seller .* error/i.test(String((err as Error).message))) {
-        for (const b of batch) b.o.IsAvailable = false;
-        checked += batch.length;
-        rejected += batch.length;
-      } else failedBatches++;
-      continue;
+      // El vendedor no responde al carrito: hoy no se le puede comprar ahí
+      if (/Seller .* error/i.test(String((err as Error).message))) return batch.map(() => 'no');
+      failedCalls++;
+      return batch.map(() => 'unknown');
     }
     const byKey = new Map((res.items ?? []).map((it) => [`${it.id}|${it.seller}`, it]));
-    for (const b of batch) {
-      const it = byKey.get(`${b.item.itemId}|${b.seller}`);
-      if (!it?.availability) continue;
-      checked++;
-      if (!ON_SALE.has(it.availability)) {
-        b.o.IsAvailable = false;
-        rejected++;
+    return batch.map((b) => {
+      const a = byKey.get(`${b.item.itemId}|${b.seller}`)?.availability;
+      return !a ? 'unknown' : a === 'available' ? 'yes' : a === 'cannotBeDelivered' ? 'nodeliver' : 'no';
+    });
+  };
+  for (const [zi, zone] of ZONES.entries()) {
+    for (const batch of batches) {
+      let answers = await simulate(batch, zone.postalCode);
+      // El carrito calcula el envío del pedido entero: varias heladeras juntas pueden "no entregarse" aunque cada una sí.
+      // Si en el lote no salió ninguna disponible, se confirma de a una.
+      if (batch.length > 1 && answers.includes('nodeliver') && !answers.includes('yes')) {
+        for (const [k, b] of batch.entries()) if (answers[k] === 'nodeliver') answers[k] = (await simulate([b], zone.postalCode))[0];
       }
+      batch.forEach((b, k) => {
+        const a = answers[k];
+        b[a === 'nodeliver' ? 'no' : a]++;
+        if (answers[k] === 'yes') b.o.zones = (b.o.zones ?? 0) | (1 << zi);
+      });
     }
   }
-  return { checked, rejected, failed: failedBatches > 0 && failedBatches === batches.length };
+  let checked = 0;
+  let rejected = 0;
+  for (const b of offers) {
+    if (b.yes + b.no === 0) continue;
+    checked++;
+    if (b.unknown) delete b.o.zones; // dato incompleto: no se filtra por zona
+    if (b.yes === 0 && b.unknown === 0) {
+      b.o.IsAvailable = false;
+      rejected++;
+    }
+  }
+  return { checked, rejected, failed: calls > 0 && failedCalls === calls };
 }
 
-export function bestOffer(p: VtexProduct): { price: number; listPrice: number; available: boolean; item: VtexItem } | null {
-  let best: { price: number; listPrice: number; available: boolean; item: VtexItem } | null = null;
+export function bestOffer(p: VtexProduct): { price: number; listPrice: number; available: boolean; zones?: number; item: VtexItem } | null {
+  let best: { price: number; listPrice: number; available: boolean; zones?: number; item: VtexItem } | null = null;
   for (const item of p.items ?? []) {
     for (const s of item.sellers ?? []) {
       const o = s.commertialOffer;
       if (!o || !(o.Price > 0)) continue;
       const available = (o.AvailableQuantity ?? 0) > 0 && o.IsAvailable !== false;
-      const cand = { price: o.Price, listPrice: o.ListPrice, available, item };
+      const cand = { price: o.Price, listPrice: o.ListPrice, available, zones: o.zones, item };
       if (!best || (available && !best.available) || (available === best.available && o.Price < best.price)) best = cand;
     }
   }

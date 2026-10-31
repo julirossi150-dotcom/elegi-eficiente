@@ -2,11 +2,14 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/Icon';
-import { acCapacityRange, acRequiredFrigorias, computeRow, gasCompatible, heaterCapacityRange, heatRequiredKcalH, DEFAULT_SCENARIO, DEFAULT_TARIFFS, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Tariffs, type Usage } from '@/lib/cost';
+import { acCapacityRange, acRequiredFrigorias, computeRow, gasCompatible, heaterCapacityRange, heatRequiredKcalH, DEFAULT_SCENARIO, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Usage } from '@/lib/cost';
 import { formatARS, formatDate } from '@/lib/format';
 import { withBase } from '@/lib/site';
 import { CAPACITY_UNIT, capacityOf, subtypeOf } from '@/lib/specs';
 import { loadPref, savePref } from '@/lib/storage';
+import { forZone, zoneName } from '@/lib/zones';
+import { useTariffs } from '@/components/useTariffs';
+import { useZone } from '@/components/useZone';
 import type { CategoryFile, CategoryId, Meta, Product } from '@/lib/types';
 import CompareView from './CompareView';
 import ProductRow, { type RowBadge } from './ProductRow';
@@ -31,7 +34,6 @@ export default function Comparator({ category }: { category: CategoryId }) {
   const [error, setError] = useState<string | null>(null);
 
   const [usage, setUsageState] = useState<Usage>(DEFAULT_USAGE);
-  const [tariffs, setTariffsState] = useState<Tariffs>(DEFAULT_TARIFFS);
   const [scenario, setScenarioState] = useState<Scenario>({ ...DEFAULT_SCENARIO, years: LIFESPAN_YEARS[category] });
 
   const [q, setQ] = useState('');
@@ -43,11 +45,13 @@ export default function Comparator({ category }: { category: CategoryId }) {
   const [sort, setSort] = useState<SortKey>('tco');
   const [limit, setLimit] = useState(PAGE);
   const [selected, setSelected] = useState<string[]>([]);
+  const zone = useZone();
+  // tarifa oficial de la zona por defecto, con los cambios del visitante encima
+  const { tariffs, setTariffs, defaults: tariffDefaults } = useTariffs(zone.zoneId);
 
   // Preferencias guardadas en el navegador (solo comodidad)
   useEffect(() => {
     setUsageState(loadPref('usage', DEFAULT_USAGE));
-    setTariffsState(loadPref('tariffs', DEFAULT_TARIFFS));
     setScenarioState(loadPref(`scenario:${category}`, { ...DEFAULT_SCENARIO, years: LIFESPAN_YEARS[category] }));
   }, [category]);
   // En aires y estufas el rango de potencia sale del ambiente; se recalcula cuando cambian sus datos
@@ -58,7 +62,6 @@ export default function Comparator({ category }: { category: CategoryId }) {
     setCapMax(String(hi));
   }, [category, usage.acAreaM2, usage.acCeilingM, usage.acHighLoad]); // eslint-disable-line react-hooks/exhaustive-deps
   const setUsage = (u: Usage) => (setUsageState(u), savePref('usage', u));
-  const setTariffs = (t: Tariffs) => (setTariffsState(t), savePref('tariffs', t));
   const setScenario = (s: Scenario) => (setScenarioState(s), savePref(`scenario:${category}`, s));
 
   useEffect(() => {
@@ -81,7 +84,8 @@ export default function Comparator({ category }: { category: CategoryId }) {
   }, [category]);
 
   const storeNames = useMemo(() => Object.fromEntries((meta?.stores ?? []).map((s) => [s.id, s.name])), [meta]);
-  const products = useMemo(() => data?.products ?? [], [data]);
+  // Solo las ofertas de tiendas que llegan a la zona del visitante
+  const products = useMemo(() => forZone(data?.products ?? [], zone.zoneId), [data, zone.zoneId]);
   const usesGas = products.some((p) => p.energy !== 'electricidad');
   const usesElectricity = products.some((p) => p.energy === 'electricidad') || category === 'heladeras' || category === 'aires' || category === 'lavarropas';
 
@@ -135,6 +139,8 @@ export default function Comparator({ category }: { category: CategoryId }) {
           setScenario={setScenario}
           usesGas={usesGas || category === 'calefones' || category === 'termotanques'}
           usesElectricity={usesElectricity}
+          zone={zone}
+          tariffDefaults={tariffDefaults}
         />
       </aside>
 
@@ -180,7 +186,9 @@ export default function Comparator({ category }: { category: CategoryId }) {
             <div className="flex flex-wrap items-end justify-between gap-3">
               <h2 id="lista-t" className="text-lg font-semibold text-white">
                 {sorted.length.toLocaleString('es-AR')} productos
-                <span className="ml-2 text-sm font-normal text-muted">· precios al {formatDate(data.generatedAt)}</span>
+                <span className="ml-2 text-sm font-normal text-muted">
+                  {zone.zoneId && `· ${zoneName(zone.zoneId)} `}· precios al {formatDate(data.generatedAt)}
+                </span>
               </h2>
               <label className="flex items-center gap-2 text-sm text-muted">
                 Ordenar por

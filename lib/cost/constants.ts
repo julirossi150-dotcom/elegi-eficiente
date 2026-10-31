@@ -31,14 +31,15 @@ export const EMISSIONS = {
 export const DEFAULT_TARIFFS: Tariffs = {
   electricityPerKwh: 190,
   gasNaturalPerM3: 700,
-  glpPerKg: 2000,
+  glpPerKg: 3000,
   gasKind: 'natural',
 };
 
+/** Respaldo si no se pudieron bajar las tarifas oficiales (public/data/tarifas.json, ver lib/tariffs.ts). */
 export const TARIFF_SOURCES: Record<keyof Omit<Tariffs, 'gasKind'>, string> = {
   electricityPerKwh: 'Referencia AMBA, tarifa residencial sin subsidio con impuestos (aprox.)',
   gasNaturalPerM3: 'Referencia AMBA, tarifa residencial con impuestos (aprox.)',
-  glpPerKg: 'Garrafa de 10 kg, precio de mercado (aprox.)',
+  glpPerKg: 'Garrafa de 10 kg a ~$30.000 en comercios (oct. 2026, aprox.): no hay un precio oficial mensual',
 };
 
 export const DEFAULT_SCENARIO: Scenario = { years: 10, realTariffGrowthPct: 0 };
