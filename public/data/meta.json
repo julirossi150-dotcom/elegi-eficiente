@@ -1,66 +1,58 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T09:35:01.411Z",
+  "generatedAt": "2026-10-31T02:28:18.260Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 555,
-      "withConsumption": 321,
-      "withPrice": 555
+      "count": 293,
+      "withConsumption": 235,
+      "withPrice": 293
     },
     {
       "id": "aires",
-      "count": 282,
-      "withConsumption": 157,
-      "withPrice": 282
+      "count": 155,
+      "withConsumption": 131,
+      "withPrice": 155
     },
     {
       "id": "lavarropas",
-      "count": 253,
-      "withConsumption": 150,
-      "withPrice": 253
+      "count": 131,
+      "withConsumption": 106,
+      "withPrice": 131
     },
     {
       "id": "calefones",
-      "count": 44,
-      "withConsumption": 44,
-      "withPrice": 44
+      "count": 22,
+      "withConsumption": 22,
+      "withPrice": 22
     },
     {
       "id": "termotanques",
-      "count": 295,
-      "withConsumption": 295,
-      "withPrice": 295
+      "count": 121,
+      "withConsumption": 121,
+      "withPrice": 121
     },
     {
       "id": "calefactores",
-      "count": 842,
-      "withConsumption": 842,
-      "withPrice": 842
+      "count": 416,
+      "withConsumption": 416,
+      "withPrice": 416
     }
   ],
   "stores": [
-    {
-      "id": "fravega",
-      "name": "Frávega",
-      "url": "https://www.fravega.com",
-      "ok": false,
-      "products": 0,
-      "error": "HTTP 403: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<HTML><HEAD><META"
-    },
     {
       "id": "cetrogar",
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 556
+      "products": 555
     },
     {
       "id": "oncity",
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1120
+      "products": 1118
     },
     {
       "id": "naldo",
@@ -74,7 +66,7 @@
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1353
+      "products": 1350
     },
     {
       "id": "jumbo",
@@ -109,7 +101,7 @@
       "name": "BGH (oficial)",
       "url": "https://www.bgh.com.ar",
       "ok": true,
-      "products": 42
+      "products": 43
     }
   ]
 }

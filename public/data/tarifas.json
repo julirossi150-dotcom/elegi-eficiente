@@ -1,0 +1,135 @@
+{
+  "generatedAt": "2026-10-31T01:40:58.420Z",
+  "vat": 0.21,
+  "electricity": {
+    "perKwh": 192.1,
+    "period": "10/2026",
+    "url": "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/937BAA27CA170F3503258E820069D790?opendocument"
+  },
+  "gas": {
+    "since": "01/10/2026",
+    "byZone": {
+      "caba": {
+        "perM3": 392.4,
+        "distributor": "MetroGAS S.A.",
+        "subzone": "CAPITAL FEDERAL"
+      },
+      "gba": {
+        "perM3": 392.4,
+        "distributor": "MetroGAS S.A.",
+        "subzone": "BUENOS AIRES"
+      },
+      "bsas": {
+        "perM3": 403.1,
+        "distributor": "Camuzzi Gas Pampeana S.A.",
+        "subzone": "PROV BUENOS AIRES"
+      },
+      "catamarca": {
+        "perM3": 440.1,
+        "distributor": "Distribuidora de Gas del Centro S.A.",
+        "subzone": "LA RIOJA Y CATAMARCA"
+      },
+      "chaco": {
+        "perM3": 414.9,
+        "distributor": "GasNea S.A.",
+        "subzone": "CHACO"
+      },
+      "chubut": {
+        "perM3": 272.5,
+        "distributor": "Camuzzi Gas del Sur S.A.",
+        "subzone": "PROV CHUBUT Y RIO NEGRO"
+      },
+      "cordoba": {
+        "perM3": 440.1,
+        "distributor": "Distribuidora de Gas del Centro S.A.",
+        "subzone": "CORDOBA"
+      },
+      "corrientes": {
+        "perM3": 371.9,
+        "distributor": "GasNea S.A.",
+        "subzone": "CORRIENTES"
+      },
+      "entrerios": {
+        "perM3": 371.1,
+        "distributor": "Redengas S.A.",
+        "subzone": "Entre Rios, Parana"
+      },
+      "formosa": {
+        "perM3": 414.9,
+        "distributor": "GasNea S.A.",
+        "subzone": "FORMOSA"
+      },
+      "jujuy": {
+        "perM3": 384.2,
+        "distributor": "Naturgy NOA S.A.",
+        "subzone": "SALTA"
+      },
+      "lapampa": {
+        "perM3": 347.7,
+        "distributor": "Camuzzi Gas Pampeana S.A.",
+        "subzone": "LA PAMPA-NORTE"
+      },
+      "larioja": {
+        "perM3": 440.1,
+        "distributor": "Distribuidora de Gas del Centro S.A.",
+        "subzone": "LA RIOJA Y CATAMARCA"
+      },
+      "mendoza": {
+        "perM3": 339.4,
+        "distributor": "Distribuidora de Gas Cuyana S.A.",
+        "subzone": "MENDOZA"
+      },
+      "neuquen": {
+        "perM3": 272.5,
+        "distributor": "Camuzzi Gas del Sur S.A.",
+        "subzone": "PROV NEUQUEN"
+      },
+      "rionegro": {
+        "perM3": 294.3,
+        "distributor": "Camuzzi Gas del Sur S.A.",
+        "subzone": "CORD CHUBUT Y RIO NEGRO"
+      },
+      "salta": {
+        "perM3": 384.2,
+        "distributor": "Naturgy NOA S.A.",
+        "subzone": "SALTA"
+      },
+      "sanjuan": {
+        "perM3": 339.4,
+        "distributor": "Distribuidora de Gas Cuyana S.A.",
+        "subzone": "SAN JUAN"
+      },
+      "sanluis": {
+        "perM3": 339.4,
+        "distributor": "Distribuidora de Gas Cuyana S.A.",
+        "subzone": "SAN LUIS"
+      },
+      "santacruz": {
+        "perM3": 244,
+        "distributor": "Camuzzi Gas del Sur S.A.",
+        "subzone": "Santa cruz Sur"
+      },
+      "santafe": {
+        "perM3": 394.7,
+        "distributor": "Litoral Gas S.A.",
+        "subzone": "PROV SANTA FE"
+      },
+      "sgoestero": {
+        "perM3": 383.8,
+        "distributor": "Naturgy NOA S.A.",
+        "subzone": "TUCUMAN"
+      },
+      "tdf": {
+        "perM3": 232.6,
+        "distributor": "Camuzzi Gas del Sur S.A.",
+        "subzone": "TIERRA DEL FUEGO"
+      },
+      "tucuman": {
+        "perM3": 383.8,
+        "distributor": "Naturgy NOA S.A.",
+        "subzone": "TUCUMAN"
+      }
+    },
+    "url": "https://www.enargas.gov.ar/secciones/precios-y-tarifas/descargas/tarifas-gn-20261001.xlsx"
+  }
+}
