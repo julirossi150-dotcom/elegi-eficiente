@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import type { Tariffs } from '@/lib/cost';
-import { withBase } from '@/lib/site';
+import { fetchData } from '@/lib/site';
 import { loadPref, savePref } from '@/lib/storage';
 import { tariffDefaults, tariffOverrides, type OfficialTariffs, type TariffDefaults } from '@/lib/tariffs';
 
@@ -27,7 +27,7 @@ export function useTariffs(zoneId: string | null): { tariffs: Tariffs; setTariff
     }
     setOverrides(saved);
     let alive = true;
-    fetch(withBase('/data/tarifas.json'))
+    fetchData('tarifas.json')
       .then((r) => (r.ok ? (r.json() as Promise<OfficialTariffs>) : null))
       .then((o) => alive && setOfficial(o))
       .catch(() => {});

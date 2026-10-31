@@ -6,7 +6,7 @@ import Icon from '@/components/Icon';
 import SettingsPanel from '@/components/comparator/SettingsPanel';
 import { compareHeating, DEFAULT_SCENARIO, DEFAULT_USAGE, heatRequiredKcalH, type CostRow, type Scenario, type Usage } from '@/lib/cost';
 import { formatARS, formatDate } from '@/lib/format';
-import { withBase } from '@/lib/site';
+import { fetchData } from '@/lib/site';
 import { loadPref, savePref } from '@/lib/storage';
 import { forZone, zoneName } from '@/lib/zones';
 import { useTariffs } from '@/components/useTariffs';
@@ -16,7 +16,7 @@ import type { CategoryFile, Meta } from '@/lib/types';
 const SCENARIO_KEY = 'scenario:calefaccion';
 
 function fetchCategory(id: string) {
-  return fetch(withBase(`/data/${id}.json`)).then((r) => (r.ok ? (r.json() as Promise<CategoryFile>) : Promise.reject(new Error(`HTTP ${r.status}`))));
+  return fetchData(`${id}.json`).then((r) => (r.ok ? (r.json() as Promise<CategoryFile>) : Promise.reject(new Error(`HTTP ${r.status}`))));
 }
 
 function Equipment({ label, row, storeNames }: { label: string; row: CostRow; storeNames: Record<string, string> }) {
@@ -62,7 +62,7 @@ export default function HeatingCompare() {
     Promise.all([
       fetchCategory('aires'),
       fetchCategory('calefactores'),
-      fetch(withBase('/data/meta.json'))
+      fetchData('meta.json')
         .then((r) => (r.ok ? (r.json() as Promise<Meta>) : null))
         .catch(() => null),
     ])

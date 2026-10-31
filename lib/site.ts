@@ -15,6 +15,14 @@ export function withBase(path: string): string {
   return `${BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
+/**
+ * Lee un archivo de public/data/. Los datos cambian todos los días: "no-cache" hace que el navegador pregunte siempre
+ * si hay una versión nueva (si no cambió, el servidor responde 304 y no se vuelve a bajar), en vez de mostrar una vieja.
+ */
+export function fetchData(file: string): Promise<Response> {
+  return fetch(withBase(`/data/${file}`), { cache: 'no-cache' });
+}
+
 export interface CategoryInfo {
   id: CategoryId;
   name: string;

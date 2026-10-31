@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/Icon';
 import { acCapacityRange, acRequiredFrigorias, computeRow, gasCompatible, heaterCapacityRange, heatRequiredKcalH, DEFAULT_SCENARIO, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Usage } from '@/lib/cost';
 import { formatARS, formatDate } from '@/lib/format';
-import { withBase } from '@/lib/site';
+import { fetchData } from '@/lib/site';
 import { CAPACITY_UNIT, capacityOf, subtypeOf } from '@/lib/specs';
 import { loadPref, savePref } from '@/lib/storage';
 import { forZone, zoneName } from '@/lib/zones';
@@ -67,8 +67,8 @@ export default function Comparator({ category }: { category: CategoryId }) {
   useEffect(() => {
     let alive = true;
     Promise.all([
-      fetch(withBase(`/data/${category}.json`)).then((r) => (r.ok ? (r.json() as Promise<CategoryFile>) : Promise.reject(new Error(`HTTP ${r.status}`)))),
-      fetch(withBase('/data/meta.json'))
+      fetchData(`${category}.json`).then((r) => (r.ok ? (r.json() as Promise<CategoryFile>) : Promise.reject(new Error(`HTTP ${r.status}`)))),
+      fetchData('meta.json')
         .then((r) => (r.ok ? (r.json() as Promise<Meta>) : null))
         .catch(() => null),
     ])
