@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T21:38:27.252Z",
+  "generatedAt": "2026-10-31T00:00:23.674Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 705,
-      "withConsumption": 405,
-      "withPrice": 705
+      "count": 535,
+      "withConsumption": 305,
+      "withPrice": 535
     },
     {
       "id": "aires",
-      "count": 374,
-      "withConsumption": 184,
-      "withPrice": 374
+      "count": 277,
+      "withConsumption": 153,
+      "withPrice": 277
     },
     {
       "id": "lavarropas",
-      "count": 335,
-      "withConsumption": 216,
-      "withPrice": 335
+      "count": 241,
+      "withConsumption": 145,
+      "withPrice": 241
     },
     {
       "id": "calefones",
-      "count": 48,
-      "withConsumption": 48,
-      "withPrice": 48
+      "count": 41,
+      "withConsumption": 41,
+      "withPrice": 41
     },
     {
       "id": "termotanques",
-      "count": 337,
-      "withConsumption": 337,
-      "withPrice": 337
+      "count": 284,
+      "withConsumption": 284,
+      "withPrice": 284
     },
     {
       "id": "calefactores",
-      "count": 919,
-      "withConsumption": 919,
-      "withPrice": 919
+      "count": 829,
+      "withConsumption": 829,
+      "withPrice": 829
     }
   ],
   "stores": [
@@ -45,7 +45,7 @@
       "name": "Frávega",
       "url": "https://www.fravega.com",
       "ok": true,
-      "products": 3203
+      "products": 3200
     },
     {
       "id": "cetrogar",
@@ -59,21 +59,21 @@
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1114
+      "products": 1120
     },
     {
       "id": "naldo",
       "name": "Naldo",
       "url": "https://www.naldo.com.ar",
       "ok": true,
-      "products": 322
+      "products": 321
     },
     {
       "id": "carrefour",
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1350
+      "products": 1352
     },
     {
       "id": "jumbo",
@@ -108,7 +108,7 @@
       "name": "BGH (oficial)",
       "url": "https://www.bgh.com.ar",
       "ok": true,
-      "products": 44
+      "products": 42
     }
   ]
 }
