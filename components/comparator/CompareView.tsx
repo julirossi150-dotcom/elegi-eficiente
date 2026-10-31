@@ -173,15 +173,16 @@ export default function CompareView({
               {rows.map((r) => (
                 <td key={r.product.id}>
                   <ul className="space-y-1.5">
-                    {[...r.product.offers]
-                      .sort((a, b) => Number(b.available) - Number(a.available) || a.price - b.price)
+                    {r.product.offers
+                      .filter((o) => o.available)
+                      .sort((a, b) => a.price - b.price)
                       .map((o) => (
                         <li key={o.store + o.url}>
                           <a
                             href={o.url}
                             target="_blank"
                             rel="noopener noreferrer nofollow"
-                            className={`focus-ring flex justify-between gap-3 rounded text-xs hover:underline ${o.available ? 'text-mint' : 'text-faint line-through'}`}
+                            className="focus-ring flex justify-between gap-3 rounded text-xs text-mint hover:underline"
                           >
                             <span>{storeNames[o.store] ?? o.store}</span>
                             <span>{formatARS(o.price)}</span>

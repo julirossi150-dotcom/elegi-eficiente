@@ -27,6 +27,8 @@ for (const c of CATEGORY_IDS) {
     ids.add(p.id);
     if (p.priceMin === null || !(p.priceMin > 0)) errors.push(`${c}: ${p.id} sin precio`);
     if (!p.offers.length) errors.push(`${c}: ${p.id} sin ofertas`);
+    if (p.offers.some((o) => !o.available)) errors.push(`${c}: ${p.id} publica ofertas sin stock`);
+    if (p.offers.length && p.priceMin !== Math.min(...p.offers.map((o) => o.price))) errors.push(`${c}: ${p.id} precio mínimo ≠ mejor oferta`);
   }
   const withConsumption = file.products.filter((p) => p.quality !== 'insuficiente').length;
   if (withConsumption < file.products.length * 0.2) errors.push(`${c}: solo ${withConsumption} productos con consumo`);

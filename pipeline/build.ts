@@ -133,8 +133,10 @@ export async function build(report: FetchReport[] | null, log: (m: string) => vo
     if (dropped) log(`  ${category}: ${dropped} ofertas descartadas por precio implausible`);
     for (const p of products) p.quality = computeQuality(p);
 
-    // Solo se publican productos con alguna oferta disponible (los discontinuados quedan en el historial).
-    products = products.filter((p) => p.priceMin !== null).sort((a, b) => a.brand.localeCompare(b.brand, 'es') || a.name.localeCompare(b.name, 'es'));
+    // Solo se publican productos y ofertas a la venta hoy: un link a algo sin stock suele llevar a una página
+    // que ya no existe. Los discontinuados quedan en el historial de precios.
+    for (const p of products) p.offers = p.offers.filter((o) => o.available);
+    products = products.filter((p) => p.priceMin !== null && p.offers.length > 0).sort((a, b) => a.brand.localeCompare(b.brand, 'es') || a.name.localeCompare(b.name, 'es'));
 
     const file: CategoryFile = { category, generatedAt: now.toISOString(), count: products.length, products };
     await writeFile(path.join(OUT_DIR, `${category}.json`), JSON.stringify(file));

@@ -42,6 +42,37 @@ export async function politeFetchJson<T>(
   throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
 }
 
+/** POST con cuerpo JSON (simulador de carrito), con la misma cortesía y reintentos que politeFetchJson. */
+export async function politePostJson<T>(url: string, body: unknown, { minIntervalMs = 1100, retries = 2, timeoutMs = 30_000 } = {}): Promise<FetchResult<T>> {
+  const host = new URL(url).host;
+  let lastErr: unknown;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const wait = (lastHit.get(host) ?? 0) + minIntervalMs - Date.now();
+    if (wait > 0) await sleep(wait);
+    lastHit.set(host, Date.now());
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'User-Agent': UA, Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(timeoutMs),
+      });
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        // un error informado por la tienda (p. ej. "Seller X HTTP error") no se arregla reintentando
+        const fatal = res.status !== 429 && (res.status < 500 || /"code"s*:s*"ORD/.test(text));
+        throw Object.assign(new Error(`HTTP ${res.status}: ${text.slice(0, 200)}`), { fatal });
+      }
+      return { data: (await res.json()) as T, headers: res.headers, status: res.status };
+    } catch (err) {
+      lastErr = err;
+      if ((err as { fatal?: boolean }).fatal) break;
+      await sleep(2000 * 2 ** attempt);
+    }
+  }
+  throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
+}
+
 /** Igual que politeFetchJson pero devuelve el cuerpo crudo (HTML o PDF). null si el recurso no existe (4xx). */
 export async function politeFetchBytes(url: string, { minIntervalMs = 1100, timeoutMs = 30_000 }: { minIntervalMs?: number; timeoutMs?: number } = {}): Promise<Buffer | null> {
   const host = new URL(url).host;

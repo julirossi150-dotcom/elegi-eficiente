@@ -4,7 +4,7 @@ import path from 'node:path';
 import { CATEGORY_IDS, type CategoryId } from '../lib/types';
 import { STORES, type StoreConfig } from './config';
 import { selectCategories } from './lib/categories';
-import { fetchCategoryProducts, fetchCategoryTree, type VtexProduct } from './sources/vtex';
+import { fetchCategoryProducts, fetchCategoryTree, verifyAvailability, type VtexProduct } from './sources/vtex';
 
 export const RAW_DIR = path.join(process.cwd(), 'pipeline', '.cache', 'raw');
 
@@ -39,6 +39,9 @@ async function fetchStore(store: StoreConfig, cats: readonly CategoryId[], log: 
           products.push(prod);
         }
       }
+      const v = await verifyAvailability(store.host, products);
+      if (v.failed) log(`  ⚠ ${store.id}/${cat}: el simulador de carrito no respondió; queda el stock del catálogo`);
+      else if (v.rejected) log(`  ${store.id}/${cat}: ${v.rejected} de ${v.checked} ofertas no están a la venta (simulador de carrito)`);
       const file: RawFile = {
         store: store.id,
         category: cat,
