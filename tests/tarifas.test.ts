@@ -57,6 +57,8 @@ describe('tarifas por defecto', () => {
     expect(tariffDefaults(official, 'cordoba').values).toMatchObject({ electricityPerKwh: 192.1, gasNaturalPerM3: 440.1, gasKind: 'natural' });
     expect(tariffDefaults(official, 'misiones').values.gasKind).toBe('envasado');
     expect(tariffDefaults(null, 'cordoba').values).toEqual(DEFAULT_TARIFFS);
+    expect(tariffDefaults(official, 'cordoba').notes.electricityPerKwh).toMatch(/factura/);
+    expect(tariffDefaults(official, 'gba').notes.electricityPerKwh).not.toMatch(/factura/);
   });
   it('del visitante se guardan solo sus cambios', () => {
     const d = tariffDefaults(official, 'caba').values;

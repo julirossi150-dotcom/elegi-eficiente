@@ -37,6 +37,9 @@ export interface TariffDefaults {
   notes: Record<'electricityPerKwh' | 'gasNaturalPerM3' | 'glpPerKg', string>;
 }
 
+// La luz por defecto es la del AMBA (Edenor y Edesur): las provincias no publican sus cuadros en un formato que se pueda leer solo
+const AMBA = new Set(['caba', 'gba']);
+
 const FALLBACK_NOTES: TariffDefaults['notes'] = { ...TARIFF_SOURCES };
 
 /** Valores por defecto para la zona: los oficiales si están, y si no los de referencia fijos. */
@@ -46,7 +49,9 @@ export function tariffDefaults(official: OfficialTariffs | null, zoneId: string 
   const e = official?.electricity;
   if (e) {
     values.electricityPerKwh = e.perKwh;
-    notes.electricityPerKwh = `Cuadro tarifario ${e.period} de Edenor y Edesur (ente regulador nacional), residencial sin subsidio, con IVA. Fuera del AMBA puede variar.`;
+    notes.electricityPerKwh = `Cuadro tarifario ${e.period} de Edenor y Edesur (ente regulador nacional), residencial sin subsidio, con IVA.${
+      zoneId && !AMBA.has(zoneId) ? ' Es la tarifa del AMBA: en tu provincia puede ser bastante distinta, cargá el precio por kWh de tu factura.' : ''
+    }`;
   }
   const g = official?.gas;
   const gz = g && (g.byZone[zoneId ?? 'caba'] ?? g.byZone.caba);
