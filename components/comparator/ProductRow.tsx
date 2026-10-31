@@ -4,7 +4,7 @@ import Icon from '@/components/Icon';
 import LabelBadge from '@/components/LabelBadge';
 import type { CostRow } from '@/lib/cost';
 import { formatARS, formatNum } from '@/lib/format';
-import { specChips } from '@/lib/specs';
+import { NOT_BEDROOM, specChips } from '@/lib/specs';
 
 export function energyText(r: CostRow): string | null {
   const e = r.estimate;
@@ -80,7 +80,7 @@ export default function ProductRow({
         <div className="mt-2.5 flex flex-wrap items-center gap-2">
           <LabelBadge label={p.label} />
           {specChips(p).map((c) => (
-            <span key={c} className="rounded-full bg-ink px-2.5 py-1 text-xs text-muted">
+            <span key={c} className={`rounded-full px-2.5 py-1 text-xs ${c === NOT_BEDROOM ? 'bg-coral/15 text-coral' : 'bg-ink text-muted'}`}>
               {c}
             </span>
           ))}

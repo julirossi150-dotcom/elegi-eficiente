@@ -11,7 +11,7 @@ Tiendas (catálogos VTEX públicos) ──► pipeline/ (todos los días) ──
 ```
 
 - **No existe una base pública oficial** de etiquetas: la Res. 438/2024 prevé una, pero no está publicada. Por eso armamos la nuestra.
-- `pipeline/fetch.ts` baja Cetrogar, OnCity, Naldo, Carrefour, Jumbo, Easy y las tiendas oficiales (1 request/seg por tienda, user-agent identificado).
+- `pipeline/fetch.ts` baja Cetrogar, OnCity, Naldo, Carrefour, Jumbo, Easy, Castillo, Bringeri, Más Online y las tiendas oficiales (Whirlpool, Electrolux, BGH, Liliana) (1 request/seg por tienda, user-agent identificado).
 - **Stock y zonas confirmados con el carrito:** el catálogo de una tienda puede listar productos que ya no vende. Cada oferta se
   consulta en el simulador de carrito de la tienda con el código postal de cada zona (`lib/zones.ts`: una por provincia, con el
   Gran Buenos Aires aparte). Lo que no se puede comprar en ninguna zona no se publica, y cada oferta guarda en qué zonas se

@@ -19,10 +19,14 @@ export const STORES: StoreConfig[] = [
   { id: 'carrefour', name: 'Carrefour', host: 'www.carrefour.com.ar', url: 'https://www.carrefour.com.ar' },
   { id: 'jumbo', name: 'Jumbo', host: 'www.jumbo.com.ar', url: 'https://www.jumbo.com.ar', salesChannel: '32' },
   { id: 'easy', name: 'Easy', host: 'www.easy.com.ar', url: 'https://www.easy.com.ar' },
+  { id: 'castillo', name: 'Castillo', host: 'www.castillo.com.ar', url: 'https://www.castillo.com.ar' },
+  { id: 'bringeri', name: 'Bringeri', host: 'www.bringeri.com.ar', url: 'https://www.bringeri.com.ar' },
+  { id: 'masonline', name: 'Más Online (Changomas)', host: 'www.masonline.com.ar', url: 'https://www.masonline.com.ar' },
   // tiendas oficiales de fabricantes (también venden, así que suman ofertas)
   { id: 'whirlpool', name: 'Whirlpool (oficial)', host: 'www.whirlpool.com.ar', url: 'https://www.whirlpool.com.ar', manufacturerOf: ['Whirlpool'] },
   { id: 'electrolux', name: 'Electrolux (oficial)', host: 'www.tienda.electrolux.com.ar', url: 'https://www.tienda.electrolux.com.ar', manufacturerOf: ['Electrolux', 'GAFA'] },
   { id: 'bgh', name: 'BGH (oficial)', host: 'www.bgh.com.ar', url: 'https://www.bgh.com.ar', manufacturerOf: ['BGH'] },
+  { id: 'liliana', name: 'Liliana (oficial)', host: 'www.liliana.com.ar', url: 'https://www.liliana.com.ar', manufacturerOf: ['Liliana'] },
 ];
 
 /**

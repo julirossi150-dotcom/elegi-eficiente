@@ -12,6 +12,16 @@ export const CAPACITY_UNIT: Record<CategoryId, { label: string; unit: string }> 
   calefactores: { label: 'Potencia', unit: 'kcal/h' },
 };
 
+/**
+ * ¿Se puede usar en un dormitorio? Las eléctricas y los calefactores de tiro balanceado (toman y largan el aire afuera), sí.
+ * Las estufas a gas sin salida al exterior (incluye infrarrojas y catalíticas) o de tipo desconocido, no.
+ */
+export const NOT_BEDROOM = 'No apto dormitorio';
+
+export function bedroomSafe(p: Product): boolean {
+  return p.energy === 'electricidad' || p.specs.roomHeaterType === 'tiro_balanceado';
+}
+
 export const ROOM_HEATER_TYPE: Record<NonNullable<Product['specs']['roomHeaterType']>, string> = {
   tiro_balanceado: 'Tiro balanceado',
   sin_salida: 'Sin salida al exterior',
@@ -106,6 +116,7 @@ export function specChips(p: Product): string[] {
       if (s.roomHeaterType) chips.push(ROOM_HEATER_TYPE[s.roomHeaterType]);
       chips.push(ENERGY_LABEL[p.energy]);
       if (p.energy !== 'electricidad' && s.hasPilot !== undefined) chips.push(s.hasPilot ? 'Con piloto' : 'Sin piloto');
+      if (!bedroomSafe(p)) chips.push(NOT_BEDROOM);
       break;
   }
   return chips;

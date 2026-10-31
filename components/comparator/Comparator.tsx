@@ -5,7 +5,7 @@ import Icon from '@/components/Icon';
 import { acCapacityRange, acRequiredFrigorias, computeRow, gasCompatible, heaterCapacityRange, heatRequiredKcalH, DEFAULT_SCENARIO, DEFAULT_USAGE, LIFESPAN_YEARS, type CostRow, type Scenario, type Usage } from '@/lib/cost';
 import { formatARS, formatDate } from '@/lib/format';
 import { fetchData } from '@/lib/site';
-import { CAPACITY_UNIT, capacityOf, subtypeOf } from '@/lib/specs';
+import { bedroomSafe, CAPACITY_UNIT, capacityOf, subtypeOf } from '@/lib/specs';
 import { loadPref, savePref } from '@/lib/storage';
 import { forZone, zoneName } from '@/lib/zones';
 import { useTariffs } from '@/components/useTariffs';
@@ -42,6 +42,8 @@ export default function Comparator({ category }: { category: CategoryId }) {
   const [capMin, setCapMin] = useState(DEFAULT_CAPACITY[category][0]);
   const [capMax, setCapMax] = useState(DEFAULT_CAPACITY[category][1]);
   const [onlyComplete, setOnlyComplete] = useState(true);
+  // Estufas: solo las que se pueden usar en un dormitorio (eléctricas y tiro balanceado)
+  const [bedroomOnly, setBedroomOnly] = useState(false);
   const [sort, setSort] = useState<SortKey>('tco');
   const [limit, setLimit] = useState(PAGE);
   const [selected, setSelected] = useState<string[]>([]);
@@ -107,9 +109,10 @@ export default function Comparator({ category }: { category: CategoryId }) {
       const cap = capacityOf(p);
       if ((capMin || capMax) && (cap === undefined || cap < min || cap > max)) return false;
       if (onlyComplete && (r.tco === null)) return false;
+      if (bedroomOnly && category === 'calefactores' && !bedroomSafe(p)) return false;
       return true;
     });
-  }, [rows, q, brand, subtype, capMin, capMax, onlyComplete, tariffs.gasKind]);
+  }, [rows, q, brand, subtype, capMin, capMax, onlyComplete, bedroomOnly, category, tariffs.gasKind]);
 
   const sorted = useMemo(() => {
     const key = (r: CostRow) => (sort === 'tco' ? r.tco : sort === 'price' ? r.price : r.annualEnergyCost) ?? Number.POSITIVE_INFINITY;
@@ -272,6 +275,18 @@ export default function Comparator({ category }: { category: CategoryId }) {
                 Solo productos con precio y datos de consumo
                 {onlyComplete && hiddenIncomplete > 0 && <span className="text-faint">({hiddenIncomplete} ocultos)</span>}
               </label>
+              {category === 'calefactores' && (
+                <label className="flex items-start gap-2 text-sm text-muted sm:col-span-2 xl:col-span-4">
+                  <input type="checkbox" checked={bedroomOnly} onChange={(e) => setBedroomOnly(e.target.checked)} className="mt-0.5 size-4 shrink-0 accent-amber" />
+                  <span>
+                    Solo aptos para dormitorio
+                    <span className="block text-xs text-faint">
+                      Eléctricas y tiro balanceado. Las estufas a gas sin salida al exterior necesitan ventilación permanente y no se pueden usar en
+                      dormitorios ni baños.
+                    </span>
+                  </span>
+                </label>
+              )}
             </div>
 
             {sorted.length === 0 ? (

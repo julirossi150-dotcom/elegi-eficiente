@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { acCapacityRange, acRequiredFrigorias, compareHeating, computeRow, cumulativeEnergy, heaterCapacityRange, heatRequiredKcalH, DEFAULT_USAGE, hotWaterDemandKcalYear, paybackYears, type Tariffs } from '../lib/cost';
+import { bedroomSafe, NOT_BEDROOM, specChips } from '../lib/specs';
 import type { Product } from '../lib/types';
 
 const T: Tariffs = { electricityPerKwh: 100, gasNaturalPerM3: 500, glpPerKg: 1000, gasKind: 'natural' };
@@ -148,5 +149,16 @@ describe('calefacción: aire, gas o eléctrica', () => {
   });
   it('con garrafa no aparecen los calefactores de gas natural', () => {
     expect(compareHeating([tb], U, { ...T, gasKind: 'envasado' }, S).find((o) => o.tech.id === 'tiro_balanceado')!.count).toBe(0);
+  });
+});
+
+describe('apto dormitorio', () => {
+  const heater = (energy: Product['energy'], roomHeaterType?: Product['specs']['roomHeaterType']) =>
+    product({ category: 'calefactores', energy, specs: { roomHeaterType } });
+  it('eléctricas y tiro balanceado sí; sin salida, infrarrojas, catalíticas o sin dato, no', () => {
+    expect(bedroomSafe(heater('electricidad', 'caloventor'))).toBe(true);
+    expect(bedroomSafe(heater('gas_natural', 'tiro_balanceado'))).toBe(true);
+    for (const t of ['sin_salida', 'infrarroja', 'catalitica', undefined] as const) expect(bedroomSafe(heater('gas_natural', t))).toBe(false);
+    expect(specChips(heater('gas_envasado', 'infrarroja'))).toContain(NOT_BEDROOM);
   });
 });
