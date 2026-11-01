@@ -1,24 +1,24 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T20:36:07.248Z",
+  "generatedAt": "2026-11-01T10:47:52.024Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 326,
-      "withConsumption": 261,
-      "withPrice": 326
+      "count": 321,
+      "withConsumption": 256,
+      "withPrice": 321
     },
     {
       "id": "aires",
-      "count": 195,
+      "count": 194,
       "withConsumption": 144,
-      "withPrice": 195
+      "withPrice": 194
     },
     {
       "id": "lavarropas",
-      "count": 159,
-      "withConsumption": 127,
-      "withPrice": 159
+      "count": 157,
+      "withConsumption": 125,
+      "withPrice": 157
     },
     {
       "id": "calefones",
@@ -34,9 +34,9 @@
     },
     {
       "id": "calefactores",
-      "count": 511,
-      "withConsumption": 511,
-      "withPrice": 511
+      "count": 512,
+      "withConsumption": 512,
+      "withPrice": 512
     }
   ],
   "stores": [
@@ -59,14 +59,14 @@
       "name": "Naldo",
       "url": "https://www.naldo.com.ar",
       "ok": true,
-      "products": 323
+      "products": 322
     },
     {
       "id": "carrefour",
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1349
+      "products": 1352
     },
     {
       "id": "jumbo",
@@ -80,7 +80,7 @@
       "name": "Easy",
       "url": "https://www.easy.com.ar",
       "ok": true,
-      "products": 203
+      "products": 202
     },
     {
       "id": "castillo",
@@ -101,7 +101,7 @@
       "name": "Más Online (Changomas)",
       "url": "https://www.masonline.com.ar",
       "ok": true,
-      "products": 113
+      "products": 112
     },
     {
       "id": "whirlpool",
