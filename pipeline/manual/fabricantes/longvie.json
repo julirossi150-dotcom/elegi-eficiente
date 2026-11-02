@@ -1,0 +1,41 @@
+[
+ {
+  "category": "lavarropas",
+  "brand": "Longvie",
+  "models": [
+   "L3W272DB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.21,
+   "waterLPerCycle": 75,
+   "capacityKg": 7
+  },
+  "label": {
+   "cls": "A",
+   "scale": "desconocida"
+  },
+  "origin": "fabricante",
+  "source": "https://www.longvie.com/productos/lavarropas-inverter-l3w272db/",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Longvie",
+  "models": [
+   "L3W46DMB*",
+   "L3W46DMBR*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.31,
+   "waterLPerCycle": 69,
+   "capacityKg": 10
+  },
+  "label": {
+   "cls": "A+++",
+   "scale": "anterior"
+  },
+  "origin": "fabricante",
+  "source": "https://www.longvie.com/productos/lavarropas-inverter-l3w46dmbr/",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ }
+]

@@ -1,6 +1,6 @@
 // Lectura de la "Declaración Jurada de Conformidad" (DJC) de la Res. SIC 438/2024. Cada fabricante la publica por
 // modelo con los mismos campos que la etiqueta (clase, consumo, volúmenes o carga), así que es la fuente oficial más completa.
-import type { CategoryId, Specs } from '../../lib/types';
+import type { CategoryId, LabelScale, Specs } from '../../lib/types';
 import { normalizeText, toNumber } from '../normalize/parse';
 
 export interface DjcRecord {
@@ -8,7 +8,55 @@ export interface DjcRecord {
   /** pares marca → modelos (una DJC puede cubrir marcas gemelas, p. ej. Drean y Patrick) */
   groups: { brand: string; models: string[] }[];
   cls?: string;
+  /** escala de la clase; sin dato, la nueva (A a G de la Res. 438/2024) */
+  scale?: LabelScale;
   specs: Specs;
+}
+
+/**
+ * DJC en forma de tabla (Longvie): "Marca Comercial: LONGVIE", el modelo en la columna "Modelo" de la tabla de normas
+ * y las características energéticas como "Clase Energética: A", "Consumo de energía: 0,31kWh", "Capacidad nominal: 10 Kg".
+ */
+function parseDjcTable(raw: string, t: string, category: CategoryId): DjcRecord | null {
+  const brand = t.match(/marca comercial:\s*([^\n]+)/)?.[1]?.trim().toUpperCase();
+  const lines = raw.split('\n');
+  const header = lines.findIndex((l) => /^\s*Producto\s+Modelo\s+Fabricante/i.test(l));
+  if (!brand || header < 0) return null;
+  const models = [
+    ...new Set(
+      lines
+        .slice(header + 1, header + 5)
+        .flatMap((l) => l.match(/\b[A-Z]{1,5}\d[A-Z0-9]{2,}\b/g) ?? [])
+        .filter((m) => !/^(IEC|IRAM|DC|ED|NAG)/.test(m)),
+    ),
+  ];
+  if (!models.length) return null;
+
+  const cls = t.match(/clase energetica:\s*([a-g]\+{0,3})/)?.[1]?.toUpperCase();
+  const specs: Specs = {};
+  const capacity = field(t, /capacidad nominal:\s*([\d.,]+)/);
+  switch (category) {
+    case 'lavarropas': {
+      const kwh = field(t, /consumo de energia:\s*([\d.,]+)\s*kwh/);
+      const water = field(t, /consumo de agua:\s*([\d.,]+)/);
+      if (kwh && kwh > 0.05 && kwh < 5) specs.kwhPerCycle = kwh;
+      if (water && water > 10 && water < 300) specs.waterLPerCycle = water;
+      if (capacity && capacity > 2 && capacity < 30) specs.capacityKg = capacity;
+      break;
+    }
+    case 'termotanques': {
+      const kw = field(t, /potencia nominal:\s*([\d.,]+)\s*kw/);
+      if (capacity && capacity > 10 && capacity < 500) specs.storageL = capacity;
+      if (kw && kw > 0.5 && kw < 10) specs.powerW = kw * 1000;
+      break;
+    }
+    default:
+      return null;
+  }
+  if (!cls && !Object.keys(specs).length) return null;
+  // "A+++" es de la escala anterior; una letra sola, sin la escala impresa, no se sabe
+  const scale: LabelScale = cls?.includes('+') ? 'anterior' : /\(mas eficiente\) a g/.test(t) ? 'nueva' : 'desconocida';
+  return { category, groups: [{ brand, models }], cls, scale, specs };
 }
 
 function field(t: string, re: RegExp): number | undefined {
@@ -44,7 +92,7 @@ export function parseDjc(raw: string): DjcRecord | null {
 
   const modelLine = t.match(/modelo(?:s)?:\s*([\s\S]*?)\n\s*(?:caracteristicas|fabricante|origen|marca)/)?.[1] ?? t.match(/codigo de identificacion unico del producto:?\s*([\s\S]*?)\n\s*marca/)?.[1];
   const brandLine = t.match(/\bmarca(?:s)?:\s*([^\n]*)/)?.[1] ?? '';
-  if (!modelLine) return null;
+  if (!modelLine) return parseDjcTable(raw, t, category);
   const modelGroups = numbered(modelLine.replace(/\n/g, ' '));
   const brandGroups = numbered(brandLine);
   // cada grupo de modelos va con su grupo de marcas (si hay una sola marca, vale para todos)

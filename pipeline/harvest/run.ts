@@ -43,6 +43,29 @@ const SOURCES: Source[] = [
       }
     },
   },
+  {
+    id: 'longvie',
+    brands: ['Longvie'],
+    // Tiendanube: cada ficha enlaza "DJC + CERTIFICADOS … .pdf"; se recorren las categorías con DJC de la Res. 438/2024
+    async *find(_models, log) {
+      const pages = new Set<string>();
+      for (const cat of ['lavado', 'termotanques']) {
+        for (let n = 1; n <= 10; n++) {
+          const html = (await politeFetchBytes(`https://www.longvie.com/${cat}/?page=${n}`))?.toString('utf8');
+          const found = [...(html ?? '').matchAll(/(\/productos\/[a-z0-9-]+\/)/g)].map((m) => `https://www.longvie.com${m[1]}`);
+          const before = pages.size;
+          for (const p of found) pages.add(p);
+          if (pages.size === before) break;
+        }
+      }
+      for (const page of pages) {
+        const html = (await politeFetchBytes(page))?.toString('utf8') ?? '';
+        const pdfs = [...new Set([...html.matchAll(/https:\/\/[^"'\s]+?\.pdf/gi)].map((m) => m[0]).filter((u) => /djc/i.test(decodeURIComponent(u))))];
+        if (!pdfs.length) log(`  longvie ${page}: sin DJC`);
+        for (const url of pdfs) yield { url, page };
+      }
+    },
+  },
 ];
 
 async function pdfText(url: string): Promise<string | null> {
@@ -97,16 +120,23 @@ async function harvest(src: Source, log: (m: string) => void) {
         // los códigos de la DJC no siempre traen el sufijo de versión que usan las tiendas (…TG vs …TG0)
         models: g.models.map((m) => `${m}*`),
         specs: rec.specs,
-        ...(rec.cls ? { label: { cls: rec.cls, scale: 'nueva' as const } } : {}),
+        ...(rec.cls ? { label: { cls: rec.cls, scale: rec.scale ?? 'nueva' } } : {}),
         origin: 'fabricante',
         source: ref.page,
         note: 'Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante',
       });
     }
   }
+  // un mismo modelo con DJC distintas (p. ej. versiones de 1,5 y 2 kW con el mismo código): no se sabe cuál venden las tiendas
+  const facts = (e: ManualEntry) => JSON.stringify([e.specs, e.label]);
+  const byModel = new Map<string, Set<string>>();
+  for (const e of entries) for (const m of e.models ?? []) byModel.set(`${e.brand}|${m}`, (byModel.get(`${e.brand}|${m}`) ?? new Set()).add(facts(e)));
+  const ambiguous = new Set([...byModel].filter(([, f]) => f.size > 1).map(([k]) => k));
+  for (const k of ambiguous) log(`  ${src.id}: ${k.replace('|', ' ')} tiene DJC distintas, se descarta`);
+  const kept = entries.filter((e) => !(e.models ?? []).some((m) => ambiguous.has(`${e.brand}|${m}`)));
   await mkdir(HARVEST_DIR, { recursive: true });
-  await writeFile(path.join(HARVEST_DIR, `${src.id}.json`), JSON.stringify(entries, null, 1));
-  log(`${src.id}: ${entries.length} entradas de ${seen.size} DJC`);
+  await writeFile(path.join(HARVEST_DIR, `${src.id}.json`), JSON.stringify(kept, null, 1));
+  log(`${src.id}: ${kept.length} entradas de ${seen.size} DJC`);
 }
 
 const only = process.argv.slice(2);

@@ -52,6 +52,23 @@ describe('DJC (Res. 438/2024)', () => {
   it('ignora documentos que no son DJC', () => {
     expect(parseDjc('Manual de instrucciones del lavarropas')).toBeNull();
   });
+  it('lee una DJC en forma de tabla (Longvie)', () => {
+    const r = parseDjc(`DECLARACIÓN JURADA DE CONFORMIDAD (DJC)
+• Marca Comercial: LONGVIE
+ID Producto      Producto Marca       Modelo           Características   Características
+ DC-E-L11-077.1  LAVARROPAS  LONGVIE  L3W46DMB ;
+                                                     - 1600 W - IPX4 -   Clase Energética: A+++
+                                                           Clase I       Consumo de energía: 0,31kWh
+                                                       Carga frontal     Consumo de agua: 69 litros
+                                                       Origen CHINA      Capacidad nominal: 10 Kg
+   Producto         Modelo        Fabricante        Reglamento/s    Nro. certificado           Normas Técnicas
+LAVARROPAS                                           Aplicable/s:                        IEC 60335-2-7 (Ed.8.0): 2019 &
+                 L3W46DMB ;    Jinling Electrical     Resolución    DC-E-L11-077.1       IEC 60335-1 (Ed. 5.0): 2010 + A1:
+                 L3W46DMBR   Company Limited /                           (IRAM)          2013 + A2: 2016
+`)!;
+    expect(r).toMatchObject({ category: 'lavarropas', cls: 'A+++', scale: 'anterior', specs: { kwhPerCycle: 0.31, waterLPerCycle: 69, capacityKg: 10 } });
+    expect(r.groups).toEqual([{ brand: 'LONGVIE', models: ['L3W46DMB', 'L3W46DMBR'] }]);
+  });
 });
 
 describe('consumo de etiqueta ENARGAS', () => {
