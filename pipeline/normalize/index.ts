@@ -265,6 +265,13 @@ function aguaCaliente(r: SpecReader, category: 'calefones' | 'termotanques'): { 
   return { specs: s, energy, guessed };
 }
 
+/** Series que se nombran por miles de kcal/h: "Tiro Balanceado 3.0", "TB 3.0", "Tiro Natural Tn 6.0" = 3000 / 6000 kcal/h. */
+function tiroSeriesKcal(t: string): number | undefined {
+  // "Tiro Balanceado U (TBU) 5.0": hasta unas letras entre la serie y el número
+  const m = t.match(/(?:tiro balanceado|tiro natural|\btbu?\b|\btn\b)[^\d]{0,12}?\b(\d)[.,](\d)\b(?!\s*(?:kw|kcal|k ?cal|w\b))/);
+  return m ? Number(`${m[1]}.${m[2]}`) * 1000 : undefined;
+}
+
 /** Estufas y calefactores: tipo, energía, potencia (kcal/h a gas, W eléctrica), encendido y rendimiento. */
 function calefactor(r: SpecReader): { specs: Specs; energy: EnergySource; guessed: boolean } {
   const s: Specs = {};
@@ -272,11 +279,11 @@ function calefactor(r: SpecReader): { specs: Specs; energy: EnergySource; guesse
   const t = ` ${typeText} `;
   if (/tiro balanceado|\btb ?u?\b|balanceado/.test(t)) s.roomHeaterType = 'tiro_balanceado';
   else if (/catalitic/.test(t)) s.roomHeaterType = 'catalitica';
-  else if (/caloventor|termoventilador/.test(t)) s.roomHeaterType = 'caloventor';
+  else if (/caloventor|termoventilador|turbo ?calefactor|\bptc\b|\btorre\b/.test(t)) s.roomHeaterType = 'caloventor';
   else if (/cuarzo/.test(t)) s.roomHeaterType = 'cuarzo';
   else if (/halogen/.test(t)) s.roomHeaterType = 'halogena';
   else if (/radiador|oleo|aceite/.test(t)) s.roomHeaterType = 'radiador';
-  else if (/panel|mica|vitroconvector|placa/.test(t)) s.roomHeaterType = 'panel';
+  else if (/panel|mica|vitro|placa/.test(t)) s.roomHeaterType = 'panel';
   else if (/convector|conveccion/.test(t)) s.roomHeaterType = 'convector';
   else if (/infrarroj|garrafer|pantalla|radiante/.test(t)) s.roomHeaterType = 'infrarroja';
   else if (/sin salida|tiro natural|\bsss?\b/.test(t)) s.roomHeaterType = 'sin_salida';
@@ -303,19 +310,25 @@ function calefactor(r: SpecReader): { specs: Specs; energy: EnergySource; guesse
   if (energy === 'electricidad' && !elecWord && !elecTypes.includes(s.roomHeaterType ?? '')) guessed = true;
   if (!s.roomHeaterType) s.roomHeaterType = energy === 'electricidad' ? 'otro' : 'sin_salida';
 
-  const specText = normalizeText([r.get(/calorias|kcal|capacidad calorifica|potencia|capacidad de calefaccion|consumo de energia/) ?? '', r.name].join(' '));
+  // "3000 K/cal" = 3000 kcal/h
+  const specText = normalizeText([r.get(/calorias|kcal|capacidad calorifica|potencia|capacidad de calefaccion|consumo de energia/) ?? '', r.name].join(' ')).replace(/k ?\/ ?cal/g, 'kcal');
   if (energy === 'electricidad') {
+    // los watts del nombre primero: algunas tiendas cargan la potencia como el rango de un filtro ("999", "1999")
     const w =
+      numberWithUnit(normalizeText(r.name), /w\b|wts?\b|watts?/) ??
       valueWithUnit('potencia', r.get(/potencia maxima|capacidad de calefaccion|^potencia/) ?? '', /w\b|watts?/) ??
       numberWithUnit(specText, /w\b|watts?/);
     const kw = numberWithUnit(specText, /kw\b/);
     const watts = w ?? (kw ? kw * 1000 : undefined);
     if (watts && watts >= 300 && watts <= 5000) s.powerW = watts;
   } else {
+    // como con los watts: el nombre primero, la ficha de algunas tiendas trae el rango de un filtro ("3999")
     const kcal =
+      numberWithUnit(normalizeText(r.name).replace(/k ?\/ ?cal/g, 'kcal'), /kcal|k ?cal/) ??
       numberWithUnit(normalizeText(r.get(/calorias$|capacidad calorifica|^potencia/) ?? ''), /kcal|k ?cal/) ??
       num(r.get(/capacidad calorifica/), 1000, 15000) ??
-      numberWithUnit(specText, /kcal|k ?cal|cal\b/);
+      numberWithUnit(specText, /kcal|k ?cal|cal\b/) ??
+      tiroSeriesKcal(t);
     if (kcal && kcal >= 1000 && kcal <= 15000) s.gasPowerKcalH = kcal;
     const enc = normalizeText(`${r.get(/encendido/) ?? ''} ${r.name}`);
     if (/sin piloto|electronico|automatico/.test(enc) && !/piezo|manual/.test(enc)) s.hasPilot = false;
@@ -365,6 +378,8 @@ export function toListing(p: VtexProduct, store: string, category: CategoryId, c
       break;
     }
     case 'calefactores': {
+      // estufas a leña (doble combustión): no usan luz ni gas, quedan fuera del comparador
+      if (/doble combustion|\b(a|de) lena\b/.test(normalizeText(name))) return null;
       const res = calefactor(r);
       specs = res.specs;
       energy = res.energy;

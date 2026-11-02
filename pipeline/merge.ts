@@ -43,14 +43,84 @@ function isOfficial(l: Listing): boolean {
   return OFFICIAL.get(l.store)?.has(modelKey(l.brand)) ?? false;
 }
 
+/** El modelo cargado no figura en el nombre, que trae otro código de la misma serie (modelo "IC-02" en un "Caloventor IC-01"). */
+export function modelContradictsName(model: string, name: string): boolean {
+  const m = modelKey(model).match(/^([A-Z]{2,})(\d+)$/);
+  if (!m) return false;
+  // el código completo, con puntos y guiones ("TESZ2.0-50")
+  const codes = (normalizeText(name).toUpperCase().match(new RegExp(`\\b${m[1]}[ -]?\\d(?:[\\d.-]*\\d)?\\b`, 'g')) ?? []).map(modelKey);
+  return codes.length > 0 && !codes.includes(m[0]);
+}
+
+/** Claves por las que dos publicaciones se consideran el mismo producto. */
+function keysOf(l: Listing): string[] {
+  const keys: string[] = [];
+  if (l.ean && /^\d{8,14}$/.test(l.ean) && !/^0+$/.test(l.ean)) keys.push(`ean:${l.ean.replace(/^0+/, '')}`);
+  if (l.model && !modelContradictsName(l.model, l.name)) keys.push(`model:${l.category}:${modelKey(l.brand)}:${modelKey(l.model)}`);
+  return keys;
+}
+
+/** Tamaño que distingue modelos de una misma línea: litros, kg, capacidad o potencia. */
+function sizeOf(l: Listing): number | undefined {
+  const s = l.specs;
+  switch (l.category) {
+    case 'heladeras':
+      return s.totalVolumeL;
+    case 'aires':
+      return s.coolingCapacityW ?? (s.frigorias ? s.frigorias * 1.163 : undefined);
+    case 'lavarropas':
+      return s.capacityKg;
+    case 'calefones':
+      return s.flowLMin;
+    case 'termotanques':
+      return s.storageL;
+    case 'calefactores':
+      return s.gasPowerKcalH ?? (s.powerW ? s.powerW * 0.86 : undefined);
+  }
+}
+
+// diferencia de tamaño que todavía puede ser el mismo producto informado distinto (litros brutos y netos, redondeos)
+const SIZE_TOLERANCE = 1.25;
+
+/**
+ * Separa un grupo que juntó tamaños distintos: pasa cuando una tienda carga el EAN o el modelo de otro producto
+ * de la misma línea (un termotanque de 30 L con el código del de 50 L) y la cadena de coincidencias los une.
+ */
+function splitBySize(group: Listing[]): Listing[][] {
+  const sized = group.filter((l) => sizeOf(l)).sort((a, b) => sizeOf(a)! - sizeOf(b)!);
+  if (!sized.length || sizeOf(sized[sized.length - 1])! <= sizeOf(sized[0])! * SIZE_TOLERANCE) return [group];
+  const clusters: Listing[][] = [];
+  for (const l of sized) {
+    const last = clusters[clusters.length - 1];
+    if (last && sizeOf(l)! <= sizeOf(last[0])! * SIZE_TOLERANCE) last.push(l);
+    else clusters.push([l]);
+  }
+  // mismo modelo o EAN principal con tamaños distintos es un dato mal cargado en una tienda (el freezer como total),
+  // no otro producto; un modelo equivocado en una sola publicación no alcanza para volver a unirlos
+  const main = (c: Listing[], prefix: string) => mode(c.flatMap((l) => keysOf(l).filter((k) => k.startsWith(prefix)).map((v) => ({ v, store: l.store }))))?.v;
+  const same = (a: Listing[], b: Listing[]) => ['model:', 'ean:'].some((p) => main(a, p) !== undefined && main(a, p) === main(b, p));
+  for (let i = 0; i < clusters.length; i++) {
+    for (let j = i + 1; j < clusters.length; j++) {
+      if (same(clusters[i], clusters[j])) {
+        clusters[i].push(...clusters.splice(j, 1)[0]);
+        j = i;
+      }
+    }
+  }
+  // sin tamaño: con el que comparte su EAN o modelo; si no, con el más grande
+  for (const l of group.filter((x) => !sizeOf(x))) {
+    const keys = keysOf(l);
+    const home = clusters.find((c) => c.some((m) => keysOf(m).some((k) => keys.includes(k)))) ?? clusters.reduce((a, b) => (b.length > a.length ? b : a));
+    home.push(l);
+  }
+  return clusters;
+}
+
 export function mergeListings(listings: Listing[], previous: Map<string, Product>, today: string): Product[] {
   const uf = new UnionFind(listings.length);
   const byKey = new Map<string, number>();
   listings.forEach((l, i) => {
-    const keys: string[] = [];
-    if (l.ean && /^\d{8,14}$/.test(l.ean)) keys.push(`ean:${l.ean.replace(/^0+/, '')}`);
-    if (l.model) keys.push(`model:${l.category}:${modelKey(l.brand)}:${modelKey(l.model)}`);
-    for (const k of keys) {
+    for (const k of keysOf(l)) {
       const j = byKey.get(k);
       if (j === undefined) byKey.set(k, i);
       else uf.union(i, j);
@@ -67,7 +137,7 @@ export function mergeListings(listings: Listing[], previous: Map<string, Product
 
   const products: Product[] = [];
   const usedIds = new Set<string>();
-  for (const group of groups.values()) {
+  for (const group of [...groups.values()].flatMap(splitBySize)) {
     // la publicación con más datos manda en nombre/imagen
     const richest = [...group].sort((a, b) => Object.keys(b.specs).length - Object.keys(a.specs).length || (b.label.cls ? 1 : 0) - (a.label.cls ? 1 : 0))[0];
     const brand = mode(group.map((l) => ({ v: l.brand, store: l.store })))!.v;
