@@ -28,15 +28,17 @@
 
   --color-text: #e8f1ef;
   --color-muted: #a3bdb9;
-  --color-faint: #6f8f8b;
+  --color-faint: #88a8a3;
 }
 
 :root {
   color-scheme: dark;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -73,6 +75,36 @@ body {
   border-radius: 50%;
   background: var(--color-ink-3);
   opacity: 0.6;
+}
+
+/* Foco visible para teclado en todo lo interactivo (.focus-ring lo reemplaza por un anillo) */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-sun);
+  outline-offset: 2px;
+}
+
+/* "Saltar al contenido": invisible hasta que recibe el foco */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 50;
+  border-radius: 0.5rem;
+  background: var(--color-sun);
+  color: var(--color-ink);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+main:focus {
+  outline: none;
+}
+/* casillas y opciones ocultas dentro de una etiqueta con forma de botón: el foco se ve en la etiqueta */
+label:has(> input.sr-only:focus-visible) {
+  outline: 3px solid var(--color-sun);
+  outline-offset: 2px;
 }
 
 .focus-ring {

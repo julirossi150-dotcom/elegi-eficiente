@@ -152,24 +152,24 @@ export default function HeatingCompare() {
               </h2>
               <ol className="space-y-3">
                 {options.map((o, i) => (
-                  <li key={o.tech.id} className={`rounded-3xl p-5 ${i === 0 && o.best ? 'bg-leaf' : 'bg-ink-2'}`}>
+                  <li key={o.tech.id} className={`rounded-3xl p-5 ${i === 0 && o.best ? 'border-2 border-sun bg-ink-3' : 'bg-ink-2'}`}>
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div className="min-w-0">
                         <h3 className="flex items-center gap-2 font-semibold text-white">
                           <Icon name={o.tech.category} size={20} /> {o.tech.name}
                         </h3>
-                        {i === 0 && o.best && <p className="mt-1 text-sm text-white/80">Menor costo total para tu ambiente</p>}
+                        {i === 0 && o.best && <p className="mt-1 text-sm text-white/90">Menor costo total para tu ambiente</p>}
                       </div>
                       {o.best && (
                         <div className="text-right">
                           <p className="tabular text-2xl font-bold text-sun">{formatARS(o.best.tco!)}</p>
-                          <p className="tabular text-xs text-white/70">
+                          <p className="tabular text-xs text-white/90">
                             {formatARS(o.best.price!)} + {formatARS(o.best.tco! - o.best.price!)} de energía
                           </p>
                         </div>
                       )}
                     </div>
-                    <p className="mt-3 text-sm leading-relaxed text-white/80">{o.tech.note}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-white/90">{o.tech.note}</p>
                     {o.tech.warning && (
                       <p className="mt-2 flex items-start gap-2 rounded-xl bg-coral/15 px-3 py-2 text-sm text-coral">
                         <Icon name="info" size={16} /> {o.tech.warning}

@@ -60,7 +60,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <main>
+      <main id="contenido" tabIndex={-1}>
         <section className="blob-bg overflow-hidden" aria-labelledby="que-es">
           <div className="mx-auto max-w-6xl px-4 pt-16 pb-10 sm:px-6 md:pt-24">
             <div className="grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-end">
@@ -104,7 +104,7 @@ export default async function Home() {
                       <Icon name={c.id} size={30} />
                     </span>
                     <h3 className="mt-6 text-lg leading-snug font-semibold text-white">{c.name}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-white/70">{c.blurb}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-white/90">{c.blurb}</p>
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm text-white/90 group-hover:text-sun">
                       Comparar <Icon name="arrow-right" size={16} />
                     </span>
@@ -122,7 +122,7 @@ export default async function Home() {
                 </span>
                 <span>
                   <span className="block font-semibold text-white">¿Con qué calefacciono?</span>
-                  <span className="mt-1 block text-sm text-white/70">Aire frío/calor, gas o eléctrica: cuánto cuesta calefaccionar tu ambiente con cada uno.</span>
+                  <span className="mt-1 block text-sm text-white/90">Aire frío/calor, gas o eléctrica: cuánto cuesta calefaccionar tu ambiente con cada uno.</span>
                 </span>
               </span>
               <span className="inline-flex items-center gap-1.5 text-sm text-white/90 group-hover:text-sun">
@@ -189,7 +189,8 @@ export default async function Home() {
   );
 }
 
-const BAR_COLORS = ['#00a651', '#4cb847', '#bfd730', '#fff200', '#fdb913', '#f37021', '#ed1c24'];
+// como en LabelBadge: letra oscura salvo en el rojo, algo más oscuro que el de la etiqueta para que se lea el blanco
+const BAR_COLORS = ['#00a651', '#4cb847', '#bfd730', '#fff200', '#fdb913', '#f37021', '#d0161e'];
 
 function MiniLabel({ title, rows, mark }: { title: string; rows: string[]; mark: number }) {
   return (
@@ -199,7 +200,7 @@ function MiniLabel({ title, rows, mark }: { title: string; rows: string[]; mark:
         {rows.map((r, i) => (
           <li key={r} className="flex items-center gap-1">
             <span
-              className="flex h-4 items-center rounded-r-sm pl-1.5 text-[10px] font-bold text-white"
+              className={`flex h-4 items-center rounded-r-sm pl-1.5 text-[10px] font-bold ${i === BAR_COLORS.length - 1 ? 'text-white' : 'text-ink'}`}
               style={{ width: `${40 + i * 9}%`, background: BAR_COLORS[i], clipPath: 'polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%)' }}
             >
               {r}

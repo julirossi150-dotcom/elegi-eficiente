@@ -31,7 +31,7 @@ export default async function MetodologiaPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-3xl space-y-10 px-4 py-12 sm:px-6">
+      <main id="contenido" tabIndex={-1} className="mx-auto max-w-3xl space-y-10 px-4 py-12 sm:px-6">
         <header>
           <h1 className="text-3xl font-bold text-sun sm:text-4xl">Cómo calculamos</h1>
           <p className="mt-4 leading-relaxed text-muted">

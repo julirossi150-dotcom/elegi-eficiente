@@ -17,7 +17,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-AR" className={rubik.variable}>
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-screen">
+        <a href="#contenido" className="skip-link">
+          Saltar al contenido
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

@@ -29,7 +29,7 @@ export default async function DatosPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+      <main id="contenido" tabIndex={-1} className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
         <h1 className="text-3xl font-bold text-sun sm:text-4xl">Datos abiertos</h1>
         <p className="mt-4 max-w-2xl leading-relaxed text-muted">
           En Argentina no existe una base pública con los datos de las etiquetas de eficiencia. Armamos la nuestra todos los días a partir de las

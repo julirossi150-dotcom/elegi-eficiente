@@ -158,12 +158,12 @@ export default function Comparator({ category }: { category: CategoryId }) {
         {data && bestTco && cheapest && (
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-3xl bg-leaf p-5">
-              <p className="flex items-center gap-2 text-sm font-medium text-white/80">
+              <p className="flex items-center gap-2 text-sm font-medium text-white/90">
                 <Icon name="check" size={16} strokeWidth={2.4} /> Menor costo total a {scenario.years} años
               </p>
               <p className="mt-2 leading-snug font-semibold text-white">{bestTco.product.name}</p>
               <p className="tabular mt-2 text-2xl font-bold text-sun">{formatARS(bestTco.tco!)}</p>
-              <p className="tabular mt-1 text-sm text-white/75">
+              <p className="tabular mt-1 text-sm text-white/90">
                 {formatARS(bestTco.price!)} hoy + {formatARS(bestTco.tco! - bestTco.price!)} de energía
               </p>
             </div>

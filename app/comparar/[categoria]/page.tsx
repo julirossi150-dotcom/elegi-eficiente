@@ -30,7 +30,7 @@ export default async function CompararPage({ params }: Props) {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-4 pt-8 pb-24 sm:px-6">
+      <main id="contenido" tabIndex={-1} className="mx-auto max-w-6xl px-4 pt-8 pb-24 sm:px-6">
         <nav aria-label="Categorías" className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
           <ul className="flex gap-2">
             {CATEGORIES.map((x) => (
