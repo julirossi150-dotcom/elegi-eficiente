@@ -69,6 +69,46 @@ LAVARROPAS                                           Aplicable/s:               
     expect(r).toMatchObject({ category: 'lavarropas', cls: 'A+++', scale: 'anterior', specs: { kwhPerCycle: 0.31, waterLPerCycle: 69, capacityKg: 10 } });
     expect(r.groups).toEqual([{ brand: 'LONGVIE', models: ['L3W46DMB', 'L3W46DMBR'] }]);
   });
+  it('lee una DJC de IRAM en un párrafo', () => {
+    const r = parseDjc(`DECLARACIÓN JURADA DE CONFORMIDAD
+c. Información del producto:
+         iii. Produto, marca, modelo y caracteristicas: Congelador vertical, Whirlpool, WVU27D2 ; WVU27K2, 220 V ~
+         - 50 Hz - 1,2 A - R134a (120 g) - Clase climática T - Clase I; Volumen de almacenamiento de alimentos frescos:
+         0 L; Volumen de almacenamiento de alimentos congelados ( ): 231 L; Clase climática: T; Consumo de energía:
+         430 kWh/año; Índice de eficiencia energética: “E”; Nivel de ruido aéreo: 50 dB (A)
+d. Normas y evaluación de la conformidad
+         i. Reglamentos: Certificación Voluntaria Resolución SIC N° 438/2024 - Etiquetado de Eficiencia Energética
+e. Otros datos.
+https://qr.iram.org.ar/Certificacion?ID=abc
+`)!;
+    expect(r).toMatchObject({ category: 'heladeras', cls: 'E', scale: 'nueva', specs: { kwhPerYear: 430, totalVolumeL: 231, freezerVolumeL: 231 } });
+    expect(r.groups).toEqual([{ brand: 'WHIRLPOOL', models: ['WVU27D2', 'WVU27K2'] }]);
+  });
+  it('lee una DJC de IRAM en tabla aunque los valores queden corridos de renglón', () => {
+    // la marca del compresor ocupa dos renglones y empuja los valores uno abajo de sus títulos
+    const r = parseDjc(`DECLARACIÓN JURADA DE CONFORMIDAD
+c. Información del producto:
+Producto                                          REFRIGERADOR CON CONGELADOR LIBRE DE ESCARCHA
+Modelo                                            WRM56CB ; WRM56CK
+Marca                                             Whirlpool
+Caracteristicas                                   220 V~ - 50 Hz - 1,5 A - 132 W (Potencia de descongelamiento) -
+                                                  R600a (43 g) - Clase climática T - Clase I.
+Clase de Eficiencia energética                    Marca compresor: EMBRACO, modelo compresor: VEMX 9C
+Indice de eficiencia energética (IEE)             C
+Consumo de energía (kWh/año)                      41,7
+Volumen de alimentos frescos (litros)             370 kWh/año
+Volúmen de alimentos congelados (litros)          355 L
+Nivel de ruido aéreo:                             106 L
+Clasificación por estrellas del compartimento de  45 dB (A)
+d. Normas y evaluación de la conformidad
+         i. Reglamentos: Certificación Voluntaria: Resolución SIC Nº 438/2024
+e. Otros datos.
+https://qr.iram.org.ar/Certificacion?ID=abc
+`)!;
+    expect(r).toMatchObject({ category: 'heladeras', cls: 'C', scale: 'nueva', specs: { kwhPerYear: 370, totalVolumeL: 461, freezerVolumeL: 106 } });
+    // marca y modelos los pone el listado de IRAM
+    expect(r.groups).toEqual([]);
+  });
 });
 
 describe('consumo de etiqueta ENARGAS', () => {

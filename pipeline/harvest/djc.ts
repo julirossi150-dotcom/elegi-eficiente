@@ -14,6 +14,100 @@ export interface DjcRecord {
 }
 
 /**
+ * DJC generada por IRAM (qr.iram.org.ar): todo en un párrafo, "Producto, Marca, modelo y características: Lavarropas,
+ * Whirlpool, WWN10AB, 220 V~ …; Índice de Eficiencia Energética: "D"; Consumo de energía: 0,75 kWh; …".
+ */
+function parseDjcIram(t: string, category: CategoryId): DjcRecord | null {
+  const block = t.match(/(?:produc?to, )?marca, modelo y caracter.?.?sticas:\s*([\s\S]*?)\n\s*d\.\s*normas/)?.[1];
+  if (!block) return null;
+  const flat = block.replace(/\s+/g, ' ');
+  const parts = flat.split(/,\s*/);
+  const brand = parts[1]?.trim().toUpperCase();
+  // los modelos siguen a la marca, separados por ";" (o por comas) hasta las características eléctricas
+  const models: string[] = [];
+  for (const p of parts.slice(2)) {
+    const codes = p.split(';').map((x) => x.trim().toUpperCase());
+    if (!codes.every((c) => /^[A-Z0-9][A-Z0-9.-]{2,}$/.test(c) && /\d/.test(c) && /[A-Z]/.test(c))) break;
+    models.push(...codes);
+  }
+  // sin la coma entre producto y marca no se pueden separar: los da el listado de IRAM
+  const groups = brand && models.length ? [{ brand, models }] : [];
+
+  const cls = flat.match(/(?:indice|clase) de eficiencia energetica:\s*["“”']?\s*([a-g]\+{0,3})/)?.[1]?.toUpperCase();
+  const specs: Specs = {};
+  switch (category) {
+    case 'heladeras': {
+      const kwh = field(flat, /consumo de energia:\s*([\d.,]+)\s*kwh/);
+      // "alimentos congelados ( ): 231 L"
+      const fresh = field(flat, /alimentos frescos[^:;]*:\s*([\d.,]+)/);
+      const frozen = field(flat, /alimentos congelados[^:;]*:\s*([\d.,]+)/);
+      if (kwh && kwh > 30 && kwh < 2000) specs.kwhPerYear = kwh;
+      if (fresh !== undefined || frozen !== undefined) specs.totalVolumeL = (fresh ?? 0) + (frozen ?? 0);
+      if (frozen) specs.freezerVolumeL = frozen;
+      break;
+    }
+    case 'lavarropas': {
+      const kwh = field(flat, /consumo de energia:\s*([\d.,]+)\s*kwh/);
+      const water = field(flat, /consumo de agua:\s*([\d.,]+)/);
+      const kg = field(flat, /capacidad[^:;]*:\s*([\d.,]+)\s*kg/);
+      if (kwh && kwh > 0.05 && kwh < 5) specs.kwhPerCycle = kwh;
+      if (water && water > 10 && water < 300) specs.waterLPerCycle = water;
+      if (kg && kg > 2 && kg < 30) specs.capacityKg = kg;
+      break;
+    }
+    default:
+      return null;
+  }
+  if (!cls && !Object.keys(specs).length) return null;
+  const scale: LabelScale = cls?.includes('+') ? 'anterior' : /438\/2024/.test(t) ? 'nueva' : 'desconocida';
+  return { category, groups, cls, scale, specs };
+}
+
+/**
+ * DJC de IRAM en tabla de dos columnas ("Consumo de energía (kWh/año)    385 kWh/año"). Cuando un título ocupa dos
+ * renglones los valores quedan corridos respecto de sus títulos, pero no cambian de orden: se leen por unidad y orden
+ * (clase, consumo, volumen de frescos, volumen de congelados). La marca y los modelos los da el listado de IRAM.
+ */
+function parseDjcIramTable(t: string, category: CategoryId): DjcRecord | null {
+  const section = t.match(/\n\s*caracter.?.?sticas\s{2,}([\s\S]*?)(?:\n\s*d\.\s*normas|$)/)?.[1];
+  if (!section) return null;
+  // columna de valores: lo que queda después del último hueco de 2+ espacios en cada renglón
+  const values = section.split('\n').map((l) => l.trim().split(/\s{2,}/).pop()!.trim());
+  const cls = values.find((v) => /^[a-g]\+{0,3}$/.test(v))?.toUpperCase();
+  const specs: Specs = {};
+  switch (category) {
+    case 'heladeras': {
+      const kwhAt = values.findIndex((v) => /^\d[\d.,]*\s*kwh\/ano$/.test(v));
+      if (kwhAt < 0) return null;
+      const kwh = toNumber(values[kwhAt]);
+      const liters = values.slice(kwhAt + 1).filter((v) => /^\d[\d.,]*\s*l$/.test(v))
+        .map(toNumber)
+        .filter((n): n is number => n !== undefined);
+      if (kwh && kwh > 30 && kwh < 2000) specs.kwhPerYear = kwh;
+      if (liters.length >= 2) {
+        specs.totalVolumeL = liters[0] + liters[1];
+        if (liters[1]) specs.freezerVolumeL = liters[1];
+      }
+      break;
+    }
+    case 'lavarropas': {
+      const kwh = field(section, /(\d[\d.,]*)\s*kwh\b(?!\s*\/)/);
+      const water = field(section, /consumo de agua[^\n]*?(\d[\d.,]*)\s*l\b/);
+      const kg = field(section, /(\d[\d.,]*)\s*kg\b/);
+      if (kwh && kwh > 0.05 && kwh < 5) specs.kwhPerCycle = kwh;
+      if (water && water > 10 && water < 300) specs.waterLPerCycle = water;
+      if (kg && kg > 2 && kg < 30) specs.capacityKg = kg;
+      break;
+    }
+    default:
+      return null;
+  }
+  if (!cls && !Object.keys(specs).length) return null;
+  const scale: LabelScale = cls?.includes('+') ? 'anterior' : /438\/2024/.test(t) ? 'nueva' : 'desconocida';
+  return { category, groups: [], cls, scale, specs };
+}
+
+/**
  * DJC en forma de tabla (Longvie): "Marca Comercial: LONGVIE", el modelo en la columna "Modelo" de la tabla de normas
  * y las características energéticas como "Clase Energética: A", "Consumo de energía: 0,31kWh", "Capacidad nominal: 10 Kg".
  */
@@ -92,6 +186,10 @@ export function parseDjc(raw: string): DjcRecord | null {
 
   const modelLine = t.match(/modelo(?:s)?:\s*([\s\S]*?)\n\s*(?:caracteristicas|fabricante|origen|marca)/)?.[1] ?? t.match(/codigo de identificacion unico del producto:?\s*([\s\S]*?)\n\s*marca/)?.[1];
   const brandLine = t.match(/\bmarca(?:s)?:\s*([^\n]*)/)?.[1] ?? '';
+  if (/(?:produc?to, )?marca, modelo y caracter.?.?sticas/.test(t)) return parseDjcIram(t, category);
+  // la tabla necesita los espacios originales para separar las columnas
+  const columns = normalizeText(raw).replace(/\r/g, '');
+  if (/qr\.iram\.org\.ar/.test(t) && /\n[ \t]*modelo[ \t]{2,}/.test(columns)) return parseDjcIramTable(columns, category);
   if (!modelLine) return parseDjcTable(raw, t, category);
   const modelGroups = numbered(modelLine.replace(/\n/g, ' '));
   const brandGroups = numbered(brandLine);

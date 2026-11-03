@@ -1,0 +1,1054 @@
+[
+ {
+  "category": "heladeras",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "EVU22D1*"
+  ],
+  "specs": {
+   "kwhPerYear": 322,
+   "totalVolumeL": 142,
+   "freezerVolumeL": 142
+  },
+  "label": {
+   "cls": "E",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/UBEmSFBE7VzkrBEkbnWdA3ct8P728FqjiTS04SVamIAzj8OJb7c3XHzG2wlubSMO",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM45AB*",
+   "WRM45AK*",
+   "WRM45BB*",
+   "WRM45BK*"
+  ],
+  "specs": {
+   "kwhPerYear": 426,
+   "totalVolumeL": 375,
+   "freezerVolumeL": 86
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/8Bv-tXoiDH3Ep8gyYmNvEJkUySC3FQ6wYnZDVQW_VCxmOdEDE0kgL0jQW9TZY_5P",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM39CB*",
+   "WRM39CK*"
+  ],
+  "specs": {
+   "kwhPerYear": 397,
+   "totalVolumeL": 340,
+   "freezerVolumeL": 72
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/GW-c7O57VFG8OB5ErYvASOO2oMMg9QykwLriZEWmuI6ZmrXfywfH_KuE5azbO2ls",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WHB42D2*"
+  ],
+  "specs": {
+   "kwhPerYear": 592,
+   "totalVolumeL": 414,
+   "freezerVolumeL": 414
+  },
+  "label": {
+   "cls": "E",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/T4aBAOm1R33Z-Chw0Z9p4QT2uD2iOraOqSNiGqPuYosQRJZ3d6YPFB10ntJsrG8X",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WVU27D2*",
+   "WVU27K2*"
+  ],
+  "specs": {
+   "kwhPerYear": 430,
+   "totalVolumeL": 231,
+   "freezerVolumeL": 231
+  },
+  "label": {
+   "cls": "E",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/4eejjXOkBe7HcqtRfvCdBPafjBgadEmVJWE8o9Rc_sAp_8UhaOGv5VZoKrUtO4gM",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM42HB*",
+   "WRM42HK*"
+  ],
+  "specs": {
+   "kwhPerYear": 440,
+   "totalVolumeL": 386,
+   "freezerVolumeL": 96
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/IzyujlWtB0W0f0cAAYAmVT6-fW6kxhi4fSJeQ9RKLR5QVZ3kDu73FF8UfgAb6IQb",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM53JB*",
+   "WRM53JK*"
+  ],
+  "specs": {
+   "kwhPerYear": 470,
+   "totalVolumeL": 451,
+   "freezerVolumeL": 98
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/D4WFGWL5W8S9eBiHMeJVU0rYJGDfmnmIYY5iAE0J6ADRW-lpntshe8EGg0negAOd",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRE25ABDIM*"
+  ],
+  "specs": {
+   "kwhPerYear": 260,
+   "totalVolumeL": 244,
+   "freezerVolumeL": 66
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/ltBsM9AR8ETm9vKqJfRyPDziW1xh2PfQmvzMIWA_d-uBtHjc4qa6RAr7A7ykKHkT",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRE57CE*",
+   "WRE57CK*"
+  ],
+  "specs": {
+   "kwhPerYear": 383,
+   "totalVolumeL": 447,
+   "freezerVolumeL": 136
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/1AstIsvXHdXPyPtFTmbSGlJ-kmv1-oPGfLSwvR49vrV2cnXkQgwm083PejvxR9fr",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM56CB*",
+   "WRM56CK*"
+  ],
+  "specs": {
+   "kwhPerYear": 370,
+   "totalVolumeL": 461,
+   "freezerVolumeL": 106
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/kb4vmc1WApCO17CujYUHVsBx0rk1aTdIpTXjOcnAU9p5DqSS28qA2ZN8_xQZFJEm",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "ERD36HB*"
+  ],
+  "specs": {
+   "kwhPerYear": 521,
+   "totalVolumeL": 334,
+   "freezerVolumeL": 76
+  },
+  "label": {
+   "cls": "E",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/EjJjrkRsosgUOXYdJdUty0lS1qAcUXK-fnV96gue4YZJjMeq7ADxcFjFWotjJCZE",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "ERD36MB*"
+  ],
+  "specs": {
+   "kwhPerYear": 521,
+   "totalVolumeL": 334,
+   "freezerVolumeL": 76
+  },
+  "label": {
+   "cls": "E",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/vw_R0Zn6QlTXwrbdp6oZeex13pCE4Iu_NKoCtCw36xR8YSg_Qt1-jPFmpHpIYSy_",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WVU26MB*",
+   "WVU26MK*"
+  ],
+  "specs": {
+   "kwhPerYear": 347,
+   "totalVolumeL": 231,
+   "freezerVolumeL": 231
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/mmoTmunQ_ODQUpwF5kjvR5dxbqsI2fdj-46H8D6uYvJGFK9IwLKiMKoT2uFBtLOn",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM40MB*",
+   "WRM40MK*"
+  ],
+  "specs": {
+   "kwhPerYear": 303,
+   "totalVolumeL": 340,
+   "freezerVolumeL": 72
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/k6IaqgJKMfJ_qBeJ3rZfaZL_UWVLrnPFNutM6Vqfv4iZWMOtIFgNM5jJxEtkGUkV",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "EVU20MB*"
+  ],
+  "specs": {
+   "kwhPerYear": 382,
+   "totalVolumeL": 142,
+   "freezerVolumeL": 142
+  },
+  "label": {
+   "cls": "E",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/5oZIcQ8iZPrM38zbd5GVX0AMm71qOb8lTX2xuFXyySYkSQvzVHCq2ZH-a6ByY_X5",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM53MB*",
+   "WRM53MK*"
+  ],
+  "specs": {
+   "kwhPerYear": 365,
+   "totalVolumeL": 454,
+   "freezerVolumeL": 100
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/WUWq5XbLXNHskny2kUgwZyJ62ahRmwoMVbWxyh5aFDZ8eloTzE7wFFxnS3vY16M3",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRO85MK*"
+  ],
+  "specs": {
+   "kwhPerYear": 449,
+   "totalVolumeL": 555,
+   "freezerVolumeL": 177
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/6pZ8EPgzbAugC7VL9GZ_2T-rtSbEn_h9Cl3ii1eVd5TtMpCUbSmuAh4OxcX79fqa",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WHB42MB*"
+  ],
+  "specs": {
+   "kwhPerYear": 434
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/3lsJh_-JMTLNjMyHzvk8xT12Nej6cvfffv4tVBmuFxQ5oKCNiOTkeQRaw-STxVpb",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM46MK*"
+  ],
+  "specs": {
+   "kwhPerYear": 344,
+   "totalVolumeL": 413,
+   "freezerVolumeL": 93
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/jT2Yg_K2KhQEJnqxyrATvMUIOkr3CcOcROFDx73gbESN4w_bYHxAk65OHznoLquk",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM25AK*",
+   "WRJ25AK*"
+  ],
+  "specs": {
+   "kwhPerYear": 253,
+   "totalVolumeL": 243,
+   "freezerVolumeL": 51
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/4pHRxgg8oCzTUA1NzfinLLjBDG87LqiHmhFo9XvGI_NFg6Utb6s-oWgZKyXbY1u3",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "ERC04AK*",
+   "ERC04AE*"
+  ],
+  "specs": {
+   "kwhPerYear": 85,
+   "totalVolumeL": 47
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/vwnqPw-8PJJ4Gq_j7hY_h5Cvpx7EH81FNLSebMjLinODd8p4kaWeAdIEVRPCCLq6",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRO88AB*",
+   "WRO88AK*",
+   "WRO88AE*"
+  ],
+  "specs": {
+   "kwhPerYear": 485,
+   "totalVolumeL": 610,
+   "freezerVolumeL": 201
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/febt_zwQE-LeIyuNHZhsvVjsQm0hdgbxx9CAuUE4hYlPi5j_PKHzY6nGMtF8K8YY",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM41MB*",
+   "WRM41MK*"
+  ],
+  "specs": {
+   "kwhPerYear": 303,
+   "totalVolumeL": 340,
+   "freezerVolumeL": 72
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/aXSRnXrKCeXYMM6-q1XC8ufnOibGANEMlVY5yTe--jzf4JXsoc1hLIhBH1x0M8zL",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WCS60ZB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.59,
+   "waterLPerCycle": 46,
+   "capacityKg": 6
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/WC9GCoJcaHGFaear52082rFd-smvTc9yjJaO-fmG0ulvTbut_1hgBbD8ID0SPB2l",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "EWH07AB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.68,
+   "waterLPerCycle": 140,
+   "capacityKg": 7
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/oXeLlroYrTAYCZpJaRpO_NCZ0wcIOKMD9IUTaZJbwe4jdqaiKQGJOvt5xi29Uxya",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "EWH09AB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.89,
+   "waterLPerCycle": 190,
+   "capacityKg": 9
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/ODJBhfiB3uIYFhOnmJdGIBxGuWvV9YSk6fpqC_xLpKgrXjQ_gJ2ADh5LG8UJtNSw",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WWH07AB*",
+   "WWH07BB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.75,
+   "waterLPerCycle": 155,
+   "capacityKg": 7.5
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/C7KL2SihUUccN-qtnJiBskW9jeDJ9832nNz6rf1BWsxRsIqaBWoow7PBs2PiHfiI",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WWH10AT*"
+  ],
+  "specs": {
+   "kwhPerCycle": 1,
+   "waterLPerCycle": 183,
+   "capacityKg": 10
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/8W_H6XvfSTANbNjZY7yJ4NMJHh0dBHAWnGFG47z7n1AJa-Nb9jvqr61ADr14dfPe",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "EWH07BB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.68,
+   "waterLPerCycle": 140,
+   "capacityKg": 7
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/y8Ocx143SfF-wB8yVH4DAkHUz747fQidfZPpzubxynwHWRl94HOipk7_rQyV_Mzc",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WW09HBB*",
+   "WW09HTB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.75,
+   "waterLPerCycle": 160,
+   "capacityKg": 9
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/V9CCq_1FflFrVd6vGuoclT2ry6hO56DXiW3SkEM56H8RlhkkRkLTlqLu4x-FlEsK",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WW10HBB*",
+   "WW10HTB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.88,
+   "waterLPerCycle": 177,
+   "capacityKg": 10
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/977NMKZNxLmQNeF2y6yNgWv_5Vw9mhKwY-6ycLZ3UzTC8cIk5CPRtodGI2hZrm0g",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WW11BTA*",
+   "WW11BLA*"
+  ],
+  "specs": {
+   "kwhPerCycle": 1.1,
+   "waterLPerCycle": 195,
+   "capacityKg": 11
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/NkT7nUPU9runAX_dOo34vc1dp15AkM2eIq_GhMabY3AEfRULfHE_9-V5elgzmMgZ",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WWN10AB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.75,
+   "waterLPerCycle": 170,
+   "capacityKg": 9
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/j7StfTu5_PFjtm4T0Dg6_Wbnk00cnpO0poDAyvwNGaX__vKggTi4cWgCgKc05JYY",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "EWN09AB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.89,
+   "waterLPerCycle": 190,
+   "capacityKg": 9
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/WcF_-NcRyDsZ4U-MAnFlc3dasMSJ0VXoRt1YESJ_flwzV3WFWKI-fEw9X7zCio6s",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Eslabón De Lujo",
+  "models": [
+   "EWH06AB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.56,
+   "waterLPerCycle": 145,
+   "capacityKg": 6
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/_z1Ig5OxTHv1l5F_aDkSKUqNLVy1Yl4oRaJ-s1c2hVCR_aThCpW2QrgJnI00L3I7",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WNQ80BB*",
+   "WNQ80BS*",
+   "WNQ80BF*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.22,
+   "waterLPerCycle": 64,
+   "capacityKg": 8
+  },
+  "label": {
+   "cls": "A",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/SUHGjcdsN-45a3p5vNKy38oL3JA6D-J0BUTx1DwZn3JiWqKst_O-xjQa5dfw1HJ5",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WNQ90AB*",
+   "WNQ90AS*",
+   "WNQ90AF*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.35,
+   "waterLPerCycle": 64,
+   "capacityKg": 9
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/5vSl-i0VwR7gCrZq9Cb8HIQuqDX59gnFGvzTVtFrguU_4OauPmNCTLswSVniUQJd",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WNQ95AB*",
+   "WNQ95AS*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.37,
+   "waterLPerCycle": 64,
+   "capacityKg": 9.5
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/4x_JWAhtq7W7IGLClI3J8XPI5lB2tVlyiWUJKCJwlDNaqDuwKUxd-yVeDZhx_CoS",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRS955FWMS*"
+  ],
+  "specs": {
+   "kwhPerYear": 324,
+   "totalVolumeL": 518,
+   "freezerVolumeL": 177
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/Ey8HrOmGn8Xfnxap2MRgV6vO9V8HwRAAJVRvyw0Nf-3B5o_zg8wxUzSDM_703L6R",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WHA22D2*"
+  ],
+  "specs": {
+   "kwhPerYear": 415,
+   "totalVolumeL": 220,
+   "freezerVolumeL": 220
+  },
+  "label": {
+   "cls": "E",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/aqjKEMXbS_qx7SLd1UUV_D8LnKox1Fdb7Q5jidZ-AuTFCd86vc8zg1SC3RPTJEl1",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRE44BB*",
+   "WRE44BK*"
+  ],
+  "specs": {
+   "kwhPerYear": 325,
+   "totalVolumeL": 397,
+   "freezerVolumeL": 112
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/0fD9BYB82_mR8KJX545cdj8rX_kKSqk8tvr5jH50NZrw94EXvHV3dQe647-lADTc",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRO85AK*",
+   "WRO85BK*"
+  ],
+  "specs": {
+   "kwhPerYear": 440,
+   "totalVolumeL": 386,
+   "freezerVolumeL": 96
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/qQXJ8s-PjP2GOyaEBSkHx1UdKL1-ETDweC5JU5ayk-SkO19wLYgSPqLqeg_fgFOA",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRA09B3*",
+   "WRA09R3*",
+   "WRA09B4*",
+   "WRA09R4*",
+   "WRA09Y3*",
+   "WRA09HN*",
+   "WRA09HV*",
+   "WRA09HE*",
+   "WRA09HB*",
+   "WRA09HG*"
+  ],
+  "specs": {
+   "kwhPerYear": 137,
+   "totalVolumeL": 76,
+   "freezerVolumeL": 8
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/sCS9bOnkPmXweYtFBEGul_w6BLnkx3Exb9HLYPeFRPYLAFwReMkyb8CU7-bbLWJI",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM42MB*",
+   "WRM42MK*"
+  ],
+  "specs": {
+   "kwhPerYear": 336
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/NekMARATNqpc_t2cPAiyz-DofZoqKgHIdV9LbW2LG2O8rRmkNPaa7ia1zvdmCnMm",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRM62AB*",
+   "WRM62AK*",
+   "WRM62AE*"
+  ],
+  "specs": {
+   "kwhPerYear": 317,
+   "totalVolumeL": 507,
+   "freezerVolumeL": 132
+  },
+  "label": {
+   "cls": "B",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/skiEwft2GcEJmpWSyf7UIdMs3OeCgLPnqdMWAk7uOVICjQIbnvhSQ4i9sEfKeY3c",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRE66AB*",
+   "WRE66AK*"
+  ],
+  "specs": {
+   "kwhPerYear": 395,
+   "totalVolumeL": 496,
+   "freezerVolumeL": 171
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/qnxdygT368dxrFjdD85jM5U7_amr6deLrCL6czoU5xgAiYbup4iZboZNrYpJfMDe",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRE68AB*",
+   "WRE68AE*"
+  ],
+  "specs": {
+   "kwhPerYear": 385,
+   "totalVolumeL": 472,
+   "freezerVolumeL": 171
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/NaI0jv5o5gI0cnm5u3mKK6lyw4K9PTguNDg88jCxCcJPbvKHiL1ovhPyjnUnQ1zc",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WNQ07AB*",
+   "WNQ07AS*",
+   "WNQ07AT*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.23,
+   "waterLPerCycle": 62,
+   "capacityKg": 7
+  },
+  "label": {
+   "cls": "A",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/OVQpM606J0ISPBIulU3-KINBqOnLgxCdJH89tZYkU2ABJhuO8YeSUJ_2cGRELPN2",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Eslabon De Lujo",
+  "models": [
+   "ENQ06AB*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.2,
+   "waterLPerCycle": 62,
+   "capacityKg": 6
+  },
+  "label": {
+   "cls": "A",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/CEIiLLhVTV0t8qpbN1JzUN7eXR-osvY_-vwJc6r7r4uG4mBfVcbBsz2Uz0EzMhdD",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WNQ11AS*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.34,
+   "waterLPerCycle": 52,
+   "capacityKg": 11
+  },
+  "label": {
+   "cls": "A",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/Xh0uJiCEwLPTvliLn6YAn8m_e1edOSNNOmoPQ_fNCfKAr0ZA_WWRlkzIeoEf1W-v",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRA12MB*",
+   "WRA12MK*"
+  ],
+  "specs": {
+   "kwhPerYear": 155,
+   "totalVolumeL": 116,
+   "freezerVolumeL": 8
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/F-qLXuK1tzNbeyFn62v63y00sEPfd12sQ9N9fnz3EesweEGzPbfCVuqmZP-LN5ts",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "heladeras",
+  "brand": "Whirlpool",
+  "models": [
+   "WRA08MB*",
+   "WRA08ME*",
+   "WRA08MG*",
+   "WRA08MN*",
+   "WRA08MV*"
+  ],
+  "specs": {
+   "kwhPerYear": 138,
+   "totalVolumeL": 76,
+   "freezerVolumeL": 8
+  },
+  "label": {
+   "cls": "D",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/TDjBR1goncfl0QLaN_KYoZfZ1LB1xKXkIHWcixdwm6Qu6sqE49Gr6AOWngl2lXiu",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ },
+ {
+  "category": "lavarropas",
+  "brand": "Whirlpool",
+  "models": [
+   "WWI06AS*",
+   "WWI06AW*"
+  ],
+  "specs": {
+   "kwhPerCycle": 0.41,
+   "waterLPerCycle": 122,
+   "capacityKg": 6.5
+  },
+  "label": {
+   "cls": "C",
+   "scale": "nueva"
+  },
+  "origin": "fabricante",
+  "source": "https://qr.iram.org.ar/Certificacion/Index/pF_Dqhddo7f14ze5evSMGsbuGCo3XQ59qq2NN0XE6NfCGAZTUQ2zb5XX98R-brsG",
+  "note": "Declaración Jurada de Conformidad (Res. SIC 438/2024) publicada por el fabricante"
+ }
+]

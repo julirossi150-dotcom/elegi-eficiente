@@ -23,7 +23,13 @@ Tiendas (catálogos VTEX públicos) ──► pipeline/ (todos los días) ──
 - **Datos de fabricante** (pisan a los de las tiendas y quedan marcados como "fabricante"):
   - Tiendas oficiales VTEX (Whirlpool, Electrolux/Gafa, BGH), que se leen todos los días junto con las demás tiendas.
   - `pipeline/manual/<categoria>.json`: cargas a mano desde etiquetas, fichas y manuales, con su fuente. Coinciden por EAN, por código de modelo (con `*` como comodín) o por una regex sobre el nombre.
-  - `pipeline/manual/fabricantes/*.json`: los genera `npx tsx pipeline/harvest/run.ts`, que baja las Declaraciones Juradas de Conformidad (Res. 438/2024) de los sitios de fabricantes (hoy Drean, que incluye Patrick, Mabe y Top House) y las lee con `pdftotext`. No corre a diario: conviene repetirlo cada uno o dos meses.
+  - `pipeline/manual/fabricantes/*.json`: los genera `npx tsx pipeline/harvest/run.ts`, que baja las Declaraciones Juradas de Conformidad (Res. 438/2024) y las lee con `pdftotext`. Fuentes: Drean (incluye Patrick, Mabe y Top House), Longvie e IRAM. No corre a diario: conviene repetirlo cada uno o dos meses.
+  - **IRAM** (`qr.iram.org.ar`): el QR de las etiquetas certificadas por IRAM abre la página de la empresa con todos sus modelos y la DJC de cada uno. IRAM no publica un listado de empresas, así que alcanza con escanear **una etiqueta de cada marca** y sumar el link a `pipeline/harvest/iram-empresas.json`:
+    1. Escanear con el celular el QR de la etiqueta de eficiencia de cualquier producto de la marca (en un local o en la foto de la etiqueta en una tienda online).
+    2. Si abre `https://qr.iram.org.ar/Certificacion/Empresa?ID=…`, copiar ese link completo. Si abre otro sitio (por ejemplo `certificaciones.bgh.com.ar`), la marca certifica con otro organismo y hace falta otro lector.
+    3. Agregar `{ "empresa": "…", "url": "…", "origen": "de qué etiqueta salió" }` a `iram-empresas.json` y correr `npx tsx pipeline/harvest/run.ts iram`.
+
+    Hoy está Whirlpool (incluye Eslabón de Lujo).
 - `lib/cost/` es el modelo de costos, compartido entre el pipeline y la web.
 - `pipeline/tariffs.ts` baja las tarifas de referencia oficiales (`public/data/tarifas.json`): luz del cuadro tarifario mensual de
   Edenor y Edesur (ente regulador nacional) y gas natural de la planilla de tarifas vigentes de ENARGAS, por distribuidora y zona.

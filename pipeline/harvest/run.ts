@@ -19,6 +19,10 @@ interface PdfRef {
   url: string;
   /** página pública del producto (el link al PDF puede llevar un token que vence) */
   page: string;
+  /** qué identifica al documento (para el caché): por defecto el URL sin la consulta, que en algunos sitios es un token que vence */
+  key?: string;
+  /** marca y modelos tal como los lista el sitio, cuando son más confiables que el texto del PDF */
+  groups?: { brand: string; models: string[] }[];
 }
 
 interface Source {
@@ -28,7 +32,60 @@ interface Source {
   find(models: string[], log: (m: string) => void): AsyncGenerator<PdfRef>;
 }
 
+/** Empresas certificadas por IRAM: el link sale del QR de una etiqueta suya (ver README). */
+interface IramCompany {
+  empresa: string;
+  url: string;
+  /** de qué etiqueta se sacó el QR */
+  origen: string;
+}
+
+const IRAM_COMPANIES = path.join(process.cwd(), 'pipeline', 'harvest', 'iram-empresas.json');
+const IRAM_PRODUCTS = /refrigerador|congelador|lavarropas|acondicionador|termotanque|calentador de agua/i;
+
+function htmlDecode(s: string): string {
+  return s
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&');
+}
+
 const SOURCES: Source[] = [
+  {
+    id: 'iram',
+    brands: [],
+    // qr.iram.org.ar: el QR de la etiqueta abre la página de la empresa con todos sus certificados; cada certificado
+    // de eficiencia enlaza la DJC ("Ver DDJJ del titular"). No hay listado de empresas: se cargan en iram-empresas.json.
+    async *find(_models, log) {
+      const companies = JSON.parse(await readFile(IRAM_COMPANIES, 'utf8')) as IramCompany[];
+      for (const c of companies) {
+        const html = (await politeFetchBytes(c.url))?.toString('utf8') ?? '';
+        const certs = [...html.matchAll(/<div class="cert-item[\s\S]*?<\/div>/g)].map((m) => m[0]);
+        const wanted = certs.filter((h) => /data-ddjj="1"/.test(h) && /data-tramite="[^"]*Eficiencia/i.test(htmlDecode(h)) && IRAM_PRODUCTS.test(htmlDecode(h.match(/data-producto="([^"]*)"/)?.[1] ?? '')));
+        log(`  iram ${c.empresa}: ${certs.length} certificados, ${wanted.length} de eficiencia con DJC`);
+        for (const h of wanted) {
+          const href = h.match(/href="(\/Certificacion\/Index\/[^"]+)"/)?.[1];
+          if (!href) continue;
+          const page = `https://qr.iram.org.ar${href}`;
+          const ddjj = (await politeFetchBytes(page))?.toString('utf8').match(/href="(\/Certificacion\/DDJJ\?id=[^"]+)"/)?.[1];
+          if (!ddjj) {
+            log(`  iram ${page}: sin DDJJ`);
+            continue;
+          }
+          // el listado trae marca y modelos bien escritos; algunos PDF tienen los acentos rotos ("Eslab�n")
+          const brand = htmlDecode(h.match(/data-marca="([^"]*)"/)?.[1] ?? '').trim();
+          const models = htmlDecode(h.match(/data-modelo="([^"]*)"/)?.[1] ?? '')
+            .split(/\s*[;,]\s*/)
+            .map((m) => m.trim().toUpperCase().replace(/\s+/g, ''))
+            .filter((m) => /\d/.test(m));
+          // el id de la DJC va en la consulta
+          const url = `https://qr.iram.org.ar${htmlDecode(ddjj)}`;
+          yield { url, page, key: url, ...(brand && models.length ? { groups: [{ brand, models }] } : {}) };
+        }
+      }
+    },
+  },
   {
     id: 'drean',
     brands: ['Drean', 'Patrick'],
@@ -68,9 +125,9 @@ const SOURCES: Source[] = [
   },
 ];
 
-async function pdfText(url: string): Promise<string | null> {
+async function pdfText(url: string, key: string): Promise<string | null> {
   await mkdir(PDF_CACHE, { recursive: true });
-  const file = path.join(PDF_CACHE, `${createHash('sha1').update(url.split('?')[0]).digest('hex')}.pdf`);
+  const file = path.join(PDF_CACHE, `${createHash('sha1').update(key).digest('hex')}.pdf`);
   if (!existsSync(file)) {
     const buf = await politeFetchBytes(url);
     if (!buf || !buf.subarray(0, 5).toString().startsWith('%PDF')) return null;
@@ -104,16 +161,16 @@ async function harvest(src: Source, log: (m: string) => void) {
   const entries: (ManualEntry & { category: string })[] = [];
   const seen = new Set<string>();
   for await (const ref of src.find(models, log)) {
-    const key = ref.url.split('?')[0];
+    const key = ref.key ?? ref.url.split('?')[0];
     if (seen.has(key)) continue;
     seen.add(key);
-    const text = await pdfText(ref.url);
+    const text = await pdfText(ref.url, key);
     const rec = text ? parseDjc(text) : null;
     if (!rec) {
       log(`  ${src.id}: no se pudo leer ${key}`);
       continue;
     }
-    for (const g of rec.groups) {
+    for (const g of ref.groups ?? rec.groups) {
       entries.push({
         category: rec.category,
         brand: normalizeBrand(g.brand),

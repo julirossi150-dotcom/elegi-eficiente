@@ -50,7 +50,12 @@ function matches(e: ManualEntry, p: Product): boolean {
   if (e.match && new RegExp(e.match).test(normalizeText(p.name))) return true;
   if (!p.model || !e.models) return false;
   const pk = modelKey(p.model);
-  return e.models.some((m) => (m.endsWith('*') ? pk.startsWith(modelKey(m.slice(0, -1))) : modelKey(m) === pk));
+  return e.models.some((m) => {
+    if (!m.endsWith('*')) return modelKey(m) === pk;
+    const mk = modelKey(m.slice(0, -1));
+    // la tienda puede agregar el sufijo de versión (…TG0) o sacarlo: WRE25AB en la tienda, WRE25ABDIM en la DJC
+    return pk.startsWith(mk) || (pk.length >= 6 && mk.startsWith(pk) && /^[A-Z]{1,3}$/.test(mk.slice(pk.length)));
+  });
 }
 
 export function applyManual(products: Product[], category: CategoryId): number {
