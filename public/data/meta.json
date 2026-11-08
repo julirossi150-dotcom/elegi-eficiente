@@ -1,24 +1,24 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T10:51:47.719Z",
+  "generatedAt": "2026-11-08T10:50:12.916Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 304,
-      "withConsumption": 245,
-      "withPrice": 304
+      "count": 301,
+      "withConsumption": 242,
+      "withPrice": 301
     },
     {
       "id": "aires",
-      "count": 205,
-      "withConsumption": 151,
-      "withPrice": 205
+      "count": 203,
+      "withConsumption": 149,
+      "withPrice": 203
     },
     {
       "id": "lavarropas",
-      "count": 155,
-      "withConsumption": 127,
-      "withPrice": 155
+      "count": 153,
+      "withConsumption": 125,
+      "withPrice": 153
     },
     {
       "id": "calefones",
@@ -28,9 +28,9 @@
     },
     {
       "id": "termotanques",
-      "count": 150,
-      "withConsumption": 150,
-      "withPrice": 150
+      "count": 151,
+      "withConsumption": 151,
+      "withPrice": 151
     },
     {
       "id": "calefactores",
@@ -45,28 +45,28 @@
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 567
+      "products": 566
     },
     {
       "id": "oncity",
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1073
+      "products": 1069
     },
     {
       "id": "naldo",
       "name": "Naldo",
       "url": "https://www.naldo.com.ar",
       "ok": true,
-      "products": 316
+      "products": 313
     },
     {
       "id": "carrefour",
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1367
+      "products": 1363
     },
     {
       "id": "jumbo",
@@ -94,7 +94,7 @@
       "name": "Bringeri",
       "url": "https://www.bringeri.com.ar",
       "ok": true,
-      "products": 217
+      "products": 216
     },
     {
       "id": "masonline",
