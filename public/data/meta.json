@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T11:03:11.759Z",
+  "generatedAt": "2026-11-10T11:01:01.665Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 300,
-      "withConsumption": 241,
-      "withPrice": 300
+      "count": 301,
+      "withConsumption": 243,
+      "withPrice": 301
     },
     {
       "id": "aires",
@@ -34,9 +34,9 @@
     },
     {
       "id": "calefactores",
-      "count": 498,
-      "withConsumption": 498,
-      "withPrice": 498
+      "count": 493,
+      "withConsumption": 493,
+      "withPrice": 493
     }
   ],
   "stores": [
@@ -45,28 +45,28 @@
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 564
+      "products": 561
     },
     {
       "id": "oncity",
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1067
+      "products": 1062
     },
     {
       "id": "naldo",
       "name": "Naldo",
       "url": "https://www.naldo.com.ar",
       "ok": true,
-      "products": 313
+      "products": 318
     },
     {
       "id": "carrefour",
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1361
+      "products": 1358
     },
     {
       "id": "jumbo",
@@ -80,7 +80,7 @@
       "name": "Easy",
       "url": "https://www.easy.com.ar",
       "ok": true,
-      "products": 204
+      "products": 203
     },
     {
       "id": "castillo",
@@ -94,14 +94,14 @@
       "name": "Bringeri",
       "url": "https://www.bringeri.com.ar",
       "ok": true,
-      "products": 215
+      "products": 214
     },
     {
       "id": "masonline",
       "name": "Más Online (Changomas)",
       "url": "https://www.masonline.com.ar",
       "ok": true,
-      "products": 110
+      "products": 107
     },
     {
       "id": "whirlpool",
