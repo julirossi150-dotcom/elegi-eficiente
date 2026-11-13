@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-12T11:03:24.618Z",
+  "generatedAt": "2026-11-13T11:04:08.566Z",
   "vat": 0.21,
   "electricity": {
-    "perKwh": 192.1,
-    "period": "10/2026",
-    "url": "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/937BAA27CA170F3503258E820069D790?opendocument"
+    "perKwh": 197.2,
+    "period": "11/2026",
+    "url": "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/0083D74210C6DE0303258EAD004257AD?opendocument"
   },
   "gas": {
     "since": "01/10/2026",
