@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-13T11:04:06.417Z",
+  "generatedAt": "2026-11-14T10:50:38.643Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 309,
-      "withConsumption": 245,
-      "withPrice": 309
+      "count": 307,
+      "withConsumption": 246,
+      "withPrice": 307
     },
     {
       "id": "aires",
-      "count": 196,
-      "withConsumption": 143,
-      "withPrice": 196
+      "count": 195,
+      "withConsumption": 142,
+      "withPrice": 195
     },
     {
       "id": "lavarropas",
@@ -34,9 +34,9 @@
     },
     {
       "id": "calefactores",
-      "count": 502,
-      "withConsumption": 502,
-      "withPrice": 502
+      "count": 496,
+      "withConsumption": 496,
+      "withPrice": 496
     }
   ],
   "stores": [
@@ -45,14 +45,14 @@
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 567
+      "products": 563
     },
     {
       "id": "oncity",
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1054
+      "products": 1051
     },
     {
       "id": "naldo",
@@ -66,7 +66,7 @@
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1366
+      "products": 1368
     },
     {
       "id": "jumbo",
@@ -80,21 +80,21 @@
       "name": "Easy",
       "url": "https://www.easy.com.ar",
       "ok": true,
-      "products": 203
+      "products": 204
     },
     {
       "id": "castillo",
       "name": "Castillo",
       "url": "https://www.castillo.com.ar",
       "ok": true,
-      "products": 275
+      "products": 274
     },
     {
       "id": "bringeri",
       "name": "Bringeri",
       "url": "https://www.bringeri.com.ar",
       "ok": true,
-      "products": 215
+      "products": 218
     },
     {
       "id": "masonline",
@@ -122,7 +122,7 @@
       "name": "BGH (oficial)",
       "url": "https://www.bgh.com.ar",
       "ok": true,
-      "products": 34
+      "products": 33
     },
     {
       "id": "liliana",
