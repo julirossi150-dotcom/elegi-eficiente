@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T10:53:12.525Z",
+  "generatedAt": "2026-11-16T11:48:04.249Z",
   "categories": [
     {
       "id": "heladeras",
       "count": 306,
-      "withConsumption": 242,
+      "withConsumption": 241,
       "withPrice": 306
     },
     {
@@ -16,9 +16,9 @@
     },
     {
       "id": "lavarropas",
-      "count": 148,
-      "withConsumption": 123,
-      "withPrice": 148
+      "count": 147,
+      "withConsumption": 122,
+      "withPrice": 147
     },
     {
       "id": "calefones",
@@ -34,9 +34,9 @@
     },
     {
       "id": "calefactores",
-      "count": 495,
-      "withConsumption": 495,
-      "withPrice": 495
+      "count": 499,
+      "withConsumption": 499,
+      "withPrice": 499
     }
   ],
   "stores": [
@@ -45,28 +45,28 @@
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 565
+      "products": 564
     },
     {
       "id": "oncity",
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1045
+      "products": 1041
     },
     {
       "id": "naldo",
       "name": "Naldo",
       "url": "https://www.naldo.com.ar",
       "ok": true,
-      "products": 318
+      "products": 314
     },
     {
       "id": "carrefour",
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1367
+      "products": 1361
     },
     {
       "id": "jumbo",
@@ -122,7 +122,7 @@
       "name": "BGH (oficial)",
       "url": "https://www.bgh.com.ar",
       "ok": true,
-      "products": 33
+      "products": 31
     },
     {
       "id": "liliana",
