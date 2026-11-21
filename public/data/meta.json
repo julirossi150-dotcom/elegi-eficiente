@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T18:43:56.623Z",
+  "generatedAt": "2026-11-21T17:46:40.279Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 311,
-      "withConsumption": 251,
-      "withPrice": 311
+      "count": 310,
+      "withConsumption": 252,
+      "withPrice": 310
     },
     {
       "id": "aires",
-      "count": 190,
-      "withConsumption": 137,
-      "withPrice": 190
+      "count": 192,
+      "withConsumption": 138,
+      "withPrice": 192
     },
     {
       "id": "lavarropas",
-      "count": 141,
-      "withConsumption": 123,
-      "withPrice": 141
+      "count": 144,
+      "withConsumption": 125,
+      "withPrice": 144
     },
     {
       "id": "calefones",
-      "count": 26,
-      "withConsumption": 26,
-      "withPrice": 26
+      "count": 27,
+      "withConsumption": 27,
+      "withPrice": 27
     },
     {
       "id": "termotanques",
-      "count": 147,
-      "withConsumption": 147,
-      "withPrice": 147
+      "count": 146,
+      "withConsumption": 146,
+      "withPrice": 146
     },
     {
       "id": "calefactores",
-      "count": 499,
-      "withConsumption": 499,
-      "withPrice": 499
+      "count": 496,
+      "withConsumption": 496,
+      "withPrice": 496
     }
   ],
   "stores": [
@@ -45,28 +45,28 @@
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 565
+      "products": 567
     },
     {
       "id": "oncity",
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1021
+      "products": 1024
     },
     {
       "id": "naldo",
       "name": "Naldo",
       "url": "https://www.naldo.com.ar",
       "ok": true,
-      "products": 307
+      "products": 309
     },
     {
       "id": "carrefour",
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1349
+      "products": 1350
     },
     {
       "id": "jumbo",
@@ -94,7 +94,7 @@
       "name": "Bringeri",
       "url": "https://www.bringeri.com.ar",
       "ok": true,
-      "products": 212
+      "products": 210
     },
     {
       "id": "masonline",
