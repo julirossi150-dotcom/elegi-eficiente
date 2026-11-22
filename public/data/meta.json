@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T17:46:40.279Z",
+  "generatedAt": "2026-11-22T18:03:48.053Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 310,
-      "withConsumption": 252,
-      "withPrice": 310
+      "count": 308,
+      "withConsumption": 251,
+      "withPrice": 308
     },
     {
       "id": "aires",
@@ -16,9 +16,9 @@
     },
     {
       "id": "lavarropas",
-      "count": 144,
-      "withConsumption": 125,
-      "withPrice": 144
+      "count": 142,
+      "withConsumption": 123,
+      "withPrice": 142
     },
     {
       "id": "calefones",
@@ -52,7 +52,7 @@
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1024
+      "products": 1018
     },
     {
       "id": "naldo",
@@ -66,7 +66,7 @@
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1350
+      "products": 1348
     },
     {
       "id": "jumbo",
@@ -80,7 +80,7 @@
       "name": "Easy",
       "url": "https://www.easy.com.ar",
       "ok": true,
-      "products": 207
+      "products": 208
     },
     {
       "id": "castillo",
