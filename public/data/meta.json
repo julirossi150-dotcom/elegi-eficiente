@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-22T18:03:48.053Z",
+  "generatedAt": "2026-11-23T22:03:15.151Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 308,
-      "withConsumption": 251,
-      "withPrice": 308
+      "count": 309,
+      "withConsumption": 252,
+      "withPrice": 309
     },
     {
       "id": "aires",
@@ -16,9 +16,9 @@
     },
     {
       "id": "lavarropas",
-      "count": 142,
+      "count": 141,
       "withConsumption": 123,
-      "withPrice": 142
+      "withPrice": 141
     },
     {
       "id": "calefones",
@@ -34,9 +34,9 @@
     },
     {
       "id": "calefactores",
-      "count": 496,
-      "withConsumption": 496,
-      "withPrice": 496
+      "count": 499,
+      "withConsumption": 499,
+      "withPrice": 499
     }
   ],
   "stores": [
@@ -45,7 +45,7 @@
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 567
+      "products": 565
     },
     {
       "id": "oncity",
@@ -59,14 +59,14 @@
       "name": "Naldo",
       "url": "https://www.naldo.com.ar",
       "ok": true,
-      "products": 309
+      "products": 308
     },
     {
       "id": "carrefour",
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1348
+      "products": 1347
     },
     {
       "id": "jumbo",
