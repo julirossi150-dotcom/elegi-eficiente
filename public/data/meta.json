@@ -1,24 +1,24 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-23T22:03:15.151Z",
+  "generatedAt": "2026-11-24T21:06:56.604Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 309,
-      "withConsumption": 252,
-      "withPrice": 309
+      "count": 305,
+      "withConsumption": 248,
+      "withPrice": 305
     },
     {
       "id": "aires",
-      "count": 192,
+      "count": 193,
       "withConsumption": 138,
-      "withPrice": 192
+      "withPrice": 193
     },
     {
       "id": "lavarropas",
-      "count": 141,
-      "withConsumption": 123,
-      "withPrice": 141
+      "count": 143,
+      "withConsumption": 124,
+      "withPrice": 143
     },
     {
       "id": "calefones",
@@ -28,15 +28,15 @@
     },
     {
       "id": "termotanques",
-      "count": 146,
-      "withConsumption": 146,
-      "withPrice": 146
+      "count": 147,
+      "withConsumption": 147,
+      "withPrice": 147
     },
     {
       "id": "calefactores",
-      "count": 499,
-      "withConsumption": 499,
-      "withPrice": 499
+      "count": 500,
+      "withConsumption": 500,
+      "withPrice": 500
     }
   ],
   "stores": [
@@ -45,14 +45,14 @@
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 565
+      "products": 563
     },
     {
       "id": "oncity",
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1018
+      "products": 1013
     },
     {
       "id": "naldo",
@@ -66,7 +66,7 @@
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1347
+      "products": 1340
     },
     {
       "id": "jumbo",
@@ -80,7 +80,7 @@
       "name": "Easy",
       "url": "https://www.easy.com.ar",
       "ok": true,
-      "products": 208
+      "products": 209
     },
     {
       "id": "castillo",
@@ -101,7 +101,7 @@
       "name": "Más Online (Changomas)",
       "url": "https://www.masonline.com.ar",
       "ok": true,
-      "products": 106
+      "products": 108
     },
     {
       "id": "whirlpool",
@@ -122,14 +122,14 @@
       "name": "BGH (oficial)",
       "url": "https://www.bgh.com.ar",
       "ok": true,
-      "products": 34
+      "products": 33
     },
     {
       "id": "liliana",
       "name": "Liliana (oficial)",
       "url": "https://www.liliana.com.ar",
       "ok": true,
-      "products": 93
+      "products": 92
     }
   ]
 }
