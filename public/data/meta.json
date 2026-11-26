@@ -1,24 +1,24 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T20:08:20.067Z",
+  "generatedAt": "2026-11-26T19:59:13.856Z",
   "categories": [
     {
       "id": "heladeras",
-      "count": 306,
-      "withConsumption": 249,
-      "withPrice": 306
+      "count": 303,
+      "withConsumption": 247,
+      "withPrice": 303
     },
     {
       "id": "aires",
       "count": 194,
-      "withConsumption": 139,
+      "withConsumption": 136,
       "withPrice": 194
     },
     {
       "id": "lavarropas",
-      "count": 145,
+      "count": 146,
       "withConsumption": 126,
-      "withPrice": 145
+      "withPrice": 146
     },
     {
       "id": "calefones",
@@ -28,15 +28,15 @@
     },
     {
       "id": "termotanques",
-      "count": 147,
-      "withConsumption": 147,
-      "withPrice": 147
+      "count": 152,
+      "withConsumption": 152,
+      "withPrice": 152
     },
     {
       "id": "calefactores",
-      "count": 503,
-      "withConsumption": 503,
-      "withPrice": 503
+      "count": 502,
+      "withConsumption": 502,
+      "withPrice": 502
     }
   ],
   "stores": [
@@ -45,28 +45,28 @@
       "name": "Cetrogar",
       "url": "https://www.cetrogar.com.ar",
       "ok": true,
-      "products": 562
+      "products": 559
     },
     {
       "id": "oncity",
       "name": "OnCity",
       "url": "https://www.oncity.com",
       "ok": true,
-      "products": 1013
+      "products": 1027
     },
     {
       "id": "naldo",
       "name": "Naldo",
       "url": "https://www.naldo.com.ar",
       "ok": true,
-      "products": 321
+      "products": 314
     },
     {
       "id": "carrefour",
       "name": "Carrefour",
       "url": "https://www.carrefour.com.ar",
       "ok": true,
-      "products": 1340
+      "products": 1350
     },
     {
       "id": "jumbo",
@@ -80,28 +80,28 @@
       "name": "Easy",
       "url": "https://www.easy.com.ar",
       "ok": true,
-      "products": 210
+      "products": 211
     },
     {
       "id": "castillo",
       "name": "Castillo",
       "url": "https://www.castillo.com.ar",
       "ok": true,
-      "products": 268
+      "products": 269
     },
     {
       "id": "bringeri",
       "name": "Bringeri",
       "url": "https://www.bringeri.com.ar",
       "ok": true,
-      "products": 208
+      "products": 218
     },
     {
       "id": "masonline",
       "name": "Más Online (Changomas)",
       "url": "https://www.masonline.com.ar",
       "ok": true,
-      "products": 110
+      "products": 111
     },
     {
       "id": "whirlpool",
@@ -122,7 +122,7 @@
       "name": "BGH (oficial)",
       "url": "https://www.bgh.com.ar",
       "ok": true,
-      "products": 33
+      "products": 34
     },
     {
       "id": "liliana",
